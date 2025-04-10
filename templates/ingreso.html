@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Hoomie</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../static/imagenes/icono.png" />
+        <link rel="stylesheet" href="../static/CSS/formularios.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <script src="../static/js/java.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body class="ingreso">
+        <div class="contenedor">
+            <a href="inicio"> <img src="../static/imagenes/logo2.png" width="180px"></a>
+            <h1>¡Bienvenido Nuevamente!</h1>
+            <p>Identificate para ingresar<p>
+                <form action="/login" method="post">
+                    <ul>
+                        <li class="input-container">
+                            <input type="email" class="input-container-input" id="email" name="email_usuario" placeholder="" required/>
+                            <label for="email" class="input-container-label" id="emailL">Correo Electrónico</label>
+                        </li>  
+                
+                        <li class="input-container">
+                            <input type="password" class="input-container-input" id="pass" name="pass_usuario" placeholder="" required />
+                            <label for="pass" class="input-container-label" id="passL">Contraseña</label>
+                        </li>
+                        <a href="olvida"><p>¿Olvidaste tu Contraseña?</p></a>
+                
+                        <section class="Botones">
+                            <li class="button">
+                                <a href="ingreso"> <button onclick="window.history.back()" class="botonAzu">Regresar</button></a>  
+                            </li>
+                            
+                            <li class="button">
+                                <button  class="botonAma">Ingresar</button>
+                            </li>      
+                        </section>
+
+                        <p>¿No tienes cuenta? <a href="registro">Crear Cuenta</a></p>
+                    </ul>
+                </form>                
+        </div>
+    </body>
+</html>

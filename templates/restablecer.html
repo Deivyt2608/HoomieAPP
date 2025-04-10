@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Hoomie</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../static/imagenes/icono.png" />
+        <link rel="stylesheet" href="../static/CSS/formularios.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <script src="../static/js/java.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body class="ingreso">
+        <div class="contenedor">
+        <h1>Cambiar contraseña</h1>
+        <form action="/guardar-nueva" method="post">
+        <ul>
+            <input type="hidden" name="email_usuario" value="{{ request.query_params.token }}">
+            <li class="input-container">
+                <input type="password" class="input-container-input" id="contraseña" name="nueva_contraseña" placeholder="" required/>
+                <label for="contraseña" class="input-container-label" id="contraseñaL">Contraseña</label>
+            </li> 
+            <br>
+            <section class="Botones">
+                <li class="button">
+                    <button type="submit" class="botonAma">Guardar contraseña</button>
+                </li> 
+            </section>
+            
+        </ul>
+         
+        </div>
+    </body>
+</html>

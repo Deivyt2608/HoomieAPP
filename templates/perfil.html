@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Perfil Hoomie</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../static/imagenes/icono.png" />
+        <link rel="stylesheet" href="../static/css/formularios.css">
+        <link rel="stylesheet" href="../static/css/perfil.css">
+        <link rel="stylesheet" href="../static/css/inicio.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <script src="../static/js/java.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="../static/imagenes/principal.png">
+            </div>
+            <div class="buttons">
+                {% if usuario_logueado %}
+                    <h2 id="name">Hola, {{ usuario_logueado }}</h2>
+                    <a href="/logout"><button class="botonAma" id="out">Cerrar sesión</button></a>
+                    <a href="/perfil"><button class="botonAzu" id="perfil">Ver Perfil</button></a>
+                {% else %}
+                    <a href="ingreso"><button class="botonAzu">Ingresar</button></a>
+                    <a href="registro"><button class="botonAma">Registrarse</button></a>
+                {% endif %}
+            </div>
+            
+        </nav>
+        <div class="base1">
+            <div class="contenedor" id="datos">
+                <p>Información personal<p>
+                    <form action="inicio" method="get">
+                        <ul>
+                            <li class="input-container">
+                                <input type="text" class="input-container-input" id="nombre" name="nombre_usuario" placeholder="" required />
+                                <label for="nombre" class="input-container-label">Nombre(s)</label>
+                            </li>
+                    
+                            <li class="input-container">
+                                <input type="text" class="input-container-input" id="apellido" name="apellido_usuario" placeholder="" required/>
+                                <label for="apellido" class="input-container-label">Apellidos</label>
+                            </li>
+                    
+                            <li class="input-container">
+                                <input type="number" class="input-container-input" id="phone" name="phone_usuario" placeholder="" required />
+                                <label for="phone" class="input-container-label" id="phoneL">Número de Celular</label>
+                            </li>   
+    
+                            <li class="input-container">
+                                <input type="email" class="input-container-input" id="email" name="email_usuario" placeholder="" required/>
+                                <label for="email" class="input-container-label" id="emailL">Correo Electrónico</label>
+                            </li>  
+    
+                            <li class="input-container">
+                                <input type="password" class="input-container-input" id="contraseña" name="contraseña_usuario" placeholder="" required/>
+                                <label for="contraseña" class="input-container-label" id="contraseñaL">Contraseña</label>
+                            </li> 
+                    
+                            <section class="Botones">
+                                <li class="button">
+                                    <button type="submit" class="botonAma">Editar datos</button>
+                                </li>   
+                            </section>
+                        </ul>
+                    </form>              
+            </div>
+                <img src="../static/imagenes/perfil.png" class="fotoPerfil">
+            </div>
+        </div>
+    </body>
+</html>

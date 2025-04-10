@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Chicle&family=Fredoka:wght@700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+.inicio{
+    background-color: white;
+    margin: 0%;
+}
+.navbar {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    box-shadow: 0 2px 1px rgb(0, 0, 0);
+    img{
+        width: 220px;
+    }
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.botonAma{
+    background-color: #FFC875;
+    color: black;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 120px;
+}
+
+#out{
+    width: 150px;
+}
+#name{
+    font-weight: bold;
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+}
+
+.botonAzu{
+    background-color: #CFEBFD; 
+    color: black;
+    margin-right: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 120px;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    padding: 30px;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.tituloA{
+    font-size: 50PX;
+    color: #FFC875;
+    font-weight: bold;
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+}
+
+.tituloN{
+    font-size: 50PX;
+    color: #000000;
+    font-weight: bold;
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #444;
+    margin-right: 40px;
+    margin-left: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+.btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #CFEBFD;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 200px;
+}
+
+.btn:hover {
+    background-color: #64b5f6;
+}
+
+.hero-logo img {
+    width: 400px;
+    margin-right: 20px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-logo img {
+        width: 200px;
+    }
+}
+
+
+.acciones {
+    text-align: center;
+    background-color: #CFEBFD; 
+    padding: 20px;
+}
+
+.acciones h2 {
+    font-size: 50px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.opciones {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.opcion {
+    text-align: center;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.opcion:hover {
+    transform: scale(1.05);
+}
+
+.opcion img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.opcion p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    margin-top: 10px;
+}
+a{
+    text-decoration: none;
+}
+
+/* Sección Carrusel */
+.reviews{
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15%;  
+    background-color: #ffffff;
+    margin: 0px;
+    width: 100%;
+    padding: 5px;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px; 
+    height: 350px; 
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+}
+
+.carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
+}
+
+.carousel-item {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0 5px;
+    flex: 0 0 33.33%; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-item img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 15px; 
+    border: 3px solid #000000; 
+}
+
+.carousel-item .user-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.carousel-item .descri {
+    color: #a5a5a5;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.carousel-btn {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 2rem;
+    padding: 10px;
+    border: none;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+    cursor: pointer;
+    z-index: 2;
+    height: 40px; 
+    width: 40px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prev {
+    left: 0px; 
+}
+
+.next {
+    right: 0px; 
+}
+
+.star-rating {
+    margin-top:10px ;
+    display: flex; 
+    gap: 5px;
+    justify-content: center; 
+    margin-bottom: 10px;
+}
+
+.star-rating i {
+    font-size: 20px; 
+    color: #FFD700; 
+}
+
+.star-rating .fa-regular {
+    color: #e0e0e0;
+}
+
+.footer {
+    background-color: #f0f0f0;
+    padding: 15px 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+}
+
+.footer-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+}
+
+.footer-left a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    height: 30px;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 15px; 
+    margin-left: 20px;
+}
+
+.footer-nav a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.footer-right {
+    font-weight: bold;
+}
+
+.footer-right a {
+    text-decoration: none;
+    color: black;
+}
