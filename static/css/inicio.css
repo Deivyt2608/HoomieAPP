@@ -48,6 +48,7 @@ html {
     font-weight: bold;
     font-family: "Fredoka", sans-serif;
     font-optical-sizing: auto;
+    text-align: center;
 }
 
 .botonAzu{
@@ -216,7 +217,7 @@ a{
 }
 
 .carousel-wrapper {
-    width: 100%;
+    width: 590;
     overflow: hidden;
 }
 
@@ -237,6 +238,7 @@ a{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 190px;
 }
 
 .carousel-item img {

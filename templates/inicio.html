@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <title>Hoomie</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="../static/imagenes/icono.png" />
-        <link rel="stylesheet" href="../static/css/inicio.css">
+        <link rel="icon" href="/static/imagenes/icono.png" />
+        <link rel="stylesheet" href="/static/css/inicio.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
-    <body class="inicio" ></body>
+    <body class="inicio" >
     <nav class="navbar">
         <div class="logo">
-            <img src="../static/imagenes/principal.png">
+            <img src="/static/imagenes/principal.png">
         </div>
         <div class="buttons">
             {% if usuario_logueado %}
@@ -41,22 +41,22 @@
             <a href="trabajo" ><button class="btn">Conocer más <i class="fa-solid fa-arrow-right"></i></button></a>
         </div>
         <div class="hero-logo">
-            <img src="../static/imagenes/logo2.png" alt="Hoomie Logo Grande">
+            <img src="/static/imagenes/logo2.png" alt="Hoomie Logo Grande">
         </div>
     </header>
     <section class="acciones">
         <h2 class="tituloN">¿Qué quieres hacer hoy?</h2>
         <div class="opciones">
             <a href="trabajo"><div class="opcion">
-                <img src="../static/imagenes/buscar.png" alt="Buscar un Roomie">
+                <img src="/static/imagenes/buscar.png" alt="Buscar un Roomie">
                 <p>Buscar un Roomie</p>
             </div></a>
             <a href="trabajo"><div class="opcion">
-                <img src="../static/imagenes/casa.png" alt="Buscar un Hogar">
+                <img src="/static/imagenes/casa.png" alt="Buscar un Hogar">
                 <p>Buscar un Hogar</p>
             </div></a>
             <a href="trabajo"><div class="opcion">
-                <img src="../static/imagenes/rent.png" alt="Rentar tu departamento">
+                <img src="/static/imagenes/rent.png" alt="Rentar tu departamento">
                 <p>Rentar tu departamento</p>
             </div></a>
         </div>
@@ -68,7 +68,7 @@
         <div class="carousel-wrapper">
             <div class="carousel">
                 <div class="carousel-item">
-                    <img src="../static/imagenes/1.jpg" alt="User Image" class="user-image">
+                    <img src="/static/imagenes/1.jpg" alt="User Image" class="user-image">
                     <h2 class="user-name">Santiago Martinez</h2>
                     <h3 class="descri">Encontré el roomie perfecto 🎉</h3>
                     <p>Me mudé a una ciudad nueva sin conocer a nadie y gracias 
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="../static/imagenes/2.jpg" alt="User Image" class="user-image">
+                    <img src="/static/imagenes/2.jpg" alt="User Image" class="user-image">
                     <h2 class="user-name">Sofia Lopez</h2>
                     <h3 class="descri">Rápido y sin tantos dramas 🙌</h3>
                     <p>Pensé que sería un lío encontrar dónde vivir,
@@ -96,7 +96,7 @@
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="../static/imagenes/3.jpg" alt="User Image" class="user-image">
+                    <img src="/static/imagenes/3.jpg" alt="User Image" class="user-image">
                     <h2 class="user-name">Jose Luis Morales</h2>
                     <h3 class="descri">Todo un match de vida 🏡</h3>
                     <p>Quería alquilar un cuarto en mi depa y en menos de una semana ya tenía roomie. Ahora compartimos gastos y risas.</p>
@@ -109,7 +109,7 @@
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="../static/imagenes/4.jpg" alt="User Image" class="user-image">
+                    <img src="/static/imagenes/4.jpg" alt="User Image" class="user-image">
                     <h2 class="user-name">Santiago Cruz</h2>
                     <h3 class="descri">La mejor decisión 🏡</h3>
                     <p>"Estaba buscando un lugar donde vivir
@@ -123,7 +123,7 @@
                         </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="../static/imagenes/5.jpg" alt="User Image" class="user-image">
+                    <img src="/static/imagenes/5.jpg" alt="User Image" class="user-image">
                     <h2 class="user-name">Erika Mateus</h2>
                     <h3 class="descri">Súper fácil, sin estrés 🙌</h3>
                     <p>"Usar la app fue súper sencillo. En solo días encontré un cuarto que me encantó 
@@ -137,7 +137,7 @@
                         </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="../static/imagenes/6.jpg" alt="User Image" class="user-image">
+                    <img src="/static/imagenes/6.jpg" alt="User Image" class="user-image">
                     <h2 class="user-name">Camilo Daza</h2>
                     <h3 class="descri">¡Mi depa perfecto! 🏠</h3>
                     <p>"Me mudé a una ciudad nueva sin conocer a nadie, y en pocos días ya tenía un cuarto
@@ -159,9 +159,24 @@
         <button id="nextBtn" class="carousel-btn next"><i class="fa-solid fa-arrow-right"></i></button>
     </div>
     </section>
-    
-    <script src="../static/js/java.js"></script>
-
-</body>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <a href="#">
+                    <img class="logo" src="/static/imagenes/principal.png">
+                </a>
+                <nav class="footer-nav">
+                    <a href="#">Inicio</a>
+                    <a href="nosotros">Nosotros</a>
+                    <a href="publicaciones">Publicaciones</a>
+                </nav>
+            </div>
+            <div class="footer-right">
+                <a href="https://www.sic.gov.co/ley-de-proteccion-de-datos"  target="_blank">Política de privacidad</a>
+            </div>
+        </div>
+    </footer>
+    <script src="/static/js/java.js"></script>
+    </body>
 </html>
 
