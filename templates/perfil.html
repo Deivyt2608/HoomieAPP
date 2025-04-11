@@ -1,77 +1,100 @@
 <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Perfil Hoomie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/imagenes/icono.png" />
+    <link rel="stylesheet" href="/static/css/formularios.css">
+    <link rel="stylesheet" href="/static/css/perfil.css">
+    <link rel="stylesheet" href="/static/css/inicio.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
 
-<html>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/inicio"><img src="/static/imagenes/principal.png"></a>
+        </div>
+        <div class="buttons">
+            {% if usuario_logueado %}
+                <h2 id="name">Hola, {{ usuario_logueado.nombre }}</h2>
+                <a href="/logout"><button class="botonAma" id="out">Cerrar sesión</button></a>
+                <a href="/perfil"><button class="botonAzu" id="perfil">Ver Perfil</button></a>
+            {% else %}
+                <a href="/ingreso"><button class="botonAzu">Ingresar</button></a>
+                <a href="/registro"><button class="botonAma">Registrarse</button></a>
+            {% endif %}
+        </div>
+    </nav>
 
-    <head>
-        <meta charset="utf-8">
-        <title>Perfil Hoomie</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="/static/imagenes/icono.png" />
-        <link rel="stylesheet" href="/static/css/formularios.css">
-        <link rel="stylesheet" href="/static/css/perfil.css">
-        <link rel="stylesheet" href="/static/css/inicio.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <script src="/static/js/java.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
+    <div class="base1">
+        <div class="contenedor" id="datos">
+            <p>Información personal</p>
+            <form action="/perfil/editar" method="post" enctype="multipart/form-data">
+                <ul>
+                    <li class="input-container">
+                        <input type="text" class="input-container-input" id="nombre" name="nombre_usuario" value="{{ usuario_logueado.nombre }}" required />
+                        <label for="nombre" class="input-container-label">Nombre(s)</label>
+                    </li>
 
-    <body>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="../static/imagenes/principal.png">
-            </div>
-            <div class="buttons">
-                {% if usuario_logueado %}
-                    <h2 id="name">Hola, {{ usuario_logueado }}</h2>
-                    <a href="/logout"><button class="botonAma" id="out">Cerrar sesión</button></a>
-                    <a href="/perfil"><button class="botonAzu" id="perfil">Ver Perfil</button></a>
-                {% else %}
-                    <a href="ingreso"><button class="botonAzu">Ingresar</button></a>
-                    <a href="registro"><button class="botonAma">Registrarse</button></a>
-                {% endif %}
-            </div>
-            
-        </nav>
-        <div class="base1">
-            <div class="contenedor" id="datos">
-                <p>Información personal<p>
-                    <form action="inicio" method="get">
-                        <ul>
-                            <li class="input-container">
-                                <input type="text" class="input-container-input" id="nombre" name="nombre_usuario" placeholder="" required />
-                                <label for="nombre" class="input-container-label">Nombre(s)</label>
-                            </li>
-                    
-                            <li class="input-container">
-                                <input type="text" class="input-container-input" id="apellido" name="apellido_usuario" placeholder="" required/>
-                                <label for="apellido" class="input-container-label">Apellidos</label>
-                            </li>
-                    
-                            <li class="input-container">
-                                <input type="number" class="input-container-input" id="phone" name="phone_usuario" placeholder="" required />
-                                <label for="phone" class="input-container-label" id="phoneL">Número de Celular</label>
-                            </li>   
-    
-                            <li class="input-container">
-                                <input type="email" class="input-container-input" id="email" name="email_usuario" placeholder="" required/>
-                                <label for="email" class="input-container-label" id="emailL">Correo Electrónico</label>
-                            </li>  
-    
-                            <li class="input-container">
-                                <input type="password" class="input-container-input" id="contraseña" name="contraseña_usuario" placeholder="" required/>
-                                <label for="contraseña" class="input-container-label" id="contraseñaL">Contraseña</label>
-                            </li> 
-                    
-                            <section class="Botones">
-                                <li class="button">
-                                    <button type="submit" class="botonAma">Editar datos</button>
-                                </li>   
-                            </section>
-                        </ul>
-                    </form>              
-            </div>
+                    <li class="input-container">
+                        <input type="text" class="input-container-input" id="apellido" name="apellido_usuario" value="{{ usuario_logueado.apellido }}" required/>
+                        <label for="apellido" class="input-container-label">Apellidos</label>
+                    </li>
+
+                    <li class="input-container">
+                        <input type="number" class="input-container-input" id="phone" name="phone_usuario" value="{{ usuario_logueado.phone }}" required />
+                        <label for="phone" class="input-container-label">Número de Celular</label>
+                    </li>   
+
+                    <li class="input-container">
+                        <input type="email" class="input-container-input" id="email" name="email_usuario" value="{{ usuario_logueado.email }}" required readonly/>
+                        <label for="email" class="input-container-label">Correo Electrónico</label>
+                    </li>  
+
+                    <li class="input-container">
+                        <input type="password" class="input-container-input" id="contraseña" name="contraseña_usuario" placeholder="Nueva contraseña (opcional)"/>
+                        <label for="contraseña" class="input-container-label">Contraseña</label>
+                    </li>
+
+                    <li class="input-container">
+                        <label for="foto">Foto de perfil</label><br>
+                        <input type="file" id="foto" name="foto_usuario" accept="image/*">
+                    </li>
+
+                    <section class="Botones">
+                        <li class="button">
+                            <button type="submit" class="botonAma">Guardar cambios</button>
+                        </li>   
+                    </section>
+                </ul>
+            </form>              
+        </div>
+
+        <div class="foto-container">
+            {% if usuario_logueado.foto %}
+                <img src="{{ usuario_logueado.foto }}" class="fotoPerfil">
+            {% else %}
                 <img src="/static/imagenes/perfil.png" class="fotoPerfil">
+            {% endif %}
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <a href="#"><img class="logo" src="/static/imagenes/principal.png"></a>
+                <nav class="footer-nav">
+                    <a href="/inicio">Inicio</a>
+                    <a href="/nosotros">Nosotros</a>
+                    <a href="/publicaciones">Publicaciones</a>
+                </nav>
+            </div>
+            <div class="footer-right">
+                <a href="https://www.sic.gov.co/ley-de-proteccion-de-datos" target="_blank">Política de privacidad</a>
             </div>
         </div>
-    </body>
+    </footer>
+</body>
 </html>

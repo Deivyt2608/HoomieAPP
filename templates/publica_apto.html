@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es" >
+    <head>
+        <meta charset="utf-8">
+        <title>Hoomie</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/static/imagenes/icono.png" />
+        <link rel="stylesheet" href="/static/css/publica.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="/static/js/java.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/static/imagenes/principal.png">
+        </div>
+        <div class="buttons">
+            <a href="ingreso"><button class="botonAzu">Ingresar</button></a>
+            <a href="registro"><button class="botonAma">Registrarse</button></a>
+        </div>
+    </nav>
+    <div class="anuncio-wrapper">
+        <div id="anuncio" class="anuncio-banner">
+          <span>Si estás buscando tu próximo hogar, <a href="#">haz click aquí</a></span>
+          <button onclick="cerrarAnuncio()" class="cerrar-btn">&times;</button>
+        </div>
+    </div>
+  
+    <section class="publica-container">
+        <div class="publica-texto">
+            <h1>Publica tu espacio en minutos, encuentra tu match de inquilino.</h1>
+            <p>¡Así de fácil!</p>
+            <button id="openModalBtn" class="botonAzu">Empezar mi publicación <i class="fa-solid fa-arrow-right"></i></button>  
+        </div>
+        <div class="publica-ilustracion">
+            <img src="/static/imagenes/public.png" />
+        </div>
+    </section>
+
+    <!-- Modal del formulario -->
+    <div class="modal" id="formModal">
+        <div class="modal-content">
+        <span class="close">&times;</span>
+    
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+    
+        <form id="multiStepForm">
+            <!-- Paso 1 -->
+            <div class="form-step active">
+            <h2>¡Inicia tu proceso de publicación!</h2>
+            <label>Nombre:</label>
+            <input type="text" id="nombre" required>
+            <div class="buttons">
+                <a href="publica_apto"><button type="button" class="cancel" >Cancelar</button></a>
+                <button type="button" class="next" disabled>Siguiente</button>
+            </div>
+            </div>
+    
+            <!-- Paso 2 -->
+            <div class="form-step">
+            <label>Email:</label>
+            <input type="email" id="email" required>
+            <div class="buttons">
+                <button type="button" class="back">Volver</button>
+                <button type="button" class="next" disabled>Siguiente</button>
+            </div>
+            </div>
+    
+            <!-- Paso 3 -->
+            <div class="form-step">
+            <label>Mensaje:</label>
+            <textarea id="mensaje" required></textarea>
+            <div class="buttons">
+                <button type="button" class="back">Volver</button>
+                <button type="submit">Enviar</button>
+            </div>
+            </div>
+        </form>
+        </div>
+    </div>
+  
+  
+      
+</body>
+</html>

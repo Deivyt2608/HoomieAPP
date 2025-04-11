@@ -10,3 +10,5 @@ class User(Base):
     phone = Column(String(20), nullable=False)
     email = Column(String(120), unique=True, nullable=False)
     password = Column(String(100), nullable=False)
+    foto = Column(String(200), nullable=True)
+
