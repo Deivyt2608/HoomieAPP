@@ -40,7 +40,8 @@ routes = [
     ("/registro", "registro.html"),
     ("/rentar", "rentar.html"),
     ("/trabajo", "trabajo.html"),
-    ("/restablecer","restablecer.html")
+    ("/restablecer","restablecer.html"),
+    ("/publicar","publica_apto.html")
 ]
 
 # Registro dinámico de rutas
