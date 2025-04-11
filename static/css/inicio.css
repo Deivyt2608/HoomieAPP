@@ -12,12 +12,11 @@ html {
     background-color: white;
     margin: 0%;
 }
-
 .navbar {
     position: fixed;     /* Se queda fijo al hacer scroll */
     top: 0;              /* Lo posiciona al tope */
     left: 0;
-    width: 98%;         /* Ocupa todo el ancho */
+    width: 100%;         /* Ocupa todo el ancho */
     background-color: #333;
     color: white;
     padding: 15px;
@@ -51,16 +50,6 @@ html {
     width: 120px;
 }
 
-#out{
-    width: 150px;
-}
-#name{
-    font-weight: bold;
-    font-family: "Fredoka", sans-serif;
-    font-optical-sizing: auto;
-    text-align: center;
-}
-
 .botonAzu{
     background-color: #CFEBFD; 
     color: black;
@@ -73,8 +62,18 @@ html {
     width: 120px;
 }
 
+#out{
+    width: 150px;
+}
+#name{
+    font-weight: bold;
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    text-align: center;
+}
 /* Hero Section */
 .hero {
+    margin-top: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -227,7 +226,7 @@ a{
 }
 
 .carousel-wrapper {
-    width: 590;
+    width: 100%;
     overflow: hidden;
 }
 
@@ -248,7 +247,6 @@ a{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 190px;
 }
 
 .carousel-item img {
@@ -363,6 +361,7 @@ a{
     margin: 10px 0;
     font-weight: 500;
   }
+  
 
 .footer {
     background-color: #f0f0f0;

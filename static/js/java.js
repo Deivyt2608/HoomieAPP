@@ -57,9 +57,92 @@ document.addEventListener("DOMContentLoaded", function () {
         prevBtn.addEventListener('click', () => moveCarousel('prev'));
     }
 
+        // =========================================
+    // Anuncio flotante
     // =========================================
-    // Agrega aquí más bloques condicionales si lo necesitas
-    // Ejemplo:
-    // const formIngreso = document.querySelector("#form-ingreso");
-    // if (formIngreso) { ... }
+    const anuncio = document.getElementById("anuncio");
+    if (anuncio) {
+        setTimeout(() => {
+            anuncio.classList.add("mostrar");
+        }, 800);
+    }
+
+    window.cerrarAnuncio = function () {
+        if (anuncio) {
+            anuncio.classList.remove("mostrar");
+        }
+    }
+
+    // =========================================
+    // Modal Formulario
+    // =========================================
+    const modal = document.getElementById("formModal");
+    const openModalBtn = document.getElementById("openModalBtn");
+    const closeModalBtn = document.querySelector(".close");
+    const steps = document.querySelectorAll(".form-step");
+    const nextBtns = document.querySelectorAll(".next");
+    const backBtns = document.querySelectorAll(".back");
+    const progress = document.getElementById("progress");
+
+    let currentStep = 0;
+
+    function showStep(step) {
+        steps.forEach((s, i) => {
+            s.classList.toggle("active", i === step);
+        });
+        if (progress) {
+            progress.style.width = ((step + 1) / steps.length) * 100 + "%";
+        }
+    }
+
+    if (openModalBtn && modal) {
+        openModalBtn.onclick = () => {
+            modal.style.display = "flex";
+            showStep(currentStep);
+        };
+    }
+
+    if (closeModalBtn && modal) {
+        closeModalBtn.onclick = () => {
+            modal.style.display = "none";
+        };
+    }
+
+    window.onclick = (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+
+    nextBtns.forEach((btn, i) => {
+        const input = steps[i].querySelector("input, textarea");
+        if (input) {
+            input.addEventListener("input", () => {
+                btn.disabled = !input.value.trim();
+            });
+
+            btn.onclick = () => {
+                if (input.value.trim()) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            };
+        }
+    });
+
+    backBtns.forEach((btn) => {
+        btn.onclick = () => {
+            currentStep--;
+            showStep(currentStep);
+        };
+    });
+
+    const form = document.getElementById("multiStepForm");
+    if (form && modal) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            alert("Formulario enviado con éxito 🎉");
+            modal.style.display = "none";
+        });
+    }
 });

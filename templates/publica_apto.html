@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-        <script src="/static/js/java.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
 <body>
@@ -18,8 +17,14 @@
             <img src="/static/imagenes/principal.png">
         </div>
         <div class="buttons">
-            <a href="ingreso"><button class="botonAzu">Ingresar</button></a>
-            <a href="registro"><button class="botonAma">Registrarse</button></a>
+            {% if usuario_logueado %}
+                <h2 id="name">Hola, {{ usuario_logueado }}</h2>
+                <a href="/logout"><button class="botonAma" id="out">Cerrar sesión</button></a>
+                <a href="/perfil"><button class="botonAzu" id="perfil">Ver Perfil</button></a>
+            {% else %}
+                <a href="ingreso"><button class="botonAzu">Ingresar</button></a>
+                <a href="registro"><button class="botonAma">Registrarse</button></a>
+            {% endif %}
         </div>
     </nav>
     <div class="anuncio-wrapper">
@@ -85,6 +90,6 @@
     </div>
   
   
-      
+    <script src="/static/js/java.js"></script>
 </body>
 </html>
