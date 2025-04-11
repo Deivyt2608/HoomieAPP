@@ -24,10 +24,10 @@ def login(
 ):
     usuario = db.query(User).filter(User.email == email_usuario).first()
     if not usuario or usuario.password != pass_usuario:
-        return RedirectResponse(url="/ingreso?error=1", status_code=302)
+        return RedirectResponse(url=f"/ingreso?mensaje=error&correo={email_usuario}", status_code=302)
 
     # Guardar cookie para saber que está logueado
-    resp = RedirectResponse(url="/inicio", status_code=302)
+    resp = RedirectResponse(url="/inicio?mensaje=exito", status_code=302)
     resp.set_cookie(key="usuario_email", value=usuario.email)
     return resp
 
@@ -41,7 +41,8 @@ def logout(response: Response):
 async def enviar_enlace(email_usuario: str = Form(...), db: Session = Depends(get_db)):
     usuario = db.query(User).filter(User.email == email_usuario).first()
     if not usuario:
-        raise HTTPException(status_code=404, detail="Correo no registrado")
+        # Redirige con mensaje y reenvía el correo para que se mantenga el campo
+        return RedirectResponse(url=f"/olvida?mensaje=correo_no_encontrado&correo={email_usuario}", status_code=302)
 
     token = usuario.email  # en producción deberías usar un token único y temporal
     enlace = f"http://localhost:8000/restablecer?token={token}"

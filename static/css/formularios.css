@@ -151,3 +151,24 @@ a{
         width: 80%;
     }
 }
+
+.toast {
+    position: fixed;
+    top: 20px; 
+    left: 41%; 
+    transform: translateX(-70%);
+    background-color: #333;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 9999;
+}
+
+.toast.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}

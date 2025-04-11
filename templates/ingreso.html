@@ -18,7 +18,7 @@
                 <form action="/login" method="post">
                     <ul>
                         <li class="input-container">
-                            <input type="email" class="input-container-input" id="email" name="email_usuario" placeholder="" required/>
+                            <input type="email" class="input-container-input" id="email" name="email_usuario" placeholder="" value="{{ request.query_params.get('correo') or '' }}" required  required/>
                             <label for="email" class="input-container-label" id="emailL">Correo Electrónico</label>
                         </li>  
                 
@@ -42,6 +42,27 @@
                     </ul>
                 </form>                
         </div>
-        <script src="/static/js/java.js"></script>
+        <div id="toast" class="toast"></div>
+
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            const toast = document.getElementById("toast");
+
+            const mensaje = params.get("mensaje");
+            const correo = params.get("correo");
+
+            if (mensaje === "error") {
+                mostrarToast("❌ Correo o contraseña incorrectos");
+            } else if (mensaje === "exito") {
+                mostrarToast("✅ Bienvenido a Hoomie");
+            }
+
+            function mostrarToast(texto) {
+                toast.textContent = texto;
+                toast.classList.add("mostrar");
+                setTimeout(() => toast.classList.remove("mostrar"), 3500);
+            }
+        </script>
+
     </body>
 </html>
