@@ -153,12 +153,13 @@ a{
 }
 
 .toast {
+    text-align: center;
+    justify-content: center;
     position: fixed;
-    top: 20px; 
-    left: 41%; 
+    top: 90%; 
     transform: translateX(-70%);
-    background-color: #333;
-    color: #fff;
+    background-color: #fe0b0b7b;
+    color: #ffffff;
     padding: 15px 25px;
     border-radius: 5px;
     font-weight: bold;

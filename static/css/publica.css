@@ -1,9 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Chicle&family=Fredoka:wght@700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 #navp{
   width: 98%;
   max-height: 80px;
 }
+
+body.modal-open {
+  overflow: hidden;
+}
+
 
 /* Anuncio */
 
@@ -79,10 +84,15 @@
     max-width: 500px;
     width: 100%;
   }
-
+  #openModalBtn{
+    width: 210px;
+    margin-left: 60px;
+  }
 
   /* Modal */
+  
 .modal {
+    font-family: "Montserrat", sans-serif;
     position: fixed;
     top: 0;
     left: 0;
@@ -93,6 +103,9 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    h2{
+      margin-bottom: 0px;
+    }
   }
   
   .modal-content {
@@ -103,11 +116,6 @@
     max-width: 90%;
     animation: slideUp 0.4s ease;
     position: relative;
-  }
-  
-  @keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
   }
   
   .close {
@@ -126,6 +134,9 @@
   }
   .form-step.active {
     display: flex;
+    p{
+      margin: 0px;
+    }
   }
   
   .progress-bar {
@@ -143,14 +154,91 @@
     transition: width 0.3s ease;
   }
   
-  .buttons {
+  .botones {
     display: flex;
     justify-content: space-between;
   }
   
   button:disabled {
-    background-color: #aaa;
+    background-color: #ffc87554;
     cursor: not-allowed;
   }
+
+  .next{
+    background-color: #FFC875;
+    color: black;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 120px;
+  }
+
+  .cancel, .back{
+    background-color: #CFEBFD; 
+    color: black;
+    margin-right: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 120px;
+  }
+  .input-group {
+    position: relative;
+    margin-bottom: 10px;
+  }
   
+  .input-group input,
+  .input-group textarea {
+    width: 90%;
+    padding: 14px 12px 17px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .input-group label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 14px;
+    pointer-events: none;
+    transition: 0.2s ease all;
+    background: white;
+  }
+  
+  .input-group input:focus,
+  .input-group textarea:focus {
+    border-color: #FFC875;
+  }
+  
+  .input-group input:focus + label,
+  .input-group input:not(:placeholder-shown) + label,
+  .input-group textarea:focus + label,
+  .input-group textarea:not(:placeholder-shown) + label {
+    top: 0;
+    font-size: 12px;
+    color: #FFC875;
+  }
+  
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(50px); opacity: 0; }
+}
+
+
   

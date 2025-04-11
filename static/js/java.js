@@ -98,38 +98,79 @@ document.addEventListener("DOMContentLoaded", function () {
     if (openModalBtn && modal) {
         openModalBtn.onclick = () => {
             modal.style.display = "flex";
+            document.body.classList.add("modal-open");
             showStep(currentStep);
         };
     }
 
     if (closeModalBtn && modal) {
         closeModalBtn.onclick = () => {
-            modal.style.display = "none";
-        };
+            const modalContent = document.querySelector(".modal-content");
+          
+            modalContent.style.animation = "slideDown 0.4s ease";
+          
+            setTimeout(() => {
+              modal.style.display = "none";
+              modalContent.style.animation = "slideUp 0.4s ease";
+              document.body.classList.remove("modal-open"); // Reiniciar animación por si se vuelve a abrir
+            }, 400);
+          };
+          
     }
 
-    window.onclick = (e) => {
-        if (e.target === modal) {
-            modal.style.display = "none";
-        }
-    };
+    const cancelBtn = document.querySelector(".cancel");
+
+        cancelBtn.onclick = () => {
+        const modalContent = document.querySelector(".modal-content");
+        
+        modalContent.style.animation = "slideDown 0.4s ease"; // Nueva animación
+
+        setTimeout(() => {
+            document.getElementById("formModal").style.display = "none";
+            window.location.href = "publicar"; // Redirige suavemente
+            document.body.classList.remove("modal-open");
+        }, 400); // Espera que termine la animación 
+        };
+
+
+        window.onclick = (e) => {
+            if (e.target === modal) {
+              const modalContent = document.querySelector(".modal-content");
+          
+              // Animación de "pop" cuando hacen clic fuera del modal
+              modalContent.animate([
+                { transform: 'scale(1)', offset: 0 },
+                { transform: 'scale(1.03)', offset: 0.5 },
+                { transform: 'scale(1)', offset: 1 }
+              ], {
+                duration: 200,
+                easing: 'ease-in-out'
+              });
+            }
+          };
+          
 
     nextBtns.forEach((btn, i) => {
-        const input = steps[i].querySelector("input, textarea");
-        if (input) {
-            input.addEventListener("input", () => {
-                btn.disabled = !input.value.trim();
-            });
-
-            btn.onclick = () => {
-                if (input.value.trim()) {
-                    currentStep++;
-                    showStep(currentStep);
-                }
-            };
+        const inputs = steps[i].querySelectorAll("input[required], textarea[required]");
+      
+        function validateInputs() {
+          const allFilled = Array.from(inputs).every(input => input.value.trim() !== "");
+          btn.disabled = !allFilled;
         }
-    });
-
+      
+        inputs.forEach(input => {
+          input.addEventListener("input", validateInputs);
+        });
+      
+        btn.onclick = () => {
+          const allFilled = Array.from(inputs).every(input => input.value.trim() !== "");
+          if (allFilled) {
+            currentStep++;
+            showStep(currentStep);
+          }
+        };
+      });
+      
     backBtns.forEach((btn) => {
         btn.onclick = () => {
             currentStep--;
