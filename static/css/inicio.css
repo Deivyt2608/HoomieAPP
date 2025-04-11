@@ -12,26 +12,7 @@ html {
     background-color: white;
     margin: 0%;
 }
-.navbar {
-    position: fixed;     /* Se queda fijo al hacer scroll */
-    top: 0;              /* Lo posiciona al tope */
-    left: 0;
-    width: 100%;         /* Ocupa todo el ancho */
-    background-color: #333;
-    color: white;
-    padding: 15px;
-    text-align: center;
-    z-index: 1000;
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    box-shadow: 0 2px 1px rgb(0, 0, 0);
-    img{
-        width: 220px;
-    }
-}
+
 
 .logo {
     display: flex;
@@ -362,62 +343,3 @@ a{
     font-weight: 500;
   }
   
-
-.footer {
-    background-color: #f0f0f0;
-    padding: 15px 20px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    bottom: 0;
-    left: 0;
-}
-
-.footer-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-}
-
-.footer-left {
-    display: flex;
-    align-items: center;
-}
-
-.footer-left a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-
-.logo {
-    height: 40px;
-    margin-right: 10px;
-}
-
-.logo-text {
-    height: 30px;
-}
-
-.footer-nav {
-    display: flex;
-    gap: 15px; 
-    margin-left: 20px;
-}
-
-.footer-nav a {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-}
-
-.footer-right {
-    font-weight: bold;
-}
-
-.footer-right a {
-    text-decoration: none;
-    color: black;
-}

@@ -6,15 +6,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="/static/imagenes/icono.png" />
         <link rel="stylesheet" href="/static/css/publica.css">
+        <link rel="stylesheet" href="/static/css/navbar.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar" id="navp">
         <div class="logo">
-            <img src="/static/imagenes/principal.png">
+            <a href="inicio"><img src="/static/imagenes/principal.png"></a>
         </div>
         <div class="buttons">
             {% if usuario_logueado %}

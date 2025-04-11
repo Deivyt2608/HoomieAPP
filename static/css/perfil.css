@@ -4,22 +4,12 @@ body{
 }
 .base1{
     background-color: #CFEBFD;
-    margin: 5px 0 0 0;
+    margin: 100px 0 0 0;
     padding: 0%;
     display: flex;
+
 }
 
-.navbar {
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    box-shadow: 0 2px 1px rgb(0, 0, 0);
-    img{
-        width: 220px;
-    }
-}
 .fotoPerfil{
     width: 30%;
     height: 30%;
