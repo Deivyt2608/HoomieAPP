@@ -23,6 +23,22 @@ async def inicio(request: Request):
         "usuario_logueado": usuario.nombre if usuario else None
     })
 
+@router.get("/publicar", response_class=HTMLResponse)
+async def inicio(request: Request):
+    usuario = get_usuario_logueado(request)
+    return templates.TemplateResponse("publica_apto.html", {
+        "request": request,
+        "usuario_logueado": usuario.nombre if usuario else None
+    })
+
+@router.get("/trabajo", response_class=HTMLResponse)
+async def inicio(request: Request):
+    usuario = get_usuario_logueado(request)
+    return templates.TemplateResponse("trabajo.html", {
+        "request": request,
+        "usuario_logueado": usuario.nombre if usuario else None
+    })
+
 # Función genérica para renderizar plantillas
 def render_template(template_name: str):
     async def view(request: Request):

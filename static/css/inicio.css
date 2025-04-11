@@ -13,7 +13,9 @@ html {
     margin: 0%;
 }
 
-
+#navp{
+    width: 100%;
+}
 .logo {
     display: flex;
     align-items: center;
@@ -83,7 +85,7 @@ html {
     font-optical-sizing: auto;
     font-weight: 700;
     text-align: center;
-    margin-top: 30px;
+    margin-top: 80px;
 }
 
 .hero p {
