@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publicar Apartamento</title>
+  <link rel="stylesheet" href="/static/css/formularios.css">
+  <style>
+    .formulario-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .formulario-container h2 {
+      margin-bottom: 15px;
+    }
+    .formulario-container label {
+      display: block;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .formulario-container input,
+    .formulario-container select,
+    .formulario-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .formulario-container button {
+      margin-top: 20px;
+      padding: 12px 30px;
+      background-color: #FFC875;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="formulario-container">
+    <h2>Publicar Apartamento</h2>
+    <form action="/publicar-apartamento" method="post" enctype="multipart/form-data">
+      <!-- Información general -->
+      <label for="precio">Precio mensual</label>
+      <input type="number" id="precio" name="precio" placeholder="$COP" required>
+
+      <label for="tipo">Tipo de alojamiento</label>
+      <select id="tipo" name="tipo" required>
+        <option value="">-- Selecciona una opción --</option>
+        <option value="Apartamento completo">Apartamento completo</option>
+        <option value="Habitación privada">Habitación privada</option>
+        <option value="Habitación compartida">Habitación compartida</option>
+      </select>
+
+      <label for="area">Área (en m²)</label>
+      <input type="number" id="area" name="area" required>
+
+      <label for="descripcion">Descripción del lugar</label>
+      <textarea id="descripcion" name="descripcion" rows="4" placeholder="Describe el ambiente, los servicios, mobiliario, etc." required></textarea>
+
+      <label for="fotos">Fotografías</label>
+      <input type="file" id="fotos" name="fotos" accept="image/*" multiple required>
+
+      <!-- Ubicación -->
+      <h3>Ubicación</h3>
+      <label for="direccion">Dirección</label>
+      <input type="text" id="direccion" name="direccion" required>
+
+      <label for="barrio">Barrio</label>
+      <input type="text" id="barrio" name="barrio" required>
+
+      <label for="ciudad">Ciudad</label>
+      <input type="text" id="ciudad" name="ciudad" required>
+
+      <!-- Estado -->
+      <label for="estado">Estado de la publicación</label>
+      <select id="estado" name="estado" required>
+        <option value="activa">Activa</option>
+        <option value="pausada">Pausada</option>
+        <option value="vencida">Vencida</option>
+      </select>
+
+      <!-- Contacto directo -->
+      <label for="contacto">WhatsApp o número de contacto</label>
+      <input type="tel" id="contacto" name="contacto" placeholder="Ej: +57 300 1234567" required>
+
+      <button type="submit">Publicar</button>
+    </form>
+  </div>
+</body>
+</html>
