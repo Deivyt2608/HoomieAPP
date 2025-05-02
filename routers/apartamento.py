@@ -72,4 +72,4 @@ async def publicar_apartamento(
 
     db.add(nuevo)
     db.commit()
-    return RedirectResponse(url="/inicio?mensaje=publicacion_exitosa", status_code=302)
+    return RedirectResponse(url="/match?mensaje=publicacion_exitosa", status_code=302)

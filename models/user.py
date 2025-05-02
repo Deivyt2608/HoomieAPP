@@ -13,5 +13,6 @@ class User(Base):
     password = Column(String(100), nullable=False)
     foto = Column(String(200), nullable=True)
     apartamentos = relationship("Apartamento", back_populates="usuario")
+    preferences = relationship("Preference", back_populates="user", uselist=False)
 
 
