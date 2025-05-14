@@ -23,4 +23,4 @@ class Preference(Base):
     estudia = Column(String(10))
     trabaja = Column(String(10))
 
-    user = relationship("User", back_populates="preferences")
+    usuario = relationship("User", back_populates="preferences")

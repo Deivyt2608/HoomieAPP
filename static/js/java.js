@@ -178,12 +178,4 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     });
 
-    const form = document.getElementById("multiStepForm");
-    if (form && modal) {
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            alert("Formulario enviado con éxito 🎉");
-            modal.style.display = "none";
-        });
-    }
 });

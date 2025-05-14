@@ -66,30 +66,17 @@
         </div>
     </nav>
   <div class="formulario-container">
-    <h2>Publicar Apartamento</h2>
-    <form action="/publicar-apartamento" method="post" enctype="multipart/form-data">
-      <!-- Información general -->
-      <label for="precio">Precio mensual</label>
-      <input type="number" id="precio" name="precio" placeholder="$COP" required>
+    <h2>Publicar inmueble</h2>
+    <form action="/publicar-inmueble" method="post" enctype="multipart/form-data">
 
-      <label for="tipo">Tipo de alojamiento</label>
-      <select id="tipo" name="tipo" required>
-        <option value="">-- Selecciona una opción --</option>
-        <option value="Apartamento completo">Apartamento completo</option>
-        <option value="Habitación privada">Habitación privada</option>
-        <option value="Habitación compartida">Habitación compartida</option>
+      <input type="hidden" name="publicacion_id" value="{{ publicacion_id }}">
+
+      <label for="tipo_inmueble">Tipo de alojamiento</label>
+      <select id="tipo_inmueble" name="tipo_inmueble" required>
+        <option value="Apartamento">Apartamento</option>
+        <option value="Casa">Casa</option>
       </select>
 
-      <label for="area">Área (en m²)</label>
-      <input type="number" id="area" name="area" required>
-
-      <label for="descripcion">Descripción del lugar</label>
-      <textarea id="descripcion" name="descripcion" rows="4" placeholder="Describe el ambiente, los servicios, mobiliario, etc." required></textarea>
-
-      <label for="fotos">Fotografías</label>
-      <input type="file" id="fotos" name="fotos" accept="image/*" multiple required>
-
-      <!-- Ubicación -->
       <h3>Ubicación</h3>
       <label for="direccion">Dirección</label>
       <input type="text" id="direccion" name="direccion" required>
@@ -100,17 +87,56 @@
       <label for="ciudad">Ciudad</label>
       <input type="text" id="ciudad" name="ciudad" required>
 
-      <!-- Estado -->
-      <label for="estado">Estado de la publicación</label>
-      <select id="estado" name="estado" required>
-        <option value="activa">Activa</option>
-        <option value="pausada">Pausada</option>
-        <option value="vencida">Vencida</option>
+      <label for="valor_arriendo">Precio arriendo mensual</label>
+      <input type="number" id="precio" name="valor_arriendo" placeholder="$COP" required>
+
+      <label for="valor_administracion">Precio administracion mensual</label>
+      <input type="number" id="precio" name="valor_administracion" placeholder="$COP" required>
+
+      <label for="area">Área (en m²)</label>
+      <input type="number" id="area" name="area_m2" required>
+
+      <label for="num_habitaciones">Numero de habitaciones</label>
+      <input type="number" id="num_habitaciones" name="num_habitaciones" required>
+
+
+      <label for="num_banos">Numero de baños</label>
+      <input type="number" id="num_banos" name="num_banos" required>
+
+      <label for="num_parqueaderos">numero de parqueaderos</label>
+      <input type="number" id="num_parqueaderos" name="num_parqueaderos" required>
+
+      <label for="">Estrato</label>
+      <input type="number" id="estrato" name="estrato" required>
+
+      <label for="genero_preferido">Preferencia de genero</label>
+      <select id="genero_preferido" name="genero_preferido" required>
+        <option value="Indiferente">Indiferente</option>
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
       </select>
 
-      <!-- Contacto directo -->
-      <label for="contacto">WhatsApp o número de contacto</label>
-      <input type="tel" id="contacto" name="contacto" placeholder="Ej: +57 300 1234567" required>
+      <label for="permite_mascotas">Permite mascotas</label>
+      <select id="permite_mascotas" name="permite_mascotas" required>
+        <option value=true>Si</option>
+        <option value=false>No</option>
+      </select>
+
+      <label for="permite_fumadores">Permite fumar</label>
+      <select id="permite_fumadores" name="permite_fumadores" required>
+        <option value=true>Si</option>
+        <option value=false>No</option>
+      </select>
+
+      <label for="permite_fiestas">Permite fiestas</label>
+      <select id="permite_fiestas" name="permite_fiestas" required>
+        <option value=true>Si</option>
+        <option value=false>No</option>
+      </select>
+
+      <label for="fotos">Fotografías</label>
+      <input type="file" id="fotos" name="fotos" accept="image/*" multiple required>
+
 
       <button type="submit">Publicar</button>
     </form>

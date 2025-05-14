@@ -55,7 +55,7 @@
             <div class="progress" id="progress"></div>
         </div>
     
-        <form id="multiStepForm">
+        <form id="multiStepForm" action="/crear-publicacion" method="post" enctype="multipart/form-data">
             <!-- Paso 1 -->
             <div class="form-step">
                 <h2>¡Inicia tu proceso de publicación!</h2>
@@ -64,12 +64,12 @@
                 </p>
                 
                 <div class="input-group">
-                    <input type="text" id="nombre" required placeholder=" " />
+                    <input type="text" id="nombre" name="nombre" required placeholder=" " />
                     <label for="nombre">Nombre de la publicación</label>
                 </div>
                   
                 <div class="input-group">
-                    <input type="text" id="descripcion" required placeholder=" " />
+                    <input type="text" id="descripcion" name="descripcion" required placeholder=" " />
                     <label for="descripcion">Descripción de la publicación</label>
                 </div>
                 
@@ -85,13 +85,13 @@
             <p>Marca la opción que mejor se adapte a lo que estás buscando y empecemos a conectar contigo.</p>
             <div class="radio-group">
                 <label class="custom-radio">
-                <input type="radio" name="tipo" value="arrendar" required>
+                <input type="radio" name="tipo_publicacion" value="arrendar" required>
                 <span class="radio-mark"></span>
                     Quiero arrendar una habitación / apartamento
                 </label>
 
                 <label class="custom-radio">
-                <input type="radio" name="tipo" value="roomie" required>
+                <input type="radio" name="tipo_publicacion" value="roomie" required>
                 <span class="radio-mark"></span>
                     Busco un roomie para compartir mi espacio
                 </label>
@@ -99,7 +99,7 @@
 
             <div class="buttons">
                 <button type="button" class="back">Volver</button>
-                <a href="/apto" ><button type="button" class="next" disabled>Enviar</button></a>
+                <button type="submit" class="next" >Enviar</button>
             </div>
             </div>
 
