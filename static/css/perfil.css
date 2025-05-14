@@ -4,14 +4,14 @@ body{
 }
 .base1{
     background-color: #CFEBFD;
-    margin: 100px 0 0 0;
+    margin: 4% 0 0 0;
     padding: 0%;
     display: flex;
 }
 
 #navp{
     width: 98%;
-    max-height: 80px;
+    height: 6%;
 }
 
 #footerp{

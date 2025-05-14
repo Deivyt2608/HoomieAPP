@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 #navp{
   width: 98%;
-  max-height: 80px;
+  height: 6%;
 }
 
 body.modal-open {
@@ -16,6 +16,9 @@ body.modal-open {
     display: flex;
     justify-content: center;
   }
+
+
+
 .anuncio-banner {
     background-color: #fff4d6;
     padding: 15px 20px;
@@ -228,7 +231,61 @@ body.modal-open {
     font-size: 12px;
     color: #FFC875;
   }
-  
+  .radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.custom-radio {
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.custom-radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-mark {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  height: 20px;
+  width: 20px;
+  background-color: #f1f1f1;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.custom-radio input:checked ~ .radio-mark {
+  background-color: #FFC875;
+  border-color: #FFC875;
+}
+
+.radio-mark::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+}
+
+.custom-radio input:checked ~ .radio-mark::after {
+  display: block;
+}
+
 
 @keyframes slideUp {
   from { transform: translateY(50px); opacity: 0; }

@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Publicar Apartamento</title>
-  <link rel="stylesheet" href="/static/css/formularios.css">
-  <style>
+<html lang="es" >
+    <head>
+        <meta charset="utf-8">
+        <title>Hoomie</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/static/imagenes/icono.png" />
+        <link rel="stylesheet" href="/static/css/publica.css">
+        <link rel="stylesheet" href="/static/css/navbar.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <style>
     .formulario-container {
       max-width: 800px;
       margin: 40px auto;
@@ -43,6 +50,21 @@
   </style>
 </head>
 <body>
+  <nav class="navbar" id="navp">
+        <div class="logo">
+            <a href="inicio"><img src="/static/imagenes/principal.png"></a>
+        </div>
+        <div class="buttons">
+            {% if usuario_logueado %}
+                <h2 id="name">Hola, {{ usuario_logueado }}</h2>
+                <a href="/logout"><button class="botonAma" id="out">Cerrar sesión</button></a>
+                <a href="/perfil"><button class="botonAzu" id="perfil">Ver Perfil</button></a>
+            {% else %}
+                <a href="ingreso"><button class="botonAzu">Ingresar</button></a>
+                <a href="registro"><button class="botonAma">Registrarse</button></a>
+            {% endif %}
+        </div>
+    </nav>
   <div class="formulario-container">
     <h2>Publicar Apartamento</h2>
     <form action="/publicar-apartamento" method="post" enctype="multipart/form-data">

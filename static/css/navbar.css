@@ -52,13 +52,15 @@
 }
 
 #out{
-    width: 150px;
+    width: 20vh;
 }
+
 #name{
     font-weight: bold;
     font-family: "Fredoka", sans-serif;
     font-optical-sizing: auto;
     text-align: center;
+    margin: 0;
 }
 
 .footer {
