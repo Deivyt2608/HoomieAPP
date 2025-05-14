@@ -9,14 +9,6 @@ body{
     display: flex;
 }
 
-#navp{
-    width: 98%;
-    height: 6%;
-}
-
-#footerp{
-    width: 97.4%;
-}
 .fotoPerfil{
     width: 30%;
     height: 30%;

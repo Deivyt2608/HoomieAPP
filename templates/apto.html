@@ -1,70 +1,11 @@
-<!DOCTYPE html>
-<html lang="es" >
-    <head>
-        <meta charset="utf-8">
-        <title>Hoomie</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="/static/imagenes/icono.png" />
+{% extends "base.html" %}
+
+{% block title %}Detalles inmueble - Hoomie{% endblock %}
+
+{% block head %}
         <link rel="stylesheet" href="/static/css/publica.css">
-        <link rel="stylesheet" href="/static/css/navbar.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
-    <style>
-    .formulario-container {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: #f9f9f9;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .formulario-container h2 {
-      margin-bottom: 15px;
-    }
-    .formulario-container label {
-      display: block;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-    .formulario-container input,
-    .formulario-container select,
-    .formulario-container textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .formulario-container button {
-      margin-top: 20px;
-      padding: 12px 30px;
-      background-color: #FFC875;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-  </style>
-</head>
-<body>
-  <nav class="navbar" id="navp">
-        <div class="logo">
-            <a href="inicio"><img src="/static/imagenes/principal.png"></a>
-        </div>
-        <div class="buttons">
-            {% if usuario_logueado %}
-                <h2 id="name">Hola, {{ usuario_logueado }}</h2>
-                <a href="/logout"><button class="botonAma" id="out">Cerrar sesión</button></a>
-                <a href="/perfil"><button class="botonAzu" id="perfil">Ver Perfil</button></a>
-            {% else %}
-                <a href="ingreso"><button class="botonAzu">Ingresar</button></a>
-                <a href="registro"><button class="botonAma">Registrarse</button></a>
-            {% endif %}
-        </div>
-    </nav>
+{% endblock %}
+{% block content %}
   <div class="formulario-container">
     <h2>Publicar inmueble</h2>
     <form action="/publicar-inmueble" method="post" enctype="multipart/form-data">
@@ -141,5 +82,9 @@
       <button type="submit">Publicar</button>
     </form>
   </div>
-</body>
-</html>
+   {% endblock %}
+
+{% block scripts %}
+<script src="/static/js/java.js"></script>
+{% endblock %}
+

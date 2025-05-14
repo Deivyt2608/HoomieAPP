@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Preferencias de Perfil</title>
+{% extends "base.html" %}
+
+{% block title %}Preferencias de Perfil - Hoomie{% endblock %}
+
+{% block head %}
   <link rel="stylesheet" href="/static/css/formularios.css">
   <style>
     .formulario-container {
@@ -36,8 +35,10 @@
       border-radius: 5px;
     }
   </style>
-</head>
-<body>
+
+{% endblock %}
+
+{% block content %}
   <div class="formulario-container">
     <h2>Configura tus Preferencias</h2>
     <form action="/guardar-preferencias" method="post">
@@ -149,7 +150,9 @@
   </div>
   
   <div id="toast" class="toast"></div>
+{% endblock %}
 
+{% block scripts %}
 <script>
 const params = new URLSearchParams(window.location.search);
 const mensaje = params.get("mensaje");
@@ -167,5 +170,5 @@ function mostrarToast(texto) {
     setTimeout(() => toast.classList.remove("mostrar"), 3500);
 }
 </script>
-</body>
-</html>
+{% endblock %}
+

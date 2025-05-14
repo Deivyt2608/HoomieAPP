@@ -45,15 +45,6 @@ html {
     width: 120px;
 }
 
-#out{
-    width: 150px;
-}
-#name{
-    font-weight: bold;
-    font-family: "Fredoka", sans-serif;
-    font-optical-sizing: auto;
-    text-align: center;
-}
 /* Hero Section */
 .hero {
     margin-top: 40px;

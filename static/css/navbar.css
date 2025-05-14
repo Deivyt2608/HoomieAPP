@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Chicle&family=Fredoka:wght@700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+* {
+  box-sizing: border-box;
+}
 .navbar {
     position: fixed;     /* Se queda fijo al hacer scroll */
     top: 0;              /* Lo posiciona al tope */
-    left: 0;
-    width: 100%;         /* Ocupa todo el ancho */
+    left: 0;        /* Ocupa todo el ancho */
+    width: 100%;
     background-color: #333;
     color: black;
     padding: 15px;
@@ -16,6 +18,7 @@
     align-items: center;
     padding: 15px;
     box-shadow: 0 2px 1px rgb(0, 0, 0);
+    height: 10vh;
     max-height: 80px;
     img{
         width: 220px;
@@ -39,7 +42,7 @@
     width: 120px;
 }
 
-.botonAzu{
+.botonAzu, #perfil{
     background-color: #CFEBFD; 
     color: black;
     margin-right: 10px;
