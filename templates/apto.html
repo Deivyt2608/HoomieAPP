@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles inmueble - Hoomie{% endblock %}
+
+{% block head %}
+        <link rel="stylesheet" href="/static/css/publica.css">
+{% endblock %}
+{% block content %}
+  <div class="formulario-container">
+    <h2>Publicar inmueble</h2>
+    <form action="/publicar-inmueble" method="post" enctype="multipart/form-data">
+
+      <input type="hidden" name="publicacion_id" value="{{ publicacion_id }}">
+
+      <label for="tipo_inmueble">Tipo de alojamiento</label>
+      <select id="tipo_inmueble" name="tipo_inmueble" required>
+        <option value="Apartamento">Apartamento</option>
+        <option value="Casa">Casa</option>
+      </select>
+
+      <h3>Ubicación</h3>
+      <label for="direccion">Dirección</label>
+      <input type="text" id="direccion" name="direccion" required>
+
+      <label for="barrio">Barrio</label>
+      <input type="text" id="barrio" name="barrio" required>
+
+      <label for="ciudad">Ciudad</label>
+      <input type="text" id="ciudad" name="ciudad" required>
+
+      <label for="valor_arriendo">Precio arriendo mensual</label>
+      <input type="number" id="precio" name="valor_arriendo" placeholder="$COP" required>
+
+      <label for="valor_administracion">Precio administracion mensual</label>
+      <input type="number" id="precio" name="valor_administracion" placeholder="$COP" required>
+
+      <label for="area">Área (en m²)</label>
+      <input type="number" id="area" name="area_m2" required>
+
+      <label for="num_habitaciones">Numero de habitaciones</label>
+      <input type="number" id="num_habitaciones" name="num_habitaciones" required>
+
+
+      <label for="num_banos">Numero de baños</label>
+      <input type="number" id="num_banos" name="num_banos" required>
+
+      <label for="num_parqueaderos">numero de parqueaderos</label>
+      <input type="number" id="num_parqueaderos" name="num_parqueaderos" required>
+
+      <label for="">Estrato</label>
+      <input type="number" id="estrato" name="estrato" required>
+
+      <label for="genero_preferido">Preferencia de genero</label>
+      <select id="genero_preferido" name="genero_preferido" required>
+        <option value="Indiferente">Indiferente</option>
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
+      </select>
+
+      <label for="permite_mascotas">Permite mascotas</label>
+      <select id="permite_mascotas" name="permite_mascotas" required>
+        <option value=true>Si</option>
+        <option value=false>No</option>
+      </select>
+
+      <label for="permite_fumadores">Permite fumar</label>
+      <select id="permite_fumadores" name="permite_fumadores" required>
+        <option value=true>Si</option>
+        <option value=false>No</option>
+      </select>
+
+      <label for="permite_fiestas">Permite fiestas</label>
+      <select id="permite_fiestas" name="permite_fiestas" required>
+        <option value=true>Si</option>
+        <option value=false>No</option>
+      </select>
+
+      <label for="fotos">Fotografías</label>
+      <input type="file" id="fotos" name="fotos" accept="image/*" multiple required>
+
+
+      <button type="submit">Publicar</button>
+    </form>
+  </div>
+   {% endblock %}
+
+{% block scripts %}
+<script src="/static/js/java.js"></script>
+{% endblock %}
+

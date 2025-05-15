@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block title %}Preferencias de Perfil - Hoomie{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="/static/css/formularios.css">
+  <style>
+    .formulario-container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 30px;
+      background-color: #FFC875;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+
+{% endblock %}
+
+{% block content %}
+  <div class="formulario-container">
+    <h2>Configura tus Preferencias</h2>
+    <form action="/guardar-preferencias" method="post">
+
+      <label>El aseo del hogar</label>
+      <select name="aseo_hogar" required>
+        <option value="">Seleccione...</option>
+        <option value="1">1 (Nada importante)</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 (Muy importante)</option>
+      </select>
+
+      <label>El ruido del hogar</label>
+      <select name="ruido_hogar" required>
+        <option value="">Seleccione...</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+
+      <label>Visitas</label>
+      <select name="visitas" required>
+        <option value="">Seleccione...</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+
+      <label>Aseo personal</label>
+      <select name="aseo_personal" required>
+        <option value="">Seleccione...</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+
+      <label>División de tareas del hogar</label>
+      <select name="division_tareas" required>
+        <option value="">Seleccione...</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+
+      <label>Salidas de fiesta</label>
+      <select name="salidas_fiesta" required>
+        <option value="">Seleccione...</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+
+      <label>¿Fuma?</label>
+      <select name="fuma" required>
+        <option value="">Seleccione...</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+      <label>¿Consume regularmente alcohol?</label>
+      <select name="alcohol" required>
+        <option value="">Seleccione...</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+      <label>¿Trabaja en casa?</label>
+      <select name="trabaja_casa" required>
+        <option value="">Seleccione...</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+      <label>¿Tiene mascotas?</label>
+      <select name="mascotas" required>
+        <option value="">Seleccione...</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+      <label>¿Estudia?</label>
+      <select name="estudia" required>
+        <option value="">Seleccione...</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+      <label>¿Trabaja?</label>
+      <select name="trabaja" required>
+        <option value="">Seleccione...</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+      <button type="submit">Guardar preferencias</button>
+    </form>
+  </div>
+  
+  <div id="toast" class="toast"></div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const params = new URLSearchParams(window.location.search);
+const mensaje = params.get("mensaje");
+const toast = document.getElementById("toast");
+
+if (mensaje === "preferencias_guardadas") {
+    mostrarToast("✅ Tus preferencias fueron guardadas con éxito.");
+} else if (mensaje === "sesion_requerida") {
+    mostrarToast("⚠️ Necesitas iniciar sesión para acceder a esta página.");
+}
+
+function mostrarToast(texto) {
+    toast.textContent = texto;
+    toast.classList.add("mostrar");
+    setTimeout(() => toast.classList.remove("mostrar"), 3500);
+}
+</script>
+{% endblock %}
+

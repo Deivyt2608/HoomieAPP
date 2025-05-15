@@ -1,33 +1,12 @@
-<!DOCTYPE html>
-<html lang="es" >
-    <head>
-        <meta charset="utf-8">
-        <title>Hoomie</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="/static/imagenes/icono.png" />
+{% extends "base.html" %}
+
+{% block title %}Inicio - Hoomie{% endblock %}
+
+{% block head %}
         <link rel="stylesheet" href="/static/css/publica.css">
-        <link rel="stylesheet" href="/static/css/navbar.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
-<body>
-    <nav class="navbar" id="navp">
-        <div class="logo">
-            <a href="inicio"><img src="/static/imagenes/principal.png"></a>
-        </div>
-        <div class="buttons">
-            {% if usuario_logueado %}
-                <h2 id="name">Hola, {{ usuario_logueado }}</h2>
-                <a href="/logout"><button class="botonAma" id="out">Cerrar sesión</button></a>
-                <a href="/perfil"><button class="botonAzu" id="perfil">Ver Perfil</button></a>
-            {% else %}
-                <a href="ingreso"><button class="botonAzu">Ingresar</button></a>
-                <a href="registro"><button class="botonAma">Registrarse</button></a>
-            {% endif %}
-        </div>
-    </nav>
+{% endblock %}
+      
+{% block content %}
     <div class="anuncio-wrapper">
         <div id="anuncio" class="anuncio-banner">
           <span>Si estás buscando tu próximo hogar, <a href="#">haz click aquí</a></span>
@@ -55,21 +34,21 @@
             <div class="progress" id="progress"></div>
         </div>
     
-        <form id="multiStepForm">
+        <form id="multiStepForm" action="/crear-publicacion" method="post" enctype="multipart/form-data">
             <!-- Paso 1 -->
-            <div class="form-step active">
+            <div class="form-step">
                 <h2>¡Inicia tu proceso de publicación!</h2>
                 <p>Para poder continuar, por favor ingresa como quieres identificar esta publicación. Este nombre
                     solo sera visible para ti.
                 </p>
                 
                 <div class="input-group">
-                    <input type="text" id="nombre" required placeholder=" " />
+                    <input type="text" id="nombre" name="nombre" required placeholder=" " />
                     <label for="nombre">Nombre de la publicación</label>
                 </div>
                   
                 <div class="input-group">
-                    <input type="text" id="descripcion" required placeholder=" " />
+                    <input type="text" id="descripcion" name="descripcion" required placeholder=" " />
                     <label for="descripcion">Descripción de la publicación</label>
                 </div>
                 
@@ -77,33 +56,35 @@
                     <button type="button" class="cancel" >Cancelar</button>
                     <button type="button" class="next"  disabled>Siguiente</button>
                 </div>
-            </div>
-            </div>
+            </div>  
     
             <!-- Paso 2 -->
             <div class="form-step">
-            <label>Email:</label>
-            <input type="email" id="email" required>
-            <div class="botones">
+            <h2>Tipo de publicación</h2>
+            <p>Marca la opción que mejor se adapte a lo que estás buscando y empecemos a conectar contigo.</p>
+            <div class="radio-group">
+                <label class="custom-radio">
+                <input type="radio" name="tipo_publicacion" value="arrendar" required>
+                <span class="radio-mark"></span>
+                    Quiero arrendar una habitación / apartamento
+                </label>
+
+                <label class="custom-radio">
+                <input type="radio" name="tipo_publicacion" value="roomie" required>
+                <span class="radio-mark"></span>
+                    Busco un roomie para compartir mi espacio
+                </label>
+            </div>
+
+            <div class="buttons">
                 <button type="button" class="back">Volver</button>
-                <button type="button" class="next" disabled>Siguiente</button>
+                <button type="submit" class="next" >Enviar</button>
             </div>
             </div>
+
     
-            <!-- Paso 3 -->
-            <div class="form-step">
-            <label>Mensaje:</label>
-            <textarea id="mensaje" required></textarea>
-            <div class="botones">
-                <button type="button" class="back">Volver</button>
-                <button type="submit">Enviar</button>
-            </div>
-            </div>
         </form>
         </div>
     </div>
   
-  
-    <script src="/static/js/java.js"></script>
-</body>
-</html>
+    {% endblock %}

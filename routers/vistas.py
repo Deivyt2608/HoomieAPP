@@ -6,6 +6,13 @@ from utils.session import get_usuario_logueado
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")  # Ruta relativa desde main.py
 
+@router.get("/base", response_class=HTMLResponse)
+async def inicio(request: Request):
+    usuario = get_usuario_logueado(request)
+    return templates.TemplateResponse("base.html", {
+        "request": request,
+        "usuario_logueado": usuario.nombre if usuario else None
+    })
 
 @router.get("/inicio", response_class=HTMLResponse)
 async def inicio(request: Request):
@@ -39,6 +46,25 @@ async def inicio(request: Request):
         "usuario_logueado": usuario.nombre if usuario else None
     })
 
+@router.get("/match", response_class=HTMLResponse)
+async def inicio(request: Request):
+    usuario = get_usuario_logueado(request)
+    return templates.TemplateResponse("match.html", {
+        "request": request,
+        "usuario_logueado": usuario.nombre if usuario else None
+    })
+
+@router.get("/apto", response_class=HTMLResponse)
+async def mostrar_formulario_inmueble(request: Request, publicacion_id: int):
+    usuario = get_usuario_logueado(request)
+    return templates.TemplateResponse("apto.html", {
+        "request": request,
+        "usuario_logueado": usuario.nombre if usuario else None,
+        "publicacion_id": publicacion_id
+    })
+
+
+
 # Función genérica para renderizar plantillas
 def render_template(template_name: str):
     async def view(request: Request):
@@ -57,7 +83,9 @@ routes = [
     ("/rentar", "rentar.html"),
     ("/trabajo", "trabajo.html"),
     ("/restablecer","restablecer.html"),
-    ("/publicar","publica_apto.html")
+    ("/publica_apto","publica_apto.html"),
+    ("/apto","apto.html"),
+    ("/match", "match.html")
 ]
 
 # Registro dinámico de rutas

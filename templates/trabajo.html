@@ -1,36 +1,13 @@
-<!DOCTYPE html>
-<html lang="es" >
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Hoomie</title>
-        <link rel="icon" href="/static/imagenes/icono.png" />
+{% extends "base.html" %}
+
+{% block title %}Inicio - Hoomie{% endblock %}
+
+{% block head %}
         <link rel="stylesheet" href="/static/css/inicio.css">
-        <link rel="stylesheet" href="/static/css/navbar.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
-    <body class="inicio" >
-        <nav class="navbar" id="navp">
-            <div class="logo">
-                <a href="/inicio"><img src="/static/imagenes/principal.png"></a>
-            </div>
-            <div class="buttons">
-                {% if usuario_logueado %}
-                    <h2 id="name">Hola, {{ usuario_logueado }}</h2>
-                    <a href="/logout"><button class="botonAma" id="out">Cerrar sesión</button></a>
-                    <a href="/perfil"><button class="botonAzu" id="perfil">Ver Perfil</button></a>
-                {% else %}
-                    <a href="ingreso"><button class="botonAzu">Ingresar</button></a>
-                    <a href="registro"><button class="botonAma">Registrarse</button></a>
-                {% endif %}
-            </div>
-            
-        </nav>
+{% endblock %}
+
+{% block content %}
     <center><h1 class="tituloN">¡Estamos trabajando en esta página!</h1></center>
     <center><img src="/static/imagenes/trabajando.png"></center>
 
-    <script src="/static/js/java.js"></script>
-
-    </body>
-</html>
+{% endblock %}

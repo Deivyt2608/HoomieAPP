@@ -1,0 +1,80 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Hoomie{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/static/imagenes/icono.png" />
+  <link rel="stylesheet" href="/static/css/navbar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+  <!-- NAVBAR -->
+   <nav class="navbar">
+    <div class="logo">
+      <a href="/inicio"><img src="/static/imagenes/principal.png" /></a>
+    </div>
+    <div class="buttons">
+      {% if usuario_logueado %}
+        <button class="profile-button" onclick="togglePerfil()">
+          <img src="{{ usuario_logueado.foto if usuario_logueado.foto else '/static/imagenes/perfil.png' }}" alt="Perfil">
+        </button>
+      {% else %}
+        <a href="/ingreso"><button class="botonAzu">Ingresar</button></a>
+        <a href="/registro"><button class="botonAma">Registrarse</button></a>
+      {% endif %}
+    </div>
+  </nav>
+
+  {% if usuario_logueado %}
+  <div id="modalPerfil" class="modal-perfil">
+    <span class="cerrar" onclick="togglePerfil()">&times;</span>
+
+    <img src="{{ usuario_logueado.foto if usuario_logueado.foto else '/static/imagenes/perfil.png' }}" alt="Perfil">
+    <h3>¡Hola, {{ usuario_logueado }}!</h3>
+    <a href="/perfil">Administrar perfil</a>
+    <a href="/mis-publicaciones">Administrar publicaciones</a>
+    <a href="/logout" id="out">Cerrar sesión <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+  </div>
+  {% endif %}
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <a href="#"><img class="logo" src="/static/imagenes/principal.png"></a>
+        <nav class="footer-nav">
+          <a href="/inicio">Inicio</a>
+          <a href="/nosotros">Nosotros</a>
+          <a href="/publicaciones">Publicaciones</a>
+        </nav>
+      </div>
+      <div class="footer-right">
+        <a href="https://www.sic.gov.co/ley-de-proteccion-de-datos" target="_blank">Política de privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+<script src="/static/js/java.js"></script>
+<script>
+    function togglePerfil() {
+      const modal = document.getElementById("modalPerfil");
+      modal.classList.toggle("mostrar");
+    }
+  </script>
+  <script src="/static/js/java.js"></script>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

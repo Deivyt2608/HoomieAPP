@@ -63,6 +63,21 @@
                 setTimeout(() => toast.classList.remove("mostrar"), 3500);
             }
         </script>
+        <div id="toast" class="toast"></div>
 
+        <script>
+        
+        if (mensaje === "preferencias_guardadas") {
+            mostrarToast("✅ Tus preferencias fueron guardadas con éxito.");
+        } else if (mensaje === "sesion_requerida") {
+            mostrarToast("⚠️ Necesitas iniciar sesión para acceder a esta página.");
+        }
+        
+        function mostrarToast(texto) {
+            toast.textContent = texto;
+            toast.classList.add("mostrar");
+            setTimeout(() => toast.classList.remove("mostrar"), 3500);
+        }
+        </script>
     </body>
 </html>
