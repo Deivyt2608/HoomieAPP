@@ -1,0 +1,55 @@
+.filtros {
+    margin: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.filtros form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.lista-publicaciones {
+    padding: 20px;
+}
+.grid-publicaciones {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+}
+.card {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.card img {
+    width: 160px;
+    height: 120px;
+    object-fit: cover;
+}
+.card-content {
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card-content h3 {
+    margin: 0 0 5px;
+    font-size: 18px;
+}
+.card-content p {
+    margin: 2px 0;
+    font-size: 14px;
+}
+.card-content a {
+    align-self: start;
+    margin-top: 10px;
+}
+@media (max-width: 768px) {
+    .grid-publicaciones {
+    grid-template-columns: 1fr;
+    }
+}

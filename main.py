@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from routers import publicacion, vistas, auth, usuario, perfil, preferencias
-from database.connection import engine
+from routers import publicacion, vistas, auth, usuario, perfil, preferencias, publicaciones
+from database.connection import engine, SessionLocal
+from sqlalchemy.orm import Session
 
 
 app = FastAPI()
@@ -14,3 +15,4 @@ app.include_router(auth.router)
 app.include_router(perfil.router)
 app.include_router(publicacion.router)
 app.include_router(preferencias.router)
+app.include_router(publicaciones.router)
