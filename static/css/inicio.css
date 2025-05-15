@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Chicle&family=Fredoka:wght@700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 html {
     scroll-behavior: smooth;
 }
@@ -13,37 +9,6 @@ html {
     margin: 0%;
 }
 
-#navp{
-    width: 100%;
-}
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.botonAma{
-    background-color: #FFC875;
-    color: black;
-    border-radius: 5px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 120px;
-}
-
-.botonAzu{
-    background-color: #CFEBFD; 
-    color: black;
-    margin-right: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 120px;
-}
 
 /* Hero Section */
 .hero {
@@ -129,6 +94,7 @@ html {
     text-align: center;
     background-color: #CFEBFD; 
     padding: 20px;
+    width: 100%;
 }
 
 .acciones h2 {
@@ -140,18 +106,24 @@ html {
 }
 
 .opciones {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
+    display: inline-block;
+    justify-content:space-between;
+    width: 100%;
+    gap: 10px;
 }
 
 .opcion {
+    display: inline-block;
     text-align: center;
     background: white;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
+    width: 100%;
+    margin: auto;
+    max-width: 300px;
+    margin-bottom: 10px;
 }
 
 .opcion:hover {
@@ -159,13 +131,12 @@ html {
 }
 
 .opcion img {
-    width: 200px;
-    height: auto;
+    width: 60%;
     border-radius: 8px;
 }
 
 .opcion p {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
     color: #000;
     margin-top: 10px;

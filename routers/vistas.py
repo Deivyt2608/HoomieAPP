@@ -46,6 +46,14 @@ async def inicio(request: Request):
         "usuario_logueado": usuario.nombre if usuario else None
     })
 
+@router.get("/match", response_class=HTMLResponse)
+async def inicio(request: Request):
+    usuario = get_usuario_logueado(request)
+    return templates.TemplateResponse("match.html", {
+        "request": request,
+        "usuario_logueado": usuario.nombre if usuario else None
+    })
+
 @router.get("/apto", response_class=HTMLResponse)
 async def mostrar_formulario_inmueble(request: Request, publicacion_id: int):
     usuario = get_usuario_logueado(request)
