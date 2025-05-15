@@ -50,7 +50,7 @@ routes = [
     ("/", "inicio.html"),
     ("/inicio", "inicio.html"),
     ("/ingreso", "ingreso.html"),
-    ("/conocenos", "conocenos.html"),
+    ("/nosotros", "conocenos.html"),
     ("/olvida", "olvida.html"),
     ("/perfil", "perfil.html"),
     ("/registro", "registro.html"),

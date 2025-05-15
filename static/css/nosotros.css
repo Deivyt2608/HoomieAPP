@@ -1,0 +1,137 @@
+body{
+    background-image: url(/static/imagenes/fondo.png);
+}
+.mision {
+    margin-top: 30px;   
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Título arriba de todo */
+.titulo {
+    font-size: 50px;
+    color: #000000;
+    font-weight: 700;
+    max-width: 900px;
+    margin: 80px auto 40px auto;
+    font-family: "Fredoka", sans-serif;
+    margin-bottom: 40px;
+    margin-top: 80px;
+    text-align: center;
+}
+
+/* Contenedor de imagen + texto */
+.contenido-hero {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+    max-width: 1400px;
+}
+
+/* Imagen a la izquierda */
+.mock {
+    margin-left: 15%;
+    flex: 1 1 400px;
+    text-align: center;
+}
+
+.mock img {
+    width: 200%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+/* Texto a la derecha */
+.cabecera {
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    width: 500% ;
+    margin: auto;
+}
+
+.descripcion {
+    color: #5d5d5d;
+    font-size: 22px;
+    font-family: "Montserrat", sans-serif;
+    font-style: normal;
+    line-height: 1.6;
+}
+
+/* Sección Valores */
+.valores {
+    text-align: center;
+    margin-bottom: 5%;
+  }
+  
+  .valores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .valor {
+    background: #ffffff;
+    padding: 30px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease;
+  }
+  
+  .valor:hover {
+    transform: translateY(-8px);
+  }
+  
+  .valor-icono {
+    font-size: 50px;
+    margin-bottom: 15px;
+  }
+  
+  .valor-nombre {
+    font-family: "Fredoka", sans-serif;
+    font-size: 24px;
+    color: #222;
+    margin-bottom: 10px;
+  }
+  
+  .valor-descripcion {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    color: #000000;
+    line-height: 1.6;
+  }
+
+  .valor-icono {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 20px;
+  }
+  
+
+/* Responsive: se apila en móviles */
+@media (max-width: 768px) {
+    .contenido-hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cabecera {
+        text-align: center;
+    }
+
+    .mock img {
+        width: 80%;
+    }
+}

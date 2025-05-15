@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es" >
+    <head>
+        <meta charset="utf-8">
+        <title>Hoomie</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/static/imagenes/icono.png" />
+        <link rel="stylesheet" href="/static/css/inicio.css">
+        <link rel="stylesheet" href="/static/css/navbar.css">
+        <link rel="stylesheet" href="/static/css/nosotros.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body class="inicio" >  
+    <nav class="navbar" id="navp">
+        <div class="logo">
+            <a href="/inicio"><img src="/static/imagenes/principal.png"></a>
+        </div>
+        <div class="buttons">
+            {% if usuario_logueado %}
+                <h2 id="name">Hola, {{ usuario_logueado }}</h2>
+                <a href="/logout"><button class="botonAma" id="out">Cerrar sesión</button></a>
+                <a href="/perfil"><button class="botonAzu" id="perfil">Ver Perfil</button></a>
+            {% else %}
+                <a href="ingreso"><button class="botonAzu">Ingresar</button></a>
+                <a href="registro"><button class="botonAma">Registrarse</button></a>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="seccion-hero">
+
+        <!-- Título arriba de todo -->
+        <h1 class="titulo">Nuestra misión es ayudarte a que encuentres tu espacio ideal, sin enredos.🏡✨</h1>
+        <!-- Contenido en columnas: imagen + texto -->
+        <div class="contenido-hero">
+          <div class="mock">
+            <img src="/static/imagenes/mock.png" alt="Mockup de Hoomie">
+          </div>
+          <div class="cabecera">
+            <p class="descripcion">
+              En Hoomie, creemos que encontrar el lugar perfecto para vivir o a la persona ideal para compartirlo 
+              no debería ser complicado. Por eso creamos una plataforma pensada especialmente para aquellos que buscan
+              un hogar donde se sientan cómodos y seguros.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+    <section class="valores">
+        <h2 class="titulo">Nuestros Valores</h2>
+        <p class="descripcion">Estos son los principios que guían nuestra comunidad de roomies en Hoomie.</p>
+        <div class="valores-grid">
+            <div class="valor">
+            <img src="/static/imagenes/confianza.png" alt="Icono de Confianza" class="valor-icono">
+            <h3 class="valor-nombre">🌱 Confianza</h3>
+            <p class="valor-descripcion">
+                Creamos un espacio donde las personas pueden sentirse seguras al buscar o compartir su hogar. Nos preocupamos por la transparencia y el respeto en cada conexión.
+            </p>
+            </div>
+        
+            <div class="valor">
+            <img src="/static/imagenes/comunidad.png" alt="Icono de Comunidad" class="valor-icono">
+            <h3 class="valor-nombre">🤝 Comunidad</h3>
+            <p class="valor-descripcion">
+                Creemos en el poder de las buenas conexiones. Hoomie no es solo una plataforma, es un lugar donde se forman amistades, alianzas y experiencias de vida.
+            </p>
+            </div>
+        
+            <div class="valor">
+            <img src="/static/imagenes/innovacion.png" alt="Icono de Innovación" class="valor-icono">
+            <h3 class="valor-nombre"> 💡 Innovación</h3>
+            <p class="valor-descripcion">
+                Apostamos por soluciones modernas que se adapten a las necesidades actuales de vivienda compartida, integrando tecnología útil y accesible.
+            </p>
+            </div>
+        </div>
+        </section>
+        
+    </section>
+
+          
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <a href="#">
+                    <img class="logo" src="/static/imagenes/principal.png">
+                </a>
+                <nav class="footer-nav">
+                    <a href="#">Inicio</a>
+                    <a href="nosotros">Nosotros</a>
+                    <a href="publicaciones">Publicaciones</a>
+                </nav>
+            </div>
+            <div class="footer-right">
+                <a href="https://www.sic.gov.co/ley-de-proteccion-de-datos"  target="_blank">Política de privacidad</a>
+            </div>
+        </div>
+    </footer>
+    <script src="/static/js/java.js"></script>
+    </body>
+</html>
+
