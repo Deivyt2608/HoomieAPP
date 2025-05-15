@@ -6,6 +6,13 @@ from utils.session import get_usuario_logueado
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")  # Ruta relativa desde main.py
 
+@router.get("/base", response_class=HTMLResponse)
+async def inicio(request: Request):
+    usuario = get_usuario_logueado(request)
+    return templates.TemplateResponse("base.html", {
+        "request": request,
+        "usuario_logueado": usuario.nombre if usuario else None
+    })
 
 @router.get("/inicio", response_class=HTMLResponse)
 async def inicio(request: Request):

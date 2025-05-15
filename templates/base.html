@@ -16,21 +16,33 @@
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar" id="navp">
+   <nav class="navbar">
     <div class="logo">
       <a href="/inicio"><img src="/static/imagenes/principal.png" /></a>
     </div>
     <div class="buttons">
       {% if usuario_logueado %}
-        <h2 id="name">Hola, {{ usuario_logueado }}</h2>
-        <a href="/logout"><button class="botonAma" id="out">Cerrar sesión</button></a>
-        <a href="/perfil"><button class="botonAzu" id="perfil">Ver Perfil</button></a>
+        <button class="profile-button" onclick="togglePerfil()">
+          <img src="{{ usuario_logueado.foto if usuario_logueado.foto else '/static/imagenes/perfil.png' }}" alt="Perfil">
+        </button>
       {% else %}
         <a href="/ingreso"><button class="botonAzu">Ingresar</button></a>
         <a href="/registro"><button class="botonAma">Registrarse</button></a>
       {% endif %}
     </div>
   </nav>
+
+  {% if usuario_logueado %}
+  <div id="modalPerfil" class="modal-perfil">
+    <span class="cerrar" onclick="togglePerfil()">&times;</span>
+
+    <img src="{{ usuario_logueado.foto if usuario_logueado.foto else '/static/imagenes/perfil.png' }}" alt="Perfil">
+    <h3>¡Hola, {{ usuario_logueado }}!</h3>
+    <a href="/perfil">Administrar perfil</a>
+    <a href="/mis-publicaciones">Administrar publicaciones</a>
+    <a href="/logout" id="out">Cerrar sesión <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+  </div>
+  {% endif %}
 
   <!-- CONTENIDO PRINCIPAL -->
   <main>
@@ -39,9 +51,9 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-container" id="footerp">
+    <div class="footer-container">
       <div class="footer-left">
-        <a href="#"><img class="logo" src="/static/imagenes/principal.png" /></a>
+        <a href="#"><img class="logo" src="/static/imagenes/principal.png"></a>
         <nav class="footer-nav">
           <a href="/inicio">Inicio</a>
           <a href="/nosotros">Nosotros</a>
@@ -55,6 +67,13 @@
   </footer>
 
 <script src="/static/js/java.js"></script>
+<script>
+    function togglePerfil() {
+      const modal = document.getElementById("modalPerfil");
+      modal.classList.toggle("mostrar");
+    }
+  </script>
+  <script src="/static/js/java.js"></script>
 
   {% block scripts %}{% endblock %}
 </body>
