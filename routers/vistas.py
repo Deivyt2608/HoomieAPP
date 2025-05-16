@@ -63,6 +63,13 @@ async def mostrar_formulario_inmueble(request: Request, publicacion_id: int):
         "publicacion_id": publicacion_id
     })
 
+@router.get("/nosotros", response_class=HTMLResponse)
+async def mostrar_formulario_inmueble(request: Request):
+    usuario = get_usuario_logueado(request)
+    return templates.TemplateResponse("conocenos.html", {
+        "request": request,
+        "usuario_logueado": usuario if usuario else None
+    })
 
 # Función genérica para renderizar plantillas
 def render_template(template_name: str):

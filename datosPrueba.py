@@ -5,7 +5,7 @@ from models.user import User
 from models.publicacion import Publicacion
 import random
 
-ciudades = ["Bogotá", "Medellín", "Cali", "Barranquilla"]
+ciudades = ["Bogotá", "Medellín", "cartagena"]
 barrio_base = ["Chapinero", "Laureles", "San Fernando", "El Prado"]
 tipos = ["apartamento", "casa"]
 generos = ["masculino", "femenino", "indiferente"]

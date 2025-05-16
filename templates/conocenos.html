@@ -7,23 +7,6 @@
 {% endblock %}
 
 {% block content %}
-
-    <body class="inicio" >  
-    <nav class="navbar" id="navp">
-        <div class="logo">
-            <a href="/inicio"><img src="/static/imagenes/principal.png"></a>
-        </div>
-        <div class="buttons">
-            {% if usuario_logueado %}
-                <h2 id="name">Hola, {{ usuario_logueado }}</h2>
-                <a href="/logout"><button class="botonAma" id="out">Cerrar sesión</button></a>
-                <a href="/perfil"><button class="botonAzu" id="perfil">Ver Perfil</button></a>
-            {% else %}
-                <a href="ingreso"><button class="botonAzu">Ingresar</button></a>
-                <a href="registro"><button class="botonAma">Registrarse</button></a>
-            {% endif %}
-        </div>
-    </nav>
     <div class="seccion-hero">
 
         <!-- Título arriba de todo -->
