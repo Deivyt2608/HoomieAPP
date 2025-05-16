@@ -45,7 +45,7 @@ async def enviar_enlace(email_usuario: str = Form(...), db: Session = Depends(ge
         return RedirectResponse(url=f"/olvida?mensaje=correo_no_encontrado&correo={email_usuario}", status_code=302)
 
     token = usuario.email  # en producción deberías usar un token único y temporal
-    enlace = f"http://localhost:8000/restablecer?token={token}"
+    enlace = f"https://hoomieapp.onrender.com/restablecer?token={token}"
 
     await enviar_enlace_restablecer(usuario.email, usuario.nombre, enlace)
     return RedirectResponse(url="/ingreso?mensaje=verifica_tu_correo", status_code=302)

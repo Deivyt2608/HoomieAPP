@@ -1,0 +1,79 @@
+.detalle-container {
+    max-width: 1000px;
+    margin: 80px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.detalle-titulo {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.detalle-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.detalle-foto {
+    flex: 1 1 300px;
+}
+.detalle-foto img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    cursor: pointer;
+}
+.detalle-datos {
+    flex: 1 1 350px;
+}
+.detalle-datos p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+.detalle-descripcion {
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* Galería Modal */
+.galeria-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.galeria-modal img {
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 10px;
+}
+.galeria-cerrar {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+.galeria-controles {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    transform: translateY(-50%);
+}
+.galeria-controles span {
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}

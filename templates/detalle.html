@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}{{ publicacion.nombre }} - Hoomie{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="/static/css/detalle.css">
+{% endblock %}
+
+{% block content %}
+  <section class="detalle-container">
+    <div class="detalle-titulo">{{ publicacion.nombre }}</div>
+    <div class="detalle-info">
+      <div class="detalle-foto">
+        <img id="foto-principal" src="{{ publicacion.inmueble.fotos.split(',')[0] }}" alt="Foto del inmueble" onclick="abrirGaleria(0)">
+      </div>
+      <div class="detalle-datos">
+        <p><strong>Ciudad:</strong> {{ publicacion.inmueble.ciudad }}</p>
+        <p><strong>Barrio:</strong> {{ publicacion.inmueble.barrio }}</p>
+        <p><strong>Estrato:</strong> {{ publicacion.inmueble.estrato }}</p>
+        <p><strong>Valor arriendo:</strong> ${{ publicacion.inmueble.valor_arriendo }}</p>
+        {% if publicacion.inmueble.valor_administracion %}
+        <p><strong>Administración:</strong> ${{ publicacion.inmueble.valor_administracion }}</p>
+        {% endif %}
+        <p><strong>Área:</strong> {{ publicacion.inmueble.area_m2 }} m²</p>
+        <p><strong>Habitaciones:</strong> {{ publicacion.inmueble.num_habitaciones }}</p>
+        <p><strong>Baños:</strong> {{ publicacion.inmueble.num_banos }}</p>
+        <p><strong>Parqueaderos:</strong> {{ publicacion.inmueble.num_parqueaderos }}</p>
+        <p><strong>Género preferido:</strong> {{ publicacion.inmueble.genero_preferido }}</p>
+        <p><strong>Mascotas:</strong> {{ 'Sí' if publicacion.inmueble.permite_mascotas else 'No' }}</p>
+        <p><strong>Fumadores:</strong> {{ 'Sí' if publicacion.inmueble.permite_fumadores else 'No' }}</p>
+        <p><strong>Fiestas:</strong> {{ 'Sí' if publicacion.inmueble.permite_fiestas else 'No' }}</p>
+      </div>
+    </div>
+    <div class="detalle-descripcion">
+      <strong>Descripción:</strong>
+      <p>{{ publicacion.descripcion }}</p>
+    </div>
+  </section>
+
+  <div id="galeriaModal" class="galeria-modal">
+    <span class="galeria-cerrar" onclick="cerrarGaleria()">&times;</span>
+    <div class="galeria-controles">
+      <span onclick="cambiarImagen(-1)">&#10094;</span>
+      <span onclick="cambiarImagen(1)">&#10095;</span>
+    </div>
+    <img id="imagenGaleria" src="" alt="Imagen ampliada">
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const fotos = {{ publicacion.inmueble.fotos.split(',')|tojson }};
+  let fotoIndex = 0;
+
+  function abrirGaleria(index) {
+    fotoIndex = index;
+    document.getElementById("imagenGaleria").src = fotos[fotoIndex];
+    document.getElementById("galeriaModal").style.display = "flex";
+  }
+
+  function cerrarGaleria() {
+    document.getElementById("galeriaModal").style.display = "none";
+  }
+
+  function cambiarImagen(direccion) {
+    fotoIndex = (fotoIndex + direccion + fotos.length) % fotos.length;
+    document.getElementById("imagenGaleria").src = fotos[fotoIndex];
+  }
+</script>
+{% endblock %}

@@ -7,6 +7,10 @@
     font-style: normal;
 }
 /* navbar.css mejorado */
+html, body {
+  height: 100%;
+  margin: 0;
+}
 
 .navbar {
   width: 100%;
@@ -157,8 +161,10 @@
     width: 120px;
 }
 
-#out{
-    width: 20vh;
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 #name{
