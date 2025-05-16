@@ -20,32 +20,30 @@
                             <input type="text" class="input-container-input" id="nombre" name="nombre_usuario" placeholder="" required />
                             <label for="nombre" class="input-container-label">Nombre(s)</label>
                         </li>
-                
                         <li class="input-container">
                             <input type="text" class="input-container-input" id="apellido" name="apellido_usuario" placeholder="" required/>
                             <label for="apellido" class="input-container-label">Apellidos</label>
                         </li>
-                
                         <li class="input-container">
                             <input type="number" class="input-container-input" id="phone" name="phone_usuario" placeholder="" required />
                             <label for="phone" class="input-container-label" id="phoneL">Número de Celular</label>
                         </li>   
-
                         <li class="input-container">
                             <input type="email" class="input-container-input" id="email" name="email_usuario" placeholder="" required/>
                             <label for="email" class="input-container-label" id="emailL">Correo Electrónico</label>
                         </li>  
-
                         <li class="input-container">
                             <input type="password" class="input-container-input" id="contraseña" name="contraseña_usuario" placeholder="" required/>
                             <label for="contraseña" class="input-container-label" id="contraseñaL">Contraseña</label>
-                        </li> 
-                
+                        </li>
+                        <li class="input-container">
+                            <input type="password" class="input-container-input" id="confirmar_contraseña" placeholder="" required/>
+                            <label for="confirmar_contraseña" class="input-container-label">Confirmar Contraseña</label>
+                        </li>
                         <section class="Botones">
                             <li class="button">
-                                <a href="ingreso"> <button onclick="window.history.back()" class="botonAzu">Regresar</button></a>  
+                                <a href="ingreso"> <button onclick="window.history.back()" class="botonAzu" type="button">Regresar</button></a>  
                             </li>
-
                             <li class="button">
                                 <button type="submit" class="botonAma">Registrarse</button>
                             </li>   
@@ -53,6 +51,16 @@
                     </ul>
                 </form>                
         </div>
+        <script>
+          document.getElementById('form-registro').addEventListener('submit', function(e) {
+            const pass1 = document.getElementById('contraseña').value;
+            const pass2 = document.getElementById('confirmar_contraseña').value;
+            if (pass1 !== pass2) {
+              e.preventDefault();
+              alert('Las contraseñas no coinciden.');
+            }
+          });
+        </script>
         <script src="/static/js/java.js"></script>
     </body>
 </html>

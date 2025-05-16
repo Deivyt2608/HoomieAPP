@@ -9,13 +9,13 @@
 {% block content %}
   <section class="detalle-container">
   <div class="detalle-header">
-    <a href="/publicaciones?tipo={{ request.query_params.tipo or '' }}&ciudad={{ request.query_params.ciudad or '' }}&estrato={{ request.query_params.estrato or '' }}">&#8592;</a>
+    <a href="/publicaciones?tipo={{ request.query_params.tipo or '' }}&ciudad={{ request.query_params.ciudad or '' }}&estrato={{ request.query_params.estrato or '' }}"><i class="fa-solid fa-circle-arrow-left"></i></a>
     <h1 class="detalle-titulo">{{ publicacion.nombre }}</h1>
   </div>
 
   <div class="detalle-info">
     <div class="detalle-foto">
-      <img id="foto-principal" src="{{ publicacion.inmueble.fotos.split(',')[0] }}" alt="Foto del inmueble">
+      <img id="foto-principal" src="{{ publicacion.inmueble.fotos.split(',')[0] }}" alt="Foto del inmueble" onclick="abrirGaleria(fotoIndex)">
       <div class="controles">
         <span onclick="cambiarImagen(-1)">&#10094;</span>
         <span onclick="cambiarImagen(1)">&#10095;</span>
@@ -46,32 +46,46 @@
     </div>
   </div>
 
-    <div class="detalle-descripcion">
-      <strong>Descripción:</strong>
-      <p>{{ publicacion.descripcion }}</p>
-    </div>
-
-    <div class="detalle-publicador">
-      <strong>Publicado por:</strong>
-      <p>{{ publicacion.usuario.nombre }} {{ publicacion.usuario.apellido }} - {{ publicacion.usuario.email }}</p>
-      <p>Teléfono: {{ publicacion.usuario.phone }}</p>
-    </div>
-  </section>
-
-  <div id="galeriaModal" class="galeria-modal">
-    <span class="galeria-cerrar" onclick="cerrarGaleria()">&times;</span>
-    <div class="galeria-controles">
-      <span onclick="cambiarImagen(-1)">&#10094;</span>
-      <span onclick="cambiarImagen(1)">&#10095;</span>
-    </div>
-    <img id="imagenGaleria" src="" alt="Imagen ampliada">
+  <div class="detalle-descripcion">
+    <strong>Descripción:</strong>
+    <p>{{ publicacion.descripcion }}</p>
   </div>
+
+  <div class="detalle-publicador">
+    <strong>Publicado por:</strong>
+    <p>{{ publicacion.usuario.nombre }} {{ publicacion.usuario.apellido }} - {{ publicacion.usuario.email }}</p>
+    <p>Teléfono: {{ publicacion.usuario.phone }}</p>
+  </div>
+</section>
+
+<div id="galeriaModal" class="galeria-modal">
+  <span class="galeria-cerrar" onclick="cerrarGaleria()">&times;</span>
+  <img id="imagenGaleria" src="" alt="Imagen ampliada">
+</div>
 {% endblock %}
 
 {% block scripts %}
 <script>
-  const fotos = {{ publicacion.inmueble.fotos.split(',')|tojson }};
+  const fotos = {{ publicacion.inmueble.fotos.split(',') | tojson | safe }};
   let fotoIndex = 0;
+
+  function cambiarImagen(direccion) {
+    fotoIndex = (fotoIndex + direccion + fotos.length) % fotos.length;
+    actualizarImagen();
+  }
+
+  function seleccionarMiniatura(index) {
+    fotoIndex = index;
+    actualizarImagen();
+  }
+
+  function actualizarImagen() {
+    const principal = document.getElementById("foto-principal");
+    principal.src = fotos[fotoIndex];
+    document.querySelectorAll(".miniaturas img").forEach((img, i) => {
+      img.classList.toggle("seleccionada", i === fotoIndex);
+    });
+  }
 
   function abrirGaleria(index) {
     fotoIndex = index;
@@ -81,22 +95,6 @@
 
   function cerrarGaleria() {
     document.getElementById("galeriaModal").style.display = "none";
-  }
-
-  function cambiarImagen(direccion) {
-    fotoIndex = (fotoIndex + direccion + fotos.length) % fotos.length;
-    document.getElementById("foto-principal").src = fotos[fotoIndex];
-  }
-   function seleccionarMiniatura(index) {
-    fotoIndex = index;
-    actualizarImagen();
-  }
-
-  function actualizarImagen() {
-    document.getElementById("foto-principal").src = fotos[fotoIndex];
-    document.querySelectorAll(".miniaturas img").forEach((img, i) => {
-      img.classList.toggle("seleccionada", i === fotoIndex);
-    });
   }
 </script>
 {% endblock %}
