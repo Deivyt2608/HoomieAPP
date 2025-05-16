@@ -43,7 +43,8 @@
               <p><strong>Ciudad:</strong> {{ pub.inmueble.ciudad }}</p>
               <p><strong>Barrio:</strong> {{ pub.inmueble.barrio }}</p>
               <p><strong>Estrato:</strong> {{ pub.inmueble.estrato }}</p>
-              <a href="/detalle/{{ pub.id }}" class="botonAma">Ver más</a>
+              <a href="/detalle/{{ pub.id }}?tipo={{ request.query_params.tipo or '' }}&ciudad={{ request.query_params.ciudad or '' }}&estrato={{ request.query_params.estrato or '' }}" class="botonAma">Ver más</a>
+
             </div>
           </div>
         {% endfor %}

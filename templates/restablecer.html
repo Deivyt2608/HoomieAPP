@@ -1,35 +1,92 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <title>Hoomie</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="/static/imagenes/icono.png" />
-        <link rel="stylesheet" href="/static/css/formularios.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <script src="/static/js/java.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
-    <body class="ingreso">
-        <div class="contenedor">
-        <h1>Cambiar contraseña</h1>
-        <form action="/guardar-nueva" method="post">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hoomie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/static/imagenes/icono.png" />
+    <link rel="stylesheet" href="/static/css/formularios.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      .modal {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex; justify-content: center; align-items: center;
+        z-index: 1000;
+        display: none;
+      }
+      .modal-contenido {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 300px;
+        text-align: center;
+      }
+      .modal-contenido button {
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body class="ingreso">
+    <div class="contenedor">
+      <img src="/static/imagenes/logo2.png" width="180px" />
+      <h1>Cambiar contraseña</h1>
+      <form id="formulario-cambio" action="/guardar-nueva" method="post">
         <ul>
-            <input type="hidden" name="email_usuario" value="{{ request.query_params.token }}">
-            <li class="input-container">
-                <input type="password" class="input-container-input" id="contraseña" name="nueva_contraseña" placeholder="" required/>
-                <label for="contraseña" class="input-container-label" id="contraseñaL">Contraseña</label>
-            </li> 
-            <br>
-            <section class="Botones">
-                <li class="button">
-                    <button type="submit" class="botonAma">Guardar contraseña</button>
-                </li> 
-            </section>
-            
+          <input type="hidden" name="email_usuario" value="{{ request.query_params.token }}" />
+          <li class="input-container">
+            <input type="password" class="input-container-input" id="contraseña" name="nueva_contraseña" required />
+            <label for="contraseña" class="input-container-label">Contraseña</label>
+          </li>
+          <li class="input-container">
+            <input type="password" class="input-container-input" id="confirmar" required />
+            <label for="confirmar" class="input-container-label">Confirmar contraseña</label>
+          </li>
+          <br />
+          <section class="Botones">
+            <li class="button">
+              <button type="button" class="botonAma" onclick="validarYConfirmar()">Guardar contraseña</button>
+            </li>
+          </section>
         </ul>
-         
-        </div>
-        <script src="/static/js/java.js"></script>
-    </body>
+      </form>
+    </div>
+
+    <div id="modalConfirmar" class="modal">
+      <div class="modal-contenido">
+        <p>¿Estás seguro de cambiar tu contraseña?</p>
+        <button onclick="enviarFormulario()" class="botonAzu" id="bconfir">confirmar</button>
+        <button onclick="cerrarModal()" class="botonAma" id="cancel">Cancelar</button>
+      </div>
+    </div>
+
+    <script>
+      function validarYConfirmar() {
+        const pass1 = document.getElementById("contraseña").value;
+        const pass2 = document.getElementById("confirmar").value;
+
+        if (!pass1 || !pass2) {
+          alert("Por favor completa ambos campos.");
+          return;
+        }
+
+        if (pass1 !== pass2) {
+          alert("Las contraseñas no coinciden.");
+          return;
+        }
+
+        document.getElementById("modalConfirmar").style.display = "flex";
+      }
+
+      function cerrarModal() {
+        document.getElementById("modalConfirmar").style.display = "none";
+      }
+
+      function enviarFormulario() {
+        document.getElementById("formulario-cambio").submit();
+      }
+    </script>
+  </body>
 </html>

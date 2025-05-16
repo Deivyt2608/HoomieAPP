@@ -72,6 +72,9 @@
     font-weight: bold;
     width: 100%;
 }
+#cancel, #bconfir{
+    width: 80%;
+}
 .button{
     list-style: none;
     text-align: center;

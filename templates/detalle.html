@@ -8,32 +8,53 @@
 
 {% block content %}
   <section class="detalle-container">
-    <div class="detalle-titulo">{{ publicacion.nombre }}</div>
-    <div class="detalle-info">
-      <div class="detalle-foto">
-        <img id="foto-principal" src="{{ publicacion.inmueble.fotos.split(',')[0] }}" alt="Foto del inmueble" onclick="abrirGaleria(0)">
+  <div class="detalle-header">
+    <a href="/publicaciones?tipo={{ request.query_params.tipo or '' }}&ciudad={{ request.query_params.ciudad or '' }}&estrato={{ request.query_params.estrato or '' }}">&#8592;</a>
+    <h1 class="detalle-titulo">{{ publicacion.nombre }}</h1>
+  </div>
+
+  <div class="detalle-info">
+    <div class="detalle-foto">
+      <img id="foto-principal" src="{{ publicacion.inmueble.fotos.split(',')[0] }}" alt="Foto del inmueble">
+      <div class="controles">
+        <span onclick="cambiarImagen(-1)">&#10094;</span>
+        <span onclick="cambiarImagen(1)">&#10095;</span>
       </div>
-      <div class="detalle-datos">
-        <p><strong>Ciudad:</strong> {{ publicacion.inmueble.ciudad }}</p>
-        <p><strong>Barrio:</strong> {{ publicacion.inmueble.barrio }}</p>
-        <p><strong>Estrato:</strong> {{ publicacion.inmueble.estrato }}</p>
-        <p><strong>Valor arriendo:</strong> ${{ publicacion.inmueble.valor_arriendo }}</p>
-        {% if publicacion.inmueble.valor_administracion %}
-        <p><strong>Administración:</strong> ${{ publicacion.inmueble.valor_administracion }}</p>
-        {% endif %}
-        <p><strong>Área:</strong> {{ publicacion.inmueble.area_m2 }} m²</p>
-        <p><strong>Habitaciones:</strong> {{ publicacion.inmueble.num_habitaciones }}</p>
-        <p><strong>Baños:</strong> {{ publicacion.inmueble.num_banos }}</p>
-        <p><strong>Parqueaderos:</strong> {{ publicacion.inmueble.num_parqueaderos }}</p>
-        <p><strong>Género preferido:</strong> {{ publicacion.inmueble.genero_preferido }}</p>
-        <p><strong>Mascotas:</strong> {{ 'Sí' if publicacion.inmueble.permite_mascotas else 'No' }}</p>
-        <p><strong>Fumadores:</strong> {{ 'Sí' if publicacion.inmueble.permite_fumadores else 'No' }}</p>
-        <p><strong>Fiestas:</strong> {{ 'Sí' if publicacion.inmueble.permite_fiestas else 'No' }}</p>
+      <div class="miniaturas">
+        {% for foto in publicacion.inmueble.fotos.split(',') %}
+          <img src="{{ foto }}" onclick="seleccionarMiniatura({{ loop.index0 }})">
+        {% endfor %}
       </div>
     </div>
+
+    <div class="detalle-datos">
+      <p><strong>Ciudad:</strong> {{ publicacion.inmueble.ciudad }}</p>
+      <p><strong>Barrio:</strong> {{ publicacion.inmueble.barrio }}</p>
+      <p><strong>Estrato:</strong> {{ publicacion.inmueble.estrato }}</p>
+      <p><strong>Valor arriendo:</strong> ${{ publicacion.inmueble.valor_arriendo }}</p>
+      {% if publicacion.inmueble.valor_administracion %}
+        <p><strong>Administración:</strong> ${{ publicacion.inmueble.valor_administracion }}</p>
+      {% endif %}
+      <p><strong>Área:</strong> {{ publicacion.inmueble.area_m2 }} m²</p>
+      <p><strong>Habitaciones:</strong> {{ publicacion.inmueble.num_habitaciones }}</p>
+      <p><strong>Baños:</strong> {{ publicacion.inmueble.num_banos }}</p>
+      <p><strong>Parqueaderos:</strong> {{ publicacion.inmueble.num_parqueaderos }}</p>
+      <p><strong>Género preferido:</strong> {{ publicacion.inmueble.genero_preferido }}</p>
+      <p><strong>Mascotas:</strong> {{ 'Sí' if publicacion.inmueble.permite_mascotas else 'No' }}</p>
+      <p><strong>Fumadores:</strong> {{ 'Sí' if publicacion.inmueble.permite_fumadores else 'No' }}</p>
+      <p><strong>Fiestas:</strong> {{ 'Sí' if publicacion.inmueble.permite_fiestas else 'No' }}</p>
+    </div>
+  </div>
+
     <div class="detalle-descripcion">
       <strong>Descripción:</strong>
       <p>{{ publicacion.descripcion }}</p>
+    </div>
+
+    <div class="detalle-publicador">
+      <strong>Publicado por:</strong>
+      <p>{{ publicacion.usuario.nombre }} {{ publicacion.usuario.apellido }} - {{ publicacion.usuario.email }}</p>
+      <p>Teléfono: {{ publicacion.usuario.phone }}</p>
     </div>
   </section>
 
@@ -64,7 +85,18 @@
 
   function cambiarImagen(direccion) {
     fotoIndex = (fotoIndex + direccion + fotos.length) % fotos.length;
-    document.getElementById("imagenGaleria").src = fotos[fotoIndex];
+    document.getElementById("foto-principal").src = fotos[fotoIndex];
+  }
+   function seleccionarMiniatura(index) {
+    fotoIndex = index;
+    actualizarImagen();
+  }
+
+  function actualizarImagen() {
+    document.getElementById("foto-principal").src = fotos[fotoIndex];
+    document.querySelectorAll(".miniaturas img").forEach((img, i) => {
+      img.classList.toggle("seleccionada", i === fotoIndex);
+    });
   }
 </script>
 {% endblock %}
