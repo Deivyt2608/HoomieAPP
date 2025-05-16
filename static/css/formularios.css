@@ -176,3 +176,8 @@ a{
     opacity: 1;
     transform: translateY(0);
 }
+
+#confirmar:focus + #confirmarL,
+#confirmar:not(:placeholder-shown) + #confirmarL{
+     transform: translate(-22px, -30px) scale(0.8);
+}
