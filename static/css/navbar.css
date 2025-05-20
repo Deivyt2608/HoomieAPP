@@ -6,6 +6,9 @@
     font-family: "Montserrat", sans-serif;
     font-style: normal;
 }
+html {
+    scroll-behavior: smooth;
+}
 /* navbar.css mejorado */
 html, body {
   height: 100%;
