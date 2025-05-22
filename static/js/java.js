@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // =========================================
     // Carrusel (inicio.html)
     // =========================================
+
     const carousel = document.querySelector('.carousel');
     const nextBtn = document.getElementById('nextBtn');
     const prevBtn = document.getElementById('prevBtn');
@@ -38,24 +39,32 @@ document.addEventListener("DOMContentLoaded", function () {
     if (carousel && nextBtn && prevBtn) {
         const items = Array.from(carousel.children);
         const totalItems = items.length;
-        const itemWidth = 190;
+        const visibleItems = 3;
+        const itemWidth = items[0].offsetWidth + 20; // incluye margen/gap
+        const maxIndex = Math.max(totalItems - visibleItems, 0);
         let index = 0;
 
-        function moveCarousel(direction) {
-            console.log("Moviendo carrusel hacia:", direction);
-            if (direction === 'next') {
-                index = (index + 1) % totalItems;
-            } else {
-                index = (index - 1 + totalItems) % totalItems;
-            }
+        // Ocultar flechas si hay 3 o menos elementos
+        if (totalItems <= visibleItems) {
+        nextBtn.style.display = 'none';
+        prevBtn.style.display = 'none';
+        }
 
-            carousel.style.transition = "transform 0.5s ease-in-out";
-            carousel.style.transform = `translateX(-${index * itemWidth}px)`;
+        function moveCarousel(direction) {
+        if (direction === 'next') {
+            index = (index < maxIndex) ? index + 1 : 0;
+        } else {
+            index = (index > 0) ? index - 1 : maxIndex;
+        }
+
+        carousel.style.transition = "transform 0.5s ease-in-out";
+        carousel.style.transform = `translateX(-${index * itemWidth}px)`;
         }
 
         nextBtn.addEventListener('click', () => moveCarousel('next'));
         prevBtn.addEventListener('click', () => moveCarousel('prev'));
-    }
+    };
+
 
         // =========================================
     // Anuncio flotante

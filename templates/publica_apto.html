@@ -9,7 +9,7 @@
 {% block content %}
     <div class="anuncio-wrapper">
         <div id="anuncio" class="anuncio-banner">
-          <span>Si estás buscando tu próximo hogar, <a href="#">haz click aquí</a></span>
+          <span>Si estás buscando tu próximo hogar, <a href="/publicaciones">haz click aquí</a></span>
           <button onclick="cerrarAnuncio()" class="cerrar-btn">&times;</button>
         </div>
     </div>
@@ -18,7 +18,13 @@
         <div class="publica-texto">
             <h1>Publica tu espacio en minutos, encuentra tu match de inquilino.</h1>
             <p>¡Así de fácil!</p>
+            {% if usuario_logueado %}
             <button id="openModalBtn" class="botonAzu">Empezar mi publicación <i class="fa-solid fa-arrow-right"></i></button>  
+            {% else %}
+            <a href="/ingreso?mensaje=sesion_requerida">
+                <button class="botonAzu" id="openModalBtn">Empezar mi publicación <i class="fa-solid fa-arrow-right"></i></button>
+            </a>
+            {% endif %} 
         </div>
         <div class="publica-ilustracion">
             <img src="/static/imagenes/public.png" />

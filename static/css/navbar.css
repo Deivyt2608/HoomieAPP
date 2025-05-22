@@ -42,6 +42,28 @@ html, body {
   object-fit: contain;
 }
 
+.nav-links {
+  display: flex;
+  gap: 15px;
+  margin-left: 30px;
+}
+
+.nav-button {
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.nav-button:hover {
+  background-color: #f0f0f0;
+}
+
+
 .profile-button {
   display: flex;
   align-items: center;
@@ -63,7 +85,7 @@ html, body {
 }
 
 .modal-perfil {
-    position: absolute;
+    position: fixed;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 10px;

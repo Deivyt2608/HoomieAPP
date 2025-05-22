@@ -16,6 +16,7 @@
             <h1>¡Bienvenido Nuevamente!</h1>
             <p>Identificate para ingresar<p>
                 <form action="/login" method="post">
+                    <input type="hidden" name="next_url" value="{{ request.query_params.next or '/inicio' }}">  
                     <ul>
                         <li class="input-container">
                             <input type="email" class="input-container-input" id="email" name="email_usuario" placeholder="" value="{{ request.query_params.get('correo') or '' }}" required  required/>

@@ -52,16 +52,35 @@
   </div>
 
   <div class="detalle-publicador">
-    <strong>Publicado por:</strong>
-    <p>{{ publicacion.usuario.nombre }} {{ publicacion.usuario.apellido }} - {{ publicacion.usuario.email }}</p>
-    <p>Teléfono: {{ publicacion.usuario.phone }}</p>
+  <div class="datos-publicador">
+    <h3>Publicado por:</h3>
+    <p><strong>Nombre:</strong> {{ publicacion.usuario.nombre }} {{ publicacion.usuario.apellido }}</p>
+    <p><strong>Email:</strong> {{ publicacion.usuario.email }}</p>
+    <p><strong>Teléfono:</strong> {{ publicacion.usuario.phone }}</p>
+  </div>
+
+  <div class="botones-publicador">
+    <a href="mailto:{{ publicacion.usuario.email }}" class="botonAzu" id="contac">Contactar</a>
+    <button onclick="verCompatibilidad({{ publicacion.usuario.id }})" class="botonAma" id="match">Compatibilidad</button>
+  </div>
+</div>
+
+
   </div>
 </section>
-
-<div id="galeriaModal" class="galeria-modal">
-  <span class="galeria-cerrar" onclick="cerrarGaleria()">&times;</span>
-  <img id="imagenGaleria" src="" alt="Imagen ampliada">
-</div>
+<!-- Modal -->
+  <div id="modalMatch" class="modal" style="display: none;" onclick="cerrarMatch()">
+    <div class="modal-contenido">
+      <span class="cerrar" onclick="cerrarMatch()">&times;</span>
+      <h3>Compatibilidad</h3>
+      <p id="resultado-match">Calculando...</p>
+    </div>
+  </div>
+  
+  <div id="galeriaModal" class="galeria-modal">
+    <span class="galeria-cerrar" onclick="cerrarGaleria()">&times;</span>
+    <img id="imagenGaleria" src="" alt="Imagen ampliada">
+  </div>
 {% endblock %}
 
 {% block scripts %}
@@ -96,5 +115,31 @@
   function cerrarGaleria() {
     document.getElementById("galeriaModal").style.display = "none";
   }
+  function verCompatibilidad(usuarioId) {
+  fetch(`/match/api/${usuarioId}`)
+    .then(res => res.json())
+    .then(data => {
+      const modal = document.getElementById("modalMatch");
+      const resultado = document.getElementById("resultado-match");
+
+      if (data.incompleto) {
+        resultado.textContent = "⚠️ Alguno de los usuarios no ha completado sus preferencias.";
+      } else if (data.compatibilidad) {
+        resultado.textContent = `🤝 Compatibilidad: ${data.compatibilidad.toFixed(2)}%`;
+      } else {
+        resultado.textContent = "❌ No se pudo calcular la compatibilidad.";
+      }
+
+      modal.style.display = "flex";
+    })
+    .catch(() => {
+      document.getElementById("resultado-match").textContent = "Error al obtener datos.";
+    });
+}
+
+function cerrarMatch() {
+  document.getElementById("modalMatch").style.display = "none";
+}
+
 </script>
 {% endblock %}

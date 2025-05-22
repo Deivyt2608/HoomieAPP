@@ -3,7 +3,22 @@ from database.connection import SessionLocal
 from models.inmueble import Inmueble
 from models.user import User
 from models.publicacion import Publicacion
+from models.preferencias import Preference
 import random
+from database.connection import Base, engine
+
+# Importa todos tus modelos aquí
+from models.user import User
+from models.preferencias import Preference
+from models.inmueble import Inmueble
+from models.publicacion import Publicacion
+
+# Crear todas las tablas
+print("🔧 Creando tablas en la base de datos...")
+Base.metadata.create_all(bind=engine)
+print("✅ Tablas creadas correctamente.")
+
+
 
 ciudades = ["Bogotá", "Medellín", "cartagena"]
 barrio_base = ["Chapinero", "Laureles", "San Fernando", "El Prado"]
@@ -52,10 +67,28 @@ def generar_apartamentos_con_usuarios():
             phone=f"30000000{i+1}",
             foto=""
         )
+        
         db.add(user)
         db.commit()
         db.refresh(user)
         usuarios.append(user)
+
+        preferencia = Preference(
+            user_id=user.id,
+            aseo_hogar=random.randint(1, 5),
+            ruido_hogar=random.randint(1, 5),
+            visitas=random.randint(1, 5),
+            aseo_personal=random.randint(1, 5),
+            division_tareas=random.randint(1, 5),
+            salidas_fiesta=random.randint(1, 5),
+            fuma=random.choice(["sí", "no"]),
+            alcohol=random.choice(["sí", "no"]),
+            trabaja_casa=random.choice(["sí", "no"]),
+            mascotas=random.choice(["sí", "no"]),
+            estudia=random.choice(["sí", "no"]),
+            trabaja=random.choice(["sí", "no"])
+        )
+        db.add(preferencia)
 
     # Crear 10 inmuebles y publicaciones asociadas
     for i in range(10):

@@ -20,6 +20,7 @@ def login(
     response: Response,
     email_usuario: str = Form(...),
     pass_usuario: str = Form(...),
+    next_url: str = Form(...),
     db: Session = Depends(get_db)
 ):
     usuario = db.query(User).filter(User.email == email_usuario).first()
@@ -27,7 +28,7 @@ def login(
         return RedirectResponse(url=f"/ingreso?mensaje=error&correo={email_usuario}", status_code=302)
 
     # Guardar cookie para saber que está logueado
-    resp = RedirectResponse(url="/inicio?mensaje=exito", status_code=302)
+    resp = RedirectResponse(url=next_url, status_code=302)
     resp.set_cookie(key="usuario_email", value=usuario.email)
     return resp
 
