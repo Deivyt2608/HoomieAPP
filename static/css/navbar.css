@@ -34,8 +34,8 @@ html, body {
 
 .logo {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
 }
 
 .logo img {
@@ -45,8 +45,7 @@ html, body {
 
 .nav-links {
   display: flex;
-  gap: 15px;
-  margin-left: 30px;
+  gap: 10px;
   align-items: center;
 }
 
@@ -298,10 +297,14 @@ html, body {
     margin-top: 10px;
   }
   .navbar{
-    height: 120px;
-    max-height: 150px;
+    height: 110px;
+    max-height: 130px;
+  }
+  .profile-button{
+    margin-left: 300px;
+    margin-bottom: 50px;
   }
   body{
-    margin-top: 70px
+    margin-top: 60px
   };
 }
