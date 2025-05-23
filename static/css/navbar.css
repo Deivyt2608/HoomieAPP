@@ -21,6 +21,7 @@ html, body {
   background-color: #f9f9f9;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding: 0 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -46,16 +47,19 @@ html, body {
   display: flex;
   gap: 15px;
   margin-left: 30px;
+  align-items: center;
 }
 
 .nav-button {
   background-color: transparent;
+  cursor: pointer;
   border: none;
   font-weight: bold;
   color: black;
   text-decoration: none;
   padding: 8px 12px;
   border-radius: 4px;
+  align-items: center;
   transition: background-color 0.2s ease;
 }
 
@@ -293,4 +297,11 @@ html, body {
     display: block;
     margin-top: 10px;
   }
+  .navbar{
+    height: 120px;
+    max-height: 150px;
+  }
+  body{
+    margin-top: 70px
+  };
 }

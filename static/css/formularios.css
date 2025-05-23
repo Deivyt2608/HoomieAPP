@@ -46,6 +46,10 @@
     }
 }
 
+#match{
+    width: 45%;
+}
+
 .Botones{
     text-align: center;
 }
@@ -140,6 +144,50 @@
 #email:not(:placeholder-shown) + #emailL{
     transform: translate(-15px, -30px) scale(0.8);
 }
+#aseo_hogar:focus + #aseo_hogarl,
+#aseo_hogar:not(:placeholder-shown) + #aseo_hogarl{
+    transform: translate(-12px, -30px) scale(0.8);
+}
+
+#ruido_hogar:focus + #ruido_hogarl,
+#ruido_hogar:not(:placeholder-shown) + #ruido_hogarl{
+    transform: translate(-12px, -30px) scale(0.8);
+}
+
+#aseo_personal:focus + #aseo_personall,
+#aseo_personal:not(:placeholder-shown) + #aseo_personall{
+    transform: translate(-10px, -30px) scale(0.8);
+}
+
+#division_tareas:focus + #division_tareasl,
+#division_tareas:not(:placeholder-shown) + #division_tareasl{
+    transform: translate(-30px, -30px) scale(0.8);
+}
+
+#salidas_fiesta:focus + #salidas_fiestal,
+#salidas_fiesta:not(:placeholder-shown) + #salidas_fiestal{
+    transform: translate(-10px, -30px) scale(0.8);
+}
+
+#fuma:focus + #fumal,
+#fuma:not(:placeholder-shown) + #fumal{
+    transform: translate(4px, -30px) scale(0.8);
+}
+
+#alcohol:focus + #alcoholl,
+#alcohol:not(:placeholder-shown) + #alcoholl{
+    transform: translate(-40px, -30px) scale(0.8);
+}
+
+#trabaja_casa:focus + #trabaja_casal,
+#trabaja_casa:not(:placeholder-shown) + #trabaja_casal{
+    transform: translate(-10px, -30px) scale(0.8);
+}
+
+#mascotas:focus + #mascotasl,
+#mascotas:not(:placeholder-shown) + #mascotasl{
+    transform: translate(-10px, -30px) scale(0.8);
+}
 
 a{
     text-decoration: none;
@@ -152,6 +200,9 @@ a{
     }
     .contenedor{
         width: 80%;
+    }
+    #match{
+        width: 85%;
     }
 }
 

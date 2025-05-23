@@ -17,24 +17,27 @@
 
   <!-- NAVBAR -->
    <nav class="navbar">
-    <div class="logo">
-      <a href="/inicio"><img src="/static/imagenes/principal.png" /></a>
-      <div class="nav-links">
-          <a href="/publicaciones" class="nav-button">Publicaciones</a>
-          <a href="/publicar" class="nav-button">Publicar</a>
-      </div>
-    </div>
-    <div class="buttons">
-      {% if usuario_logueado %}
-        <button class="profile-button" onclick="togglePerfil()">
-          <img src="{{ usuario_logueado.foto if usuario_logueado.foto else '/static/imagenes/perfil.png' }}" alt="Perfil">
-        </button>
-      {% else %}
-        <a href="/ingreso?next={{ request.url.path }}"><button class="botonAzu">Ingresar</button></a>
-        <a href="/registro"><button class="botonAma">Registrarse</button></a>
-      {% endif %}
-    </div>
-  </nav>
+  <div class="logo">
+    <a href="/inicio"><img src="/static/imagenes/principal.png" /></a>
+  </div>
+
+  <div class="nav-links">
+    <a href="/publicaciones" class="nav-button">Publicaciones</a>
+    <a href="/publicar" class="nav-button">Publicar</a>
+  </div>
+
+  <div class="buttons">
+    {% if usuario_logueado %}
+      <button class="profile-button" onclick="togglePerfil()">
+        <img src="{{ usuario_logueado.foto or '/static/imagenes/perfil.png' }}" alt="Perfil">
+      </button>
+    {% else %}
+      <a href="/ingreso"><button class="botonAzu">Ingresar</button></a>
+      <a href="/registro"><button class="botonAma">Registrarse</button></a>
+    {% endif %}
+  </div>
+</nav>
+
 
   {% if usuario_logueado %}
   <div id="modalPerfil" class="modal-perfil">

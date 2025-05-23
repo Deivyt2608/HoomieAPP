@@ -1,158 +1,72 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Hoomie</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/static/imagenes/icono.png" />
+        <link rel="stylesheet" href="/static/css/formularios.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <script src="/static/js/java.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+<body class="ingreso">
+<div class="contenedor" id="match">
+  <a href="/inicio"><img src="/static/imagenes/logo2.png" width="180px"></a>
+  <h1>Preferencias de convivencia</h1>
+  <p>Selecciona tu nivel de importancia o respuesta para cada categoría:</p>
 
-{% block title %}Preferencias de Perfil - Hoomie{% endblock %}
+  <form action="/guardar-preferencias" method="post">
+    <ul>
+      {% for campo, texto in [
+        ('aseo_hogar', 'El aseo del hogar'),
+        ('ruido_hogar', 'El ruido del hogar'),
+        ('visitas', 'Las visitas'),
+        ('aseo_personal', 'El aseo personal'),
+        ('division_tareas', 'División de tareas del hogar'),
+        ('salidas_fiesta', 'Salidas de fiesta')
+      ] %}
+      <li class="input-container">
+        <select name="{{ campo }}" class="input-container-input" id="{{campo}}" required>
+          <option value="" disabled selected></option>
+          <option value="1">1 Nada importante</option>
+          {% for i in range(2, 5) %}
+          <option value="{{ i }}">{{ i }}</option>
+          {% endfor %}
+          <option value="5">5 Muy importante</option>
+        </select>
+        <label class="input-container-label" id="{{campo}}l">{{ texto }}</label>
+      </li>
+      {% endfor %}
 
-{% block head %}
-  <link rel="stylesheet" href="/static/css/formularios.css">
-  <style>
-    .formulario-container {
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: #f9f9f9;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-    input, select {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button {
-      margin-top: 20px;
-      padding: 12px 30px;
-      background-color: #FFC875;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-  </style>
+      {% for campo, texto in [
+        ('fuma', '¿Fumas?'),
+        ('alcohol', '¿Consumes alcohol regularmente?'),
+        ('trabaja_casa', '¿Trabajas en casa?'),
+        ('mascotas', '¿Tienes mascotas?'),
+        ('estudia', '¿Estudias?'),
+        ('trabaja', '¿Trabajas?')
+      ] %}
+      <li class="input-container">
+        <select name="{{ campo }}" class="input-container-input" id="{{campo}}" required>
+          <option value="" disabled selected></option>
+          <option value="sí">Sí</option>
+          <option value="no">No</option>
+        </select>
+        <label class="input-container-label" id="{{campo}}l">{{ texto }}</label>
+      </li>
+      {% endfor %}
 
-{% endblock %}
+      <section class="Botones">
+        <li class="button">
+          <button type="submit" class="botonAma">Guardar preferencias</button>
+        </li>
+      </section>
+    </ul>
+  </form>
+</div>
+<div id="toast" class="toast"></div>
 
-{% block content %}
-  <div class="formulario-container">
-    <h2>Configura tus Preferencias</h2>
-    <form action="/guardar-preferencias" method="post">
-
-      <label>El aseo del hogar</label>
-      <select name="aseo_hogar" required>
-        <option value="">Seleccione...</option>
-        <option value="1">1 (Nada importante)</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5 (Muy importante)</option>
-      </select>
-
-      <label>El ruido del hogar</label>
-      <select name="ruido_hogar" required>
-        <option value="">Seleccione...</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-
-      <label>Visitas</label>
-      <select name="visitas" required>
-        <option value="">Seleccione...</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-
-      <label>Aseo personal</label>
-      <select name="aseo_personal" required>
-        <option value="">Seleccione...</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-
-      <label>División de tareas del hogar</label>
-      <select name="division_tareas" required>
-        <option value="">Seleccione...</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-
-      <label>Salidas de fiesta</label>
-      <select name="salidas_fiesta" required>
-        <option value="">Seleccione...</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-
-      <label>¿Fuma?</label>
-      <select name="fuma" required>
-        <option value="">Seleccione...</option>
-        <option value="si">Sí</option>
-        <option value="no">No</option>
-      </select>
-
-      <label>¿Consume regularmente alcohol?</label>
-      <select name="alcohol" required>
-        <option value="">Seleccione...</option>
-        <option value="si">Sí</option>
-        <option value="no">No</option>
-      </select>
-
-      <label>¿Trabaja en casa?</label>
-      <select name="trabaja_casa" required>
-        <option value="">Seleccione...</option>
-        <option value="si">Sí</option>
-        <option value="no">No</option>
-      </select>
-
-      <label>¿Tiene mascotas?</label>
-      <select name="mascotas" required>
-        <option value="">Seleccione...</option>
-        <option value="si">Sí</option>
-        <option value="no">No</option>
-      </select>
-
-      <label>¿Estudia?</label>
-      <select name="estudia" required>
-        <option value="">Seleccione...</option>
-        <option value="si">Sí</option>
-        <option value="no">No</option>
-      </select>
-
-      <label>¿Trabaja?</label>
-      <select name="trabaja" required>
-        <option value="">Seleccione...</option>
-        <option value="si">Sí</option>
-        <option value="no">No</option>
-      </select>
-
-      <button type="submit">Guardar preferencias</button>
-    </form>
-  </div>
-  
-  <div id="toast" class="toast"></div>
-{% endblock %}
-
-{% block scripts %}
 <script>
 const params = new URLSearchParams(window.location.search);
 const mensaje = params.get("mensaje");
@@ -170,5 +84,6 @@ function mostrarToast(texto) {
     setTimeout(() => toast.classList.remove("mostrar"), 3500);
 }
 </script>
-{% endblock %}
+</body>
+</html>
 
