@@ -238,6 +238,26 @@ a{
 .next {
     right: 0px; 
 }
+@media (max-width: 768px) {
+  .carousel-item {
+    flex: 0 0 100%; /* Solo 1 tarjeta visible en pantallas pequeñas */
+  }
+
+  .carousel-container {
+    height: auto; /* Ajusta automáticamente la altura */
+  }
+
+  .carousel-item img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .carousel-btn {
+    font-size: 1.5rem;
+    height: 35px;
+    width: 35px;
+  }
+}
 
 .star-rating {
     margin-top:10px ;

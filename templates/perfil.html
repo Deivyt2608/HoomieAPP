@@ -3,58 +3,70 @@
 {% block title %}Inicio - Hoomie{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="/static/css/formularios.css">
     <link rel="stylesheet" href="/static/css/perfil.css">
 {% endblock %}
 
 {% block content %}
-    <div class="base1">
-        <div class="contenedor" id="datos">
-            <p>Información personal</p>
-            <form action="/editar-perfil" method="post" enctype="multipart/form-data">
-                <ul>
-                    <li class="input-container">
-                        <input type="text" class="input-container-input" id="nombre" name="nombre_usuario" value="{{ usuario_logueado.nombre }}" required />
-                        <label for="nombre" class="input-container-label">Nombre(s)</label>
-                    </li>
+<div class="perfil-wrapper">
 
-                    <li class="input-container">
-                        <input type="text" class="input-container-input" id="apellido" name="apellido_usuario" value="{{ usuario_logueado.apellido }}" required/>
-                        <label for="apellido" class="input-container-label">Apellidos</label>
-                    </li>
-
-                    <li class="input-container">
-                        <input type="number" class="input-container-input" id="phone" name="phone_usuario" value="{{ usuario_logueado.phone }}" required />
-                        <label for="phone" class="input-container-label">Número de Celular</label>
-                    </li>   
-
-                    <li class="input-container">
-                        <input type="email" class="input-container-input" id="email" name="email_usuario" value="{{ usuario_logueado.email }}" required readonly/>
-                        <label for="email" class="input-container-label">Correo Electrónico</label>
-                    </li>  
-
-
-                    <li class="input-container">
-                        <label for="foto">Foto de perfil</label><br>
-                        <input type="file" id="foto" name="foto_usuario" accept="image/*">
-                    </li>
-
-                    <section class="Botones">
-                        <li class="button">
-                            <button type="submit" class="botonAma">Guardar cambios</button>
-                        </li>   
-                    </section>
-                </ul>
-            </form>              
-        </div>
-
-        <div class="foto-container">
-            {% if usuario_logueado.foto %}
-                <img src="{{ usuario_logueado.foto }}" class="fotoPerfil">
-            {% else %}
-                <img src="/static/imagenes/perfil.png" class="fotoPerfil">
-            {% endif %}
-        </div>
+  <!-- Columna izquierda -->
+  <div class="perfil-info">
+    <div class="foto-container">
+      <img src="{{ usuario_logueado.foto or '/static/imagenes/perfil.png' }}" class="fotoPerfil">
     </div>
+
+    <form action="/editar-perfil" method="post" enctype="multipart/form-data" class="datos">
+      <ul>
+        <li class="input-container">
+          <input type="text" class="input-container-input" name="nombre_usuario" value="{{ usuario_logueado.nombre }}" required>
+          <label class="input-container-label">Nombre(s)</label>
+        </li>
+        <li class="input-container">
+          <input type="text" class="input-container-input" name="apellido_usuario" value="{{ usuario_logueado.apellido }}" required>
+          <label class="input-container-label">Apellidos</label>
+        </li>
+        <li class="input-container">
+          <input type="number" class="input-container-input" name="phone_usuario" value="{{ usuario_logueado.phone }}" required>
+          <label class="input-container-label">Número de Celular</label>
+        </li>
+        <li class="input-container">
+          <input type="email" class="input-container-input" name="email_usuario" value="{{ usuario_logueado.email }}" readonly>
+          <label class="input-container-label">Correo Electrónico</label>
+        </li>
+        <li class="input-container">
+          <label>Foto de perfil</label><br>
+          <input type="file" name="foto_usuario" accept="image/*">
+        </li>
+        <li class="button">
+          <button type="submit" class="botonAma">Guardar cambios</button>
+        </li>
+      </ul>
+    </form>
+
+    <a href="/match/editar" class="botonAzu">Editar preferencias</a>
+  </div>
+
+  <!-- Columna derecha -->
+  <div class="perfil-publicaciones">
+    <h3>Mis publicaciones</h3>
+    {% if publicaciones %}
+      <div class="publicaciones-grid">
+        {% for pub in publicaciones %}
+          <div class="card">
+            <img src="{{ pub.inmueble.fotos.split(',')[0] }}" alt="Foto">
+            <div class="card-content">
+              <h4>{{ pub.nombre }}</h4>
+              <p>{{ pub.inmueble.ciudad }} - {{ pub.inmueble.barrio }}</p>
+              <a href="/detalle/{{ pub.id }}" class="botonAma">Ver</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No has publicado ningún inmueble.</p>
+    {% endif %}
+  </div>
+
+</div>
 
 {% endblock %}

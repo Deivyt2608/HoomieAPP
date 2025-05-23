@@ -40,7 +40,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const items = Array.from(carousel.children);
         const totalItems = items.length;
         const visibleItems = 3;
-        const itemWidth = items[0].offsetWidth + 20; // incluye margen/gap
+        let itemWidth = items[0].offsetWidth+10;
+
+        window.addEventListener("resize", () => {
+        itemWidth = items[0].offsetWidth;
+        });
+       
         const maxIndex = Math.max(totalItems - visibleItems, 0);
         let index = 0;
 

@@ -1,20 +1,128 @@
-body{
-    margin:0%;
-    padding: 0%;
-}
-.base1{
-    background-color: #CFEBFD;
-    margin: 4% 0 0 0;
-    padding: 0%;
-    display: flex;
+.perfil-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 75px;
+ 
 }
 
-.fotoPerfil{
-    width: 30%;
-    height: 30%;
-    margin: 20px;
+.perfil-info {
+  flex: 1;
+  min-width: 280px;
+  width: 100%;
+  background-color: #CFEBFD;
 }
 
-#datos{
-    margin: 20px 20px 20px 20%;
+.datos{
+    background-color: #ffff;
+    border-radius: 5%;
+    border: solid;
+    border-color: black;
+    width: 400px;
+    padding: 20px;
+    margin: auto;
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+    label {
+        display: inline-block;
+        width: auto;
+        text-align: right;
+    }
+}
+.input-container {
+    position: relative;
+    width: 90%;
+    margin-left: 3%;
+    margin-bottom: 20px;
+    
+}
+
+/* Estilos generales para inputs y selects */
+.input-container-input{
+    color: gray;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    outline: 2px solid rgba(128, 128, 128, 0.557);
+    background-color: transparent;
+    transition: outline-color 500ms, transform 500ms;
+    width: 100%;
+    appearance: none;
+    font-size: 20px;
+    left: 12px; 
+}
+
+.input-container-input:focus{
+    outline-color: #FFC875;
+}
+
+.input-container-label {
+    position: absolute;
+    top: 30%;
+    left: 0%;
+    transform: translateY(0%);
+    color: gray;
+    transition: transform 500ms, scale 500ms, background-color 500ms;
+    padding-inline: 5px;
+    width: 80%;
+}
+
+
+.input-container-input:focus + .input-container-label,
+.input-container-input:not(:placeholder-shown) + .input-container-label{
+    transform: translateY(-30px) scale(0.8);
+    background-color: rgb(255, 255, 255);
+    scale: 0.8;
+    font-size: 20px;
+    color: #FFC875;
+    left: -10px;
+    padding: 0 5px;
+}
+.perfil-publicaciones {
+  flex: 2;
+  min-width: 300px;
+  max-width: 100%;
+  background-color: #FFC875;
+}
+
+.foto-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.fotoPerfil {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
+.publicaciones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 10px;
 }

@@ -1,7 +1,10 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Depends
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from utils.session import get_usuario_logueado
+from sqlalchemy.orm import Session
+from database.connection import get_db
+from models.publicacion import Publicacion
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")  # Ruta relativa desde main.py
@@ -23,12 +26,23 @@ async def inicio(request: Request):
     })
 
 @router.get("/perfil", response_class=HTMLResponse)
-async def inicio(request: Request):
+async def ver_perfil(request: Request, db: Session = Depends(get_db)):
     usuario = get_usuario_logueado(request)
+    if not usuario:
+        return templates.TemplateResponse("perfil.html", {
+            "request": request,
+            "usuario_logueado": None,
+            "publicaciones": []
+        })
+
+    publicaciones = db.query(Publicacion).filter(Publicacion.usuario_id == usuario.id).all()
+
     return templates.TemplateResponse("perfil.html", {
         "request": request,
-        "usuario_logueado": usuario if usuario else None
+        "usuario_logueado": usuario,
+        "publicaciones": publicaciones
     })
+
 
 @router.get("/publicar", response_class=HTMLResponse)
 async def inicio(request: Request):
