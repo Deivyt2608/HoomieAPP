@@ -14,7 +14,7 @@ class User(Base):
     email = Column(String(120), unique=True, nullable=False)
     password = Column(String(100), nullable=False)
     foto = Column(String(200), nullable=True)
-    publicaciones = relationship("Publicacion", back_populates="usuario")
-    preferences = relationship("Preference", back_populates="usuario", uselist=False)
+    publicaciones = relationship("Publicacion", back_populates="usuario",cascade="all, delete")
+    preferences = relationship("Preference", back_populates="usuario", cascade="all, delete", uselist=False)
 
 

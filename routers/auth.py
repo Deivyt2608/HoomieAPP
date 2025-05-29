@@ -5,6 +5,7 @@ from database.connection import SessionLocal
 from models.user import User
 from fastapi import Form
 from utils.email import enviar_enlace_restablecer
+from utils.session import get_usuario_logueado
 
 router = APIRouter()
 
@@ -64,3 +65,16 @@ async def guardar_nueva(
     usuario.password = nueva_contraseña
     db.commit()
     return RedirectResponse(url="/ingreso?mensaje=contraseña_actualizada", status_code=302)
+
+@router.get("/eliminar-cuenta")
+def eliminar_cuenta(request: Request, db: Session = Depends(get_db)):
+    usuario = get_usuario_logueado(request)
+    if not usuario:
+        return RedirectResponse("/ingreso?mensaje=sesion_requerida", status_code=302)
+
+    db.delete(usuario)
+    db.commit()
+
+    response = RedirectResponse("/inicio?mensaje=cuenta_eliminada", status_code=302)
+    response.delete_cookie("usuario_email")
+    return response
