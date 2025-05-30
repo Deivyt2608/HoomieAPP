@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Inicio - Hoomie{% endblock %}
+{% block title %}perfil - Hoomie{% endblock %}
 
 {% block head %}
     <link rel="stylesheet" href="/static/css/perfil.css">
@@ -11,6 +11,7 @@
 
   <!-- Columna izquierda -->
   <div class="perfil-info">
+    <h1>Mi informacion</h1>
     <div class="foto-container">
       <img src="{{ usuario_logueado.foto or '/static/imagenes/perfil.png' }}" class="fotoPerfil">
     </div>
@@ -18,15 +19,15 @@
     <form action="/editar-perfil" method="post" enctype="multipart/form-data" class="datos">
       <ul>
         <li class="input-container">
-          <input type="text" class="input-container-input" name="nombre_usuario" value="{{ usuario_logueado.nombre }}" required>
+          <input type="text" class="input-container-input" name="nombre_usuario" id="nombre" value="{{ usuario_logueado.nombre }}" readonly>
           <label class="input-container-label">Nombre(s)</label>
         </li>
         <li class="input-container">
-          <input type="text" class="input-container-input" name="apellido_usuario" value="{{ usuario_logueado.apellido }}" required>
+          <input type="text" class="input-container-input" name="apellido_usuario" id="apellido" value="{{ usuario_logueado.apellido }}" readonly>
           <label class="input-container-label">Apellidos</label>
         </li>
         <li class="input-container">
-          <input type="number" class="input-container-input" name="phone_usuario" value="{{ usuario_logueado.phone }}" required>
+          <input type="number" class="input-container-input" name="phone_usuario" id="celular" value="{{ usuario_logueado.phone }}" readonly>
           <label class="input-container-label">Número de Celular</label>
         </li>
         <li class="input-container">
@@ -35,10 +36,17 @@
         </li>
         <li class="input-container">
           <label>Foto de perfil</label><br>
-          <input type="file" name="foto_usuario" accept="image/*">
+          <input type="file" name="foto_usuario" accept="image/*" id="fotoInput" disabled>
         </li>
-        <li class="button">
-          <button type="submit" class="botonAma">Guardar cambios</button>
+        <div class="foto-container">
+          <img id="fotoPreview" src="/static/imagenes/placeholder.png" class="fotoPerfil">
+        </div>
+
+        <li class="button-group">
+          <button type="button" id="editarBtn" class="botonAzu">Editar perfil</button>
+          <button type="submit" id="guardarBtn" class="botonAma" style="display:none;">Guardar cambios</button>
+          <button type="button" id="cancelarBtn" class="botonRojo" style="display:none;">Cancelar</button>
+          <button type="button" id="eliminarBtn" class="botonRojo">Eliminar perfil</button>
         </li>
       </ul>
     </form>
@@ -68,5 +76,66 @@
   </div>
 
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById("eliminarBtn").addEventListener("click", () => {
+  if (confirm("¿Estás seguro de que deseas eliminar tu perfil? Esta acción no se puede deshacer.")) {
+    window.location.href = "/eliminar-cuenta"; // ruta que debe manejar el backend
+  }
+});
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("form");
+    const inputs = form.querySelectorAll("input:not([type='file']):not([name='email_usuario'])");
+    const fileInput = document.getElementById("fotoInput");
+    const editarBtn = document.getElementById("editarBtn");
+    const guardarBtn = document.getElementById("guardarBtn");
+    const cancelarBtn = document.getElementById("cancelarBtn");
+    const eliminarBtn = document.getElementById("eliminarBtn");
+    const fotoPreview = document.getElementById("fotoPreview");
+
+    
+
+    // Guardar valores originales
+    const valoresOriginales = {};
+    inputs.forEach(input => valoresOriginales[input.name] = input.value);
+
+    editarBtn.addEventListener("click", () => {
+      inputs.forEach(input => input.removeAttribute("readonly"));
+      fileInput.removeAttribute("disabled");
+      editarBtn.style.display = "none";
+      guardarBtn.style.display = "inline-block";
+      cancelarBtn.style.display = "inline-block";
+      eliminarBtn.style.display = "none";
+    });
+
+    cancelarBtn.addEventListener("click", () => {
+      inputs.forEach(input => {
+        input.value = valoresOriginales[input.name];
+        input.setAttribute("readonly", true);
+      });
+      editarBtn.style.display = "inline-block";
+      guardarBtn.style.display = "none";
+      cancelarBtn.style.display = "none";
+      eliminarBtn.style.display = "inline-block";
+    });
+  });
+
+fileInput.addEventListener("change", function() {
+  const fotoPreview = document.getElementById("fotoPreview");
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      fotoPreview.src = e.target.result; // muestra solo la nueva imagen seleccionada
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+
+</script>
 
 {% endblock %}

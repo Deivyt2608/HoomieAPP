@@ -30,19 +30,24 @@ async def actualizar_perfil(
 ):
     usuario = db.query(User).filter(User.email == email_usuario).first()
     if not usuario:
-        return RedirectResponse("/perfil?mensaje=usuario_no_encontrado", status_code=302)
+        return RedirectResponse("/ingreso?mensaje=usuario_no_encontrado", status_code=302)
 
     usuario.nombre = nombre_usuario
     usuario.apellido = apellido_usuario
     usuario.phone = phone_usuario
 
-    if foto_usuario:
-        ext = os.path.splitext(foto_usuario.filename)[1]
-        filename = f"{usuario.id}{ext}"
-        file_path = os.path.join(UPLOAD_DIR, filename)
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(foto_usuario.file, buffer)
-        usuario.foto = f"/static/imagenes/usuarios/{filename}"
+    if foto_usuario.content_type.startswith("image/"):
+    # guardar archivo...
+
+        if foto_usuario and foto_usuario.filename != "":
+            import uuid
+            filename = f"{uuid.uuid4().hex}_{foto_usuario.filename}"
+            ruta_foto = os.path.join(UPLOAD_DIR, filename)
+
+            with open(ruta_foto, "wb") as buffer:
+                shutil.copyfileobj(foto_usuario.file, buffer)
+
+            usuario.foto = "/" + ruta_foto.replace("\\", "/")  # ruta relativa
 
     db.commit()
     return RedirectResponse("/perfil?mensaje=perfil_actualizado", status_code=302)
