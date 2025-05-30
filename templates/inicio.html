@@ -7,7 +7,10 @@
 {% endblock %}
 
 {% block content %}
-
+<div class="cta-texto" data-aos="fade-up">
+    ...
+  </div>
+<!--Hero section Nosotros -->
 <header class="hero">
     <div class="hero-content">
         <h2 class="tituloA">¡Tu espacio, tu elección!</h2>
@@ -24,6 +27,25 @@
         <img src="/static/imagenes/logo2.png" alt="Hoomie Logo Grande">
     </div>
 </header>
+
+<!-- Call to Action - Test de Match -->
+<section class="cta-section" id="match">
+    <div class="cta-container">
+      <div class="cta-img">
+        <img src="/static/imagenes/match.png" alt="Test de compatibilidad">
+      </div>
+      <div class="cta-texto">
+        <h2>Encuentra tu espacio ideal o al roomie perfecto 🏡✨</h2>
+        <p>
+        Completa nuestro formulario inteligente y descubre quién encaja mejor contigo para compartir hogar. 🧠✨ <br>
+        Hoomie te conecta con personas afines, no con extraños.
+        </p>
+        <a href="/login" class="cta-boton">¡Haz el test y encuentra tu match!</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seccion Acciones -->
 <section class="acciones">
     <h2 class="tituloN">¿Qué quieres hacer hoy?</h2>
     <div class="opciones">
@@ -41,6 +63,32 @@
         </div></a>
     </div>
 </section>
+
+<!-- Tarjetas Ciudades -->
+<h1 class="tituloN">Ciudades Disponibles</h1>
+<div class="ciudades-container">
+    <div class="ciudad-card">
+        <div class="imagen-container">
+            <a href="publicaciones?ciudad=bogota"><img src="/static/imagenes/bogota.jpg" alt="Bogotá" /></a>
+        </div>
+        <p>Bogotá</p>
+    </div>
+    
+    <div class="ciudad-card">
+        <div class="imagen-container">
+            <a href="publicaciones?ciudad=medellin"><img src="/static/imagenes/mede.jpg" alt="Medellín" /></a>
+        </div>
+        <p>Medellín</p>
+    </div>
+    <div class="ciudad-card">
+        <div class="imagen-container">
+            <a href="publicaciones?ciudad=cartagena"><img src="/static/imagenes/carta.jpg" alt="Cartagena" /></a>
+        </div>
+        <p>Cartagena</p>
+        </div>
+</div> 
+
+<!-- Carrusel Opiniones -->
 <center><h1 class="tituloA">Opiniones de nuestros Hoomies</h1></center>
 <section class="reviews">
     <div class="carousel-container">
@@ -135,27 +183,7 @@
         <button id="nextBtn" class="carousel-btn next"><i class="fa-solid fa-arrow-right"></i></button>
     </div>
 </section>
-<h1 class="tituloN">Ciudades Disponibles</h1>
-<div class="ciudades-container">
-    <div class="ciudad-card">
-        <div class="imagen-container">
-            <a href="publicaciones?ciudad=bogota"><img src="/static/imagenes/bogota.jpg" alt="Bogotá" /></a>
-        </div>
-        <p>Bogotá</p>
-    </div>
-    
-    <div class="ciudad-card">
-        <div class="imagen-container">
-            <a href="publicaciones?ciudad=medellin"><img src="/static/imagenes/mede.jpg" alt="Medellín" /></a>
-        </div>
-        <p>Medellín</p>
-    </div>
-    <div class="ciudad-card">
-        <div class="imagen-container">
-            <a href="publicaciones?ciudad=cartagena"><img src="/static/imagenes/carta.jpg" alt="Cartagena" /></a>
-        </div>
-        <p>Cartagena</p>
-        </div>
-    </div> 
+
+
     {% endblock %}
 
