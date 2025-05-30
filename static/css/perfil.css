@@ -37,7 +37,8 @@
     width: 90%;
     margin-left: 3%;
     margin-bottom: 20px;
-    
+    text-align: center;
+    justify-content: center;
 }
 
 /* Estilos generales para inputs y selects */
@@ -82,11 +83,20 @@
     padding: 0 5px;
 }
 
+
+#fotoInput{
+  display: flex;
+  justify-content: center;
+  margin-left: 29.3%;
+}
+
 .button-group {
   display: flex;
   text-align: center;
   gap: 10px;
   flex-wrap: wrap;
+  margin-bottom: 15px;
+  justify-content: center;
 }
 
 .botonRojo {
@@ -122,6 +132,18 @@
 
 input[type="file"] {
   color: transparent;
+}
+
+.match{
+  background-color: rgb(222, 221, 221);
+  text-decoration: none;
+  border-radius: 5px;
+  display: flex;
+  font-size: 20px;
+  color: black;
+  font-weight: 600;
+  padding: 5px;
+  justify-content: center;
 }
 
 .publicaciones-grid {
@@ -162,4 +184,3 @@ input[type="file"] {
     align-self: start;
     margin-top: 10px;
 }
-

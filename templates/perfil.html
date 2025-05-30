@@ -34,11 +34,11 @@
           <input type="email" class="input-container-input" name="email_usuario" value="{{ usuario_logueado.email }}" readonly>
           <label class="input-container-label">Correo Electrónico</label>
         </li>
-        <li class="input-container">
+        <li class="input-container ">
           <label>Foto de perfil</label><br>
           <input type="file" name="foto_usuario" accept="image/*" id="fotoInput" disabled>
         </li>
-        <div class="foto-container">
+        <div class="foto-container" id="fnueva" style="display: none;">
           <img id="fotoPreview" src="/static/imagenes/placeholder.png" class="fotoPerfil">
         </div>
 
@@ -49,9 +49,10 @@
           <button type="button" id="eliminarBtn" class="botonRojo">Eliminar perfil</button>
         </li>
       </ul>
+      <a href="/match/editar" class="match">Editar preferencias</a>
     </form>
 
-    <a href="/match/editar" class="botonAzu">Editar preferencias</a>
+    
   </div>
 
   <!-- Columna derecha -->
@@ -95,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cancelarBtn = document.getElementById("cancelarBtn");
     const eliminarBtn = document.getElementById("eliminarBtn");
     const fotoPreview = document.getElementById("fotoPreview");
+    const fnueva = document.getElementById("fnueva");
 
     
 
@@ -105,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     editarBtn.addEventListener("click", () => {
       inputs.forEach(input => input.removeAttribute("readonly"));
       fileInput.removeAttribute("disabled");
+      fnueva.style.display = "flex";
       editarBtn.style.display = "none";
       guardarBtn.style.display = "inline-block";
       cancelarBtn.style.display = "inline-block";
@@ -116,24 +119,27 @@ document.addEventListener("DOMContentLoaded", () => {
         input.value = valoresOriginales[input.name];
         input.setAttribute("readonly", true);
       });
+      fileInput.setAttribute("disabled", true);
+      fnueva.style.display = "none";
       editarBtn.style.display = "inline-block";
       guardarBtn.style.display = "none";
       cancelarBtn.style.display = "none";
       eliminarBtn.style.display = "inline-block";
     });
-  });
 
-fileInput.addEventListener("change", function() {
-  const fotoPreview = document.getElementById("fotoPreview");
-  const file = this.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      fotoPreview.src = e.target.result; // muestra solo la nueva imagen seleccionada
-    };
-    reader.readAsDataURL(file);
-  }
-});
+    fileInput.addEventListener("change", function() {
+    const fotoPreview = document.getElementById("fotoPreview");
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        fotoPreview.src = e.target.result; // muestra solo la nueva imagen seleccionada
+      };
+      reader.readAsDataURL(file);
+      }
+    });
+
+  });
 
 
 </script>
