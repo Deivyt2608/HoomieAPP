@@ -410,4 +410,25 @@ a{
     font-weight: 500;
   }
   
+.toast {
+    text-align: center;
+    justify-content: center;
+    position: fixed;
+    top: 90%; 
+    transform: translateX(-70%);
+    background-color: rgba(0, 0, 0, 0.671) ;
+    color: #ffffff;
+    padding: 15px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 9999;
+}
+
+.toast.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
   

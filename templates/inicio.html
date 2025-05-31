@@ -40,7 +40,13 @@
         Completa nuestro formulario inteligente y descubre quién encaja mejor contigo para compartir hogar. 🧠✨ <br>
         Hoomie te conecta con personas afines, no con extraños.
         </p>
-        <a href="/login" class="cta-boton">¡Haz el test y encuentra tu match!</a>
+        {% if usuario_logueado %}
+            <a href="/match" class="cta-boton">¡Haz el test y encuentra tu match!</a>
+            {% else %}
+            <a href="/ingreso?mensaje=sesion_requerida" class="cta-boton">¡Haz el test y encuentra tu match!</a>
+            {% endif %} 
+
+        
       </div>
     </div>
   </section>
@@ -182,8 +188,27 @@
             </div>
         <button id="nextBtn" class="carousel-btn next"><i class="fa-solid fa-arrow-right"></i></button>
     </div>
+    <div id="toast" class="toast"></div>
 </section>
 
 
-    {% endblock %}
+{% endblock %}
 
+{% block scripts %}
+<script>
+const params = new URLSearchParams(window.location.search);
+const mensaje = params.get("mensaje");
+const toast = document.getElementById("toast");
+
+if (mensaje === "preferencias_guardadas") {
+    mostrarToast("✅ Tus preferencias fueron guardadas con éxito.");
+} else if (mensaje === "sesion_requerida") {
+    mostrarToast("⚠️ Necesitas iniciar sesión para acceder a esta página.");
+}
+function mostrarToast(texto) {
+    toast.textContent = texto;
+    toast.classList.add("mostrar");
+    setTimeout(() => toast.classList.remove("mostrar"), 3500);
+}
+</script>
+{% endblock %}
