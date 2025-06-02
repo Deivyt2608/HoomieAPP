@@ -1,4 +1,3 @@
-# scripts/generar_apartamentos.py
 from database.connection import SessionLocal
 from models.inmueble import Inmueble
 from models.user import User
@@ -7,27 +6,25 @@ from models.preferencias import Preference
 import random
 from database.connection import Base, engine
 
-# Importa todos tus modelos aquí
-from models.user import User
-from models.preferencias import Preference
-from models.inmueble import Inmueble
-from models.publicacion import Publicacion
+print("⚠ ATENCIÓN: Eliminando todas las tablas...")
+Base.metadata.drop_all(bind=engine)
+print("✅ Tablas eliminadas.")
 
-# Crear todas las tablas
 print("🔧 Creando tablas en la base de datos...")
 Base.metadata.create_all(bind=engine)
 print("✅ Tablas creadas correctamente.")
 
+# Ciudades y barrios asociados
+ciudades_barrios = {
+    "Bogotá": ["Chapinero", "Usaquén", "Teusaquillo"],
+    "Medellín": ["Laureles", "El Poblado", "Belén"],
+    "Cartagena": ["San Diego", "Getsemaní", "Bocagrande"]
+}
 
-
-ciudades = ["Bogotá", "Medellín", "cartagena"]
-barrio_base = ["Chapinero", "Laureles", "San Fernando", "El Prado"]
 tipos = ["apartamento", "casa"]
 generos = ["masculino", "femenino", "indiferente"]
-
-fotos_base = "/static/imagenes/apartamentos/demo1.jpg,/static/imagenes/apartamentos/demo2.jpg"
-
 tipos_publicacion = ["arrendar", "buscar roomie"]
+
 nombres_publicacion = [
     "Arriendo habitación amoblada",
     "Se busca roomie responsable",
@@ -52,7 +49,6 @@ valores = [
     {"arriendo": 1000000, "admin": 150000}
 ]
 
-
 def generar_apartamentos_con_usuarios():
     db = SessionLocal()
 
@@ -67,7 +63,6 @@ def generar_apartamentos_con_usuarios():
             phone=f"30000000{i+1}",
             foto=""
         )
-        
         db.add(user)
         db.commit()
         db.refresh(user)
@@ -90,14 +85,19 @@ def generar_apartamentos_con_usuarios():
         )
         db.add(preferencia)
 
+    # Generar lista única de imágenes demo1.jpg a demo10.jpg
+    imagenes = [f"/static/imagenes/apartamentos/demo{i+1}.jpg" for i in range(10)]
+    random.shuffle(imagenes)
+
     # Crear 10 inmuebles y publicaciones asociadas
     for i in range(10):
-        ciudad = random.choice(ciudades)
-        barrio = random.choice(barrio_base)
+        ciudad = random.choice(list(ciudades_barrios.keys()))
+        barrio = random.choice(ciudades_barrios[ciudad])
         tipo = random.choice(tipos)
         genero = random.choice(generos)
         precios = random.choice(valores)
         usuario = random.choice(usuarios)
+        imagen = imagenes.pop()  # sacar una imagen única
 
         inmueble = Inmueble(
             tipo_inmueble=tipo,
@@ -115,7 +115,7 @@ def generar_apartamentos_con_usuarios():
             permite_mascotas=random.choice([True, False]),
             permite_fumadores=random.choice([True, False]),
             permite_fiestas=random.choice([True, False]),
-            fotos=fotos_base
+            fotos=imagen  # solo una imagen
         )
         db.add(inmueble)
         db.commit()

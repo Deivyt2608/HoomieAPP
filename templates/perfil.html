@@ -7,57 +7,52 @@
 {% endblock %}
 
 {% block content %}
-<div class="perfil-wrapper">
+<div class="editar-contenedor">
 
   <!-- Columna izquierda -->
-  <div class="perfil-info">
-    <h1>Mi informacion</h1>
-    <div class="foto-container">
-      <img src="{{ usuario_logueado.foto or '/static/imagenes/perfil.png' }}" class="fotoPerfil">
-    </div>
+  <div class="panel perfil">
+    <h2>Mi perfil 👤</h2>
 
-    <form action="/editar-perfil" method="post" enctype="multipart/form-data" class="datos">
-      <ul>
-        <li class="input-container">
-          <input type="text" class="input-container-input" name="nombre_usuario" id="nombre" value="{{ usuario_logueado.nombre }}" readonly>
-          <label class="input-container-label">Nombre(s)</label>
-        </li>
-        <li class="input-container">
-          <input type="text" class="input-container-input" name="apellido_usuario" id="apellido" value="{{ usuario_logueado.apellido }}" readonly>
-          <label class="input-container-label">Apellidos</label>
-        </li>
-        <li class="input-container">
-          <input type="number" class="input-container-input" name="phone_usuario" id="celular" value="{{ usuario_logueado.phone }}" readonly>
-          <label class="input-container-label">Número de Celular</label>
-        </li>
-        <li class="input-container">
-          <input type="email" class="input-container-input" name="email_usuario" value="{{ usuario_logueado.email }}" readonly>
-          <label class="input-container-label">Correo Electrónico</label>
-        </li>
-        <li class="input-container ">
-          <label>Foto de perfil</label><br>
-          <input type="file" name="foto_usuario" accept="image/*" id="fotoInput" disabled>
-        </li>
-        <div class="foto-container" id="fnueva" style="display: none;">
-          <img id="fotoPreview" src="/static/imagenes/placeholder.png" class="fotoPerfil">
+    <form action="/editar-perfil" method="post" enctype="multipart/form-data" class="form-perfil">
+
+      <div class="foto-container">
+      <img id="fotoPreview" src="{{ usuario_logueado.foto or '/static/imagenes/perfil.png' }}" class="fotoPerfil">
+      <label class="subir-foto" id="subirF">
+      Cambiar foto
+      <input type="file" name="foto_usuario" accept="image/*" id="fotoInput" style="display: none;" disabled>
+      </label>
+
+      </div>
+
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre_usuario" value="{{ usuario_logueado.nombre }}" readonly>
+      
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido" name="apellido_usuario" id="apellido" value="{{ usuario_logueado.apellido }}" readonly>
+
+      <label for="celular">Celular:</label>
+      <input type="tel" id="celular" name="phone_usuario" value="{{ usuario_logueado.phone }}" readonly>
+
+      <label for="correo">Correo:</label>
+      <input type="email" id="correo" name="email_usuario" value="{{ usuario_logueado.email }}" readonly>
+
+      <label for="biografia">Biografía:</label>
+      <textarea id="biografia" name="biografia" value="" readonly>{{ usuario_logueado.biografia or "Sin biografía aún." }}</textarea>
+
+        <div class="botones-perfil">
+          <button type="button" id="editarBtn" class="botonAzu"><i class="fa-solid fa-user-pen"></i>  Editar perfil</button>
+          <button type="submit" id="guardarBtn" class="botonAma" style="display:none;"><i class="fa-solid fa-floppy-disk"></i>  Guardar cambios</button>
+          <button type="button" id="cancelarBtn" class="botonRojo" style="display:none;"><i class="fa-solid fa-eraser"></i> Cancelar</button>
+          <button type="button" id="eliminarBtn" class="botonRojo"><i class="fa-solid fa-user-xmark"></i> Eliminar perfil</button>
         </div>
+      <a href="/inicio"><button type="button" class="match"><i class="fa-solid fa-star"></i> Editar preferencias</button></a>
 
-        <li class="button-group">
-          <button type="button" id="editarBtn" class="botonAzu">Editar perfil</button>
-          <button type="submit" id="guardarBtn" class="botonAma" style="display:none;">Guardar cambios</button>
-          <button type="button" id="cancelarBtn" class="botonRojo" style="display:none;">Cancelar</button>
-          <button type="button" id="eliminarBtn" class="botonRojo">Eliminar perfil</button>
-        </li>
-      </ul>
-      <a href="/match/editar" class="match">Editar preferencias</a>
     </form>
-
-    
   </div>
 
   <!-- Columna derecha -->
-  <div class="perfil-publicaciones">
-    <h3>Mis publicaciones</h3>
+  <div class="panel publicaciones">
+    <h2>Mis publicaciones 🏠</h2>
     {% if publicaciones %}
       <div class="publicaciones-grid">
         {% for pub in publicaciones %}
@@ -72,31 +67,46 @@
         {% endfor %}
       </div>
     {% else %}
-      <p>No has publicado ningún inmueble.</p>
+      <div class="sin-publicaciones">
+        <p>🛏️ Aún no tienes publicaciones...</p>
+        <a href="/publicar" class="boton-publicar">¡Empieza a publicar!</a>
+      </div>
     {% endif %}
   </div>
 
 </div>
 
+<!-- 🧨 Modal de confirmación -->
+  <div class="modal" id="modal-confirmacion">
+    <div class="modal-contenido">
+        <h1><i class="fa-solid fa-user-xmark" style="color: #ab0303;"></i> Eliminar Cuenta</h1>
+      <p>¿Estás segur@ de que quieres eliminar tu perfil? Esta acción no se puede deshacer.</p>
+      <div class="modal-botones">
+        <button id="cancelar-eliminar">Cancelar</button>
+        <button id="confirmar-eliminar">Eliminar</button>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 
 {% block scripts %}
 <script>
-document.getElementById("eliminarBtn").addEventListener("click", () => {
-  if (confirm("¿Estás seguro de que deseas eliminar tu perfil? Esta acción no se puede deshacer.")) {
-    window.location.href = "/eliminar-cuenta"; // ruta que debe manejar el backend
-  }
-});
+
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form");
     const inputs = form.querySelectorAll("input:not([type='file']):not([name='email_usuario'])");
     const fileInput = document.getElementById("fotoInput");
+    const subirF = document.getElementById("subirF")
     const editarBtn = document.getElementById("editarBtn");
     const guardarBtn = document.getElementById("guardarBtn");
     const cancelarBtn = document.getElementById("cancelarBtn");
     const eliminarBtn = document.getElementById("eliminarBtn");
     const fotoPreview = document.getElementById("fotoPreview");
     const fnueva = document.getElementById("fnueva");
+    const modal = document.getElementById('modal-confirmacion');
+    const cancelarEliminar = document.getElementById('cancelar-eliminar');
+    const confirmarEliminar = document.getElementById('confirmar-eliminar');
+
 
     
 
@@ -106,8 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     editarBtn.addEventListener("click", () => {
       inputs.forEach(input => input.removeAttribute("readonly"));
+      subirF.style.display = "inline-block";
       fileInput.removeAttribute("disabled");
-      fnueva.style.display = "flex";
       editarBtn.style.display = "none";
       guardarBtn.style.display = "inline-block";
       cancelarBtn.style.display = "inline-block";
@@ -119,8 +129,9 @@ document.addEventListener("DOMContentLoaded", () => {
         input.value = valoresOriginales[input.name];
         input.setAttribute("readonly", true);
       });
-      fileInput.setAttribute("disabled", true);
-      fnueva.style.display = "none";
+      
+      fotoPreview.src = "{{ usuario_logueado.foto or '/static/imagenes/perfil.png' }}";
+      subirF.style.display = "none";
       editarBtn.style.display = "inline-block";
       guardarBtn.style.display = "none";
       cancelarBtn.style.display = "none";
@@ -128,19 +139,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     fileInput.addEventListener("change", function() {
-    const fotoPreview = document.getElementById("fotoPreview");
-    const file = this.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        fotoPreview.src = e.target.result; // muestra solo la nueva imagen seleccionada
-      };
-      reader.readAsDataURL(file);
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          fotoPreview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
       }
     });
 
-  });
 
+
+    eliminarBtn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+    });
+
+    cancelarEliminar.addEventListener('click', () => {
+    modal.style.display = 'none';
+    });
+
+    confirmarEliminar.addEventListener('click', () => {
+    modal.style.display = 'none';
+    window.location.href = "/eliminar-cuenta";
+    alert('Perfil eliminado');
+    });
+  });
 
 </script>
 

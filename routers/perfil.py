@@ -25,6 +25,7 @@ async def actualizar_perfil(
     apellido_usuario: str = Form(...),
     phone_usuario: str = Form(...),
     email_usuario: str = Form(...),
+    biografia_usuario: str = File(...),
     foto_usuario: UploadFile = File(None),
     db: Session = Depends(get_db)
 ):
@@ -35,11 +36,10 @@ async def actualizar_perfil(
     usuario.nombre = nombre_usuario
     usuario.apellido = apellido_usuario
     usuario.phone = phone_usuario
+    usuario.biografia =biografia_usuario
 
-    if foto_usuario.content_type.startswith("image/"):
-    # guardar archivo...
-
-        if foto_usuario and foto_usuario.filename != "":
+    if foto_usuario and foto_usuario.filename != "":
+        if foto_usuario.content_type.startswith("image/"):
             import uuid
             filename = f"{uuid.uuid4().hex}_{foto_usuario.filename}"
             ruta_foto = os.path.join(UPLOAD_DIR, filename)
@@ -48,6 +48,7 @@ async def actualizar_perfil(
                 shutil.copyfileobj(foto_usuario.file, buffer)
 
             usuario.foto = "/" + ruta_foto.replace("\\", "/")  # ruta relativa
+
 
     db.commit()
     return RedirectResponse("/perfil?mensaje=perfil_actualizado", status_code=302)
