@@ -5,85 +5,45 @@
         <title>Hoomie</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="/static/imagenes/icono.png" />
-        <link rel="stylesheet" href="/static/css/formularios.css">
+        <link rel="stylesheet" href="/static/css/match.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <script src="/static/js/java.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
 <body class="ingreso">
-<div class="contenedor" id="match">
-  <a href="/inicio"><img src="/static/imagenes/logo2.png" width="180px"></a>
-  <h1>Preferencias de convivencia</h1>
-  <p>Selecciona tu nivel de importancia o respuesta para cada categoría:</p>
 
-  <form action="/guardar-preferencias" method="post">
-    <ul>
-      {% for campo, texto in [
-        ('aseo_hogar', 'El aseo del hogar'),
-        ('ruido_hogar', 'El ruido del hogar'),
-        ('visitas', 'Las visitas'),
-        ('aseo_personal', 'El aseo personal'),
-        ('division_tareas', 'División de tareas del hogar'),
-        ('salidas_fiesta', 'Salidas de fiesta')
-      ] %}
-      <li class="input-container">
-        <select name="{{ campo }}" class="input-container-input" id="{{campo}}" required>
-          <option value="" disabled selected></option>
-          <option value="1">1 Nada importante</option>
-          {% for i in range(2, 5) %}
-          <option value="{{ i }}">{{ i }}</option>
-          {% endfor %}
-          <option value="5">5 Muy importante</option>
-        </select>
-        <label class="input-container-label" id="{{campo}}l">{{ texto }}</label>
-      </li>
-      {% endfor %}
+<!-- Modal Match -->
+<div id="modalMatch" class="modal">
+    <div class="modal-contenido">
+        <div class="modal-header">
+            <h2>Formulario de Match 🧩</h2>
+            <div class="barra-progreso">
+                <div class="progreso" id="barraProgreso"></div>
+            </div>
+        </div>
 
-      {% for campo, texto in [
-        ('fuma', '¿Fumas?'),
-        ('alcohol', '¿Consumes alcohol regularmente?'),
-        ('trabaja_casa', '¿Trabajas en casa?'),
-        ('mascotas', '¿Tienes mascotas?'),
-        ('estudia', '¿Estudias?'),
-        ('trabaja', '¿Trabajas?')
-      ] %}
-      <li class="input-container">
-        <select name="{{ campo }}" class="input-container-input" id="{{campo}}" required>
-          <option value="" disabled selected></option>
-          <option value="sí">Sí</option>
-          <option value="no">No</option>
-        </select>
-        <label class="input-container-label" id="{{campo}}l">{{ texto }}</label>
-      </li>
-      {% endfor %}
+        <div class="modal-body">
+            <div class="pregunta">
+                <h3 id="textoPregunta"></h3>
+                <p id="descripcionPregunta" style="display:none;"></p>
+                <select id="respuestaPregunta" class="input-container-input" style="display:none;"></select>
+            </div>
+            <div class="imagen">
+                <img id="imagenPregunta" src="" alt="Imagen pregunta">
+            </div>
+        </div>
 
-      <section class="Botones">
-        <li class="button">
-          <button type="submit" class="botonAma">Guardar preferencias</button>
-        </li>
-      </section>
-    </ul>
-  </form>
+        <div class="modal-footer">
+            <button id="cancelarBtn" class="botonCancelar">Cancelar</button>
+            <button id="anteriorBtn" class="botonAtras oculto">Anterior</button>
+            <button id="siguienteBtn" class="botonSiguiente">Siguiente</button>
+        </div>
+    </div>
 </div>
+
 <div id="toast" class="toast"></div>
+<script src="/static/js/match.js"></script>
 
-<script>
-const params = new URLSearchParams(window.location.search);
-const mensaje = params.get("mensaje");
-const toast = document.getElementById("toast");
 
-if (mensaje === "preferencias_guardadas") {
-    mostrarToast("✅ Tus preferencias fueron guardadas con éxito.");
-} else if (mensaje === "sesion_requerida") {
-    mostrarToast("⚠️ Necesitas iniciar sesión para acceder a esta página.");
-}
-
-function mostrarToast(texto) {
-    toast.textContent = texto;
-    toast.classList.add("mostrar");
-    setTimeout(() => toast.classList.remove("mostrar"), 3500);
-}
-</script>
 </body>
 </html>
-
