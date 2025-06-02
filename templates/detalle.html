@@ -61,7 +61,9 @@
 
   <div class="botones-publicador">
     <a href="mailto:{{ publicacion.usuario.email }}" class="botonAzu" id="contac">Contactar</a>
-    <button onclick="verCompatibilidad({{ publicacion.usuario.id }})" class="botonAma" id="match">Compatibilidad</button>
+    {% if publicacion.tipo_publicacion == "buscar roomie" %}
+      <button onclick="verCompatibilidad({{ publicacion.usuario.id }})" class="botonAma" id="match">Compatibilidad</button>
+      {% endif %}
   </div>
 </div>
 
@@ -115,15 +117,37 @@
   function cerrarGaleria() {
     document.getElementById("galeriaModal").style.display = "none";
   }
+  
   function verCompatibilidad(usuarioId) {
   fetch(`/match/api/${usuarioId}`)
-    .then(res => res.json())
-    .then(data => {
+    .then(res => {
       const modal = document.getElementById("modalMatch");
       const resultado = document.getElementById("resultado-match");
 
-      if (data.incompleto) {
-        resultado.textContent = "⚠️ Alguno de los usuarios no ha completado sus preferencias.";
+      if (res.status === 401) {
+        resultado.innerHTML = `
+          ⚠️ Debes iniciar sesión para ver la compatibilidad.<br><br>
+          <a href="/ingreso?mensaje=sesion_requerida" class="botonAzu">Iniciar sesión</a>
+        `;
+        modal.style.display = "flex";
+        return;
+      }
+
+      return res.json();
+    })
+    .then(data => {
+      if (!data) return; // ya manejado arriba
+
+      const modal = document.getElementById("modalMatch");
+      const resultado = document.getElementById("resultado-match");
+
+      if (data.error === "preferencias_faltantes") {
+        resultado.innerHTML = `
+          ⚠️ Debes completar tus preferencias para usar esta función.<br><br>
+          <a href="/match" class="botonAzu">Ir al formulario</a>
+        `;
+      } else if (data.error === "preferencias_objetivo_faltantes") {
+        resultado.textContent = "⚠️ El usuario objetivo no ha completado sus preferencias.";
       } else if (data.compatibilidad) {
         resultado.textContent = `🤝 Compatibilidad: ${data.compatibilidad.toFixed(2)}%`;
       } else {
@@ -136,6 +160,7 @@
       document.getElementById("resultado-match").textContent = "Error al obtener datos.";
     });
 }
+
 
 function cerrarMatch() {
   document.getElementById("modalMatch").style.display = "none";

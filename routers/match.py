@@ -59,8 +59,11 @@ def obtener_compatibilidad(usuario_id: int, request: Request, db: Session = Depe
     preferencias_1 = db.query(Preference).filter(Preference.user_id == usuario_actual.id).first()
     preferencias_2 = db.query(Preference).filter(Preference.user_id == usuario_id).first()
 
-    if not preferencias_1 or not preferencias_2:
-        return JSONResponse(content={"incompleto": True})
+    if not preferencias_1:
+        return JSONResponse(content={"error": "preferencias_faltantes"})
+    
+    if not preferencias_2:
+        return JSONResponse(content={"error": "preferencias_objetivo_faltantes"})
 
     vector_1 = [[
     preferencias_1.aseo_hogar,
