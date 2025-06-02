@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Chicle&family=Fredoka:wght@700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* General */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('/static/imagenes/fondo.png') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.347); /* 50% opacidad negra */
+    z-index: -1;
+}
+
+.modal {
+    display: flex; /* Mostrar automáticamente */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+h2 {
+    font-size: 25px;
+    font-family: "Fredoka", sans-serif;
+    margin-bottom: 20px;
+    color: #333;
+}
+h3 {
+    font-size: 25px;
+    font-family: "Fredoka", sans-serif;
+    margin-bottom: 20px;
+    color: #333;
+}
+  
+
+.modal-contenido {
+    background: white;
+    width: 80%;
+    max-width: 700px;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.barra-progreso {
+    width: 60%;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 10px;
+}
+
+.progreso {
+    height: 100%;
+    width: 0%;
+    background-color: #CFEBFD;
+    transition: width 0.3s;
+}
+
+.modal-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.pregunta {
+    width: 55%; /* reducido para dar más espacio a la imagen */
+}
+
+.pregunta p {
+    font-size: 20px;
+    color: #555;
+}
+
+.imagen {
+    width: 35%; /* ampliado para compensar */
+}
+
+.imagen img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Botón Cancelar (rojo) */
+.botonCancelar {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.botonCancelar:hover {
+    background-color: #c0392b;
+}
+
+/* Botón Siguiente / Enviar (amarillo) */
+.botonSiguiente {
+    background-color: #FFC875;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.botonSiguiente:hover {
+    background-color: #e0a848;
+}
+
+/* Botón Atrás (azul) */
+.botonAtras {
+    background-color:  #64b5f6;
+    color: #030303;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.botonAtras:hover {
+    background-color:#CFEBFD;
+}
+
+  
+.oculto {
+    display: none;
+}
+
+/* Select básico (para fallback si no carga Choices.js) */
+.input-container-input {
+    width: 100%;
+    max-width: 300px; /* límite máximo */
+    padding: 10px 15px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    border: 2px solid #CFEBFD;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 18px;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-container-input:hover {
+    border-color: #FFC875;
+    box-shadow: 0 0 5px rgba(255, 200, 117, 0.5);
+}
+
+.input-container-input:focus {
+    outline: none;
+    border-color: #FFC875;
+    box-shadow: 0 0 8px rgba(255, 200, 117, 0.8);
+}
+
+.input-container-input option {
+    background-color: #ffffff;
+    color: #333333;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+}
+.input-container-input option[disabled] {
+    color: #999999;
+}
+
+/* ---------- Choices.js personalizado ---------- */
+.choices {
+    width: 100%;
+    max-width: 300px;
+}
+
+.choices__inner {
+    border: 2px solid #CFEBFD;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    padding: 10px 15px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #333;
+    min-height: auto;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.choices__inner:hover, .choices__inner.is-focused {
+    border-color: #FFC875;
+    box-shadow: 0 0 8px rgba(255, 200, 117, 0.8);
+}
+
+.choices[data-type*='select-one']::after {
+    border-color: #333 transparent transparent transparent;
+    right: 15px;
+}
+
+.choices__list--single {
+    padding: 0;
+}
+
+.choices__list--dropdown .choices__item--selectable {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+}
+
+.choices__list--dropdown .choices__item--selectable.is-highlighted {
+    background-color: #FFC875;
+    color: #000;
+}
+
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease, bottom 0.3s ease;
+    z-index: 1000;
+}
+
+.toast.mostrar {
+    opacity: 1;
+    bottom: 50px;
+}
