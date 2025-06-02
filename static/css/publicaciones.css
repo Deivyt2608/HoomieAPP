@@ -39,6 +39,8 @@
 }
 .card img {
     width: 30%;
+    max-height: 160px;
+    
     object-fit: cover;
 }
 .card-content {
