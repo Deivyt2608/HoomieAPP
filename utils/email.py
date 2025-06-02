@@ -15,7 +15,7 @@ async def enviar_correo_bienvenida(destinatario: str, nombre: str):
         <p>🏡✨ ¡Gracias por registrarte en <b>Hoomie</b>! 🏡✨</p>
         <p>Ya puedes empezar a buscar tu roomie o compartir tu espacio con otros.</p>
         <img src="https://res.cloudinary.com/df7elploy/image/upload/v1748900325/correo_maqmx1.png" alt="Correo Bienvenida" width="400" style="margin-top:20px;">
-        <p>Saludos,<br>El equipo de Hoomie</p>
+        <p>Saludos 👋,<br>El equipo de Hoomie 💙💛</p>
       </body>
     </html>
     """
@@ -58,7 +58,7 @@ async def enviar_enlace_restablecer(correo: str, nombre: str, enlace: str):
         <p><a href="{enlace}" style="display:inline-block; padding:10px 20px; background-color:#FFC875; color:#000; text-decoration:none; border-radius:5px;">Restablecer contraseña</a></p>
         <img src="https://res.cloudinary.com/df7elploy/image/upload/v1748904079/restablece_txxr1v.png" alt="Restablecer Contraseña" width="400" style="margin-top:20px;">
         <p>Si no solicitaste este cambio, puedes ignorar este correo.</p>
-        <p>Saludos,<br>El equipo de Hoomie 💙💛</p>
+        <p>Saludos 👋,<br>El equipo de Hoomie 💙💛</p>
       </body>
     </html>
     """
@@ -71,7 +71,7 @@ Haz clic en este enlace para restablecer tu contraseña:
 
 Si no solicitaste esto, ignora este mensaje.
 
-Saludos,
+Saludos 👋,
 El equipo de Hoomie 💙💛
     """)  # Texto alternativo
 
