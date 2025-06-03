@@ -54,13 +54,13 @@
         <script>
           document.getElementById('form-registro').addEventListener('submit', function(e) {
             const pass1 = document.getElementById('contraseña').value;
-            const pass2 = document.getElementById('confirmar_contraseña').value;
+            const pass2 = document.getElementById('confirmar').value;
             if (pass1 !== pass2) {
               e.preventDefault();
               alert('Las contraseñas no coinciden.');
             }
           });
         </script>
-        <script src="/static/js/java.js"></script>
+        
     </body>
 </html>

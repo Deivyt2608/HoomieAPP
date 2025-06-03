@@ -37,7 +37,7 @@
       <input type="email" id="correo" name="email_usuario" value="{{ usuario_logueado.email }}" readonly>
 
       <label for="biografia">Biografía:</label>
-      <textarea id="biografia" name="biografia" value="" readonly>{{ usuario_logueado.biografia or "Sin biografía aún." }}</textarea>
+      <textarea id="biografia" name="biografia_usuario" placeholder="Escribe tu biografía aquí..." readonly> {{ usuario_logueado.biografia or 'Escribe tu biografía aquí...' }}</textarea>
 
         <div class="botones-perfil">
           <button type="button" id="editarBtn" class="botonAzu"><i class="fa-solid fa-user-pen"></i>  Editar perfil</button>
@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById('modal-confirmacion');
     const cancelarEliminar = document.getElementById('cancelar-eliminar');
     const confirmarEliminar = document.getElementById('confirmar-eliminar');
+    const biografia = document.getElementById('biografia')
 
 
     
@@ -113,9 +114,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Guardar valores originales
     const valoresOriginales = {};
     inputs.forEach(input => valoresOriginales[input.name] = input.value);
+    const iniciob = biografia.value;
 
     editarBtn.addEventListener("click", () => {
       inputs.forEach(input => input.removeAttribute("readonly"));
+      biografia.removeAttribute('readonly');
       subirF.style.display = "inline-block";
       fileInput.removeAttribute("disabled");
       editarBtn.style.display = "none";
@@ -129,7 +132,8 @@ document.addEventListener("DOMContentLoaded", () => {
         input.value = valoresOriginales[input.name];
         input.setAttribute("readonly", true);
       });
-      
+      biografia.value = iniciob;
+      biografia.setAttribute('readonly',true);
       fotoPreview.src = "{{ usuario_logueado.foto or '/static/imagenes/perfil.png' }}";
       subirF.style.display = "none";
       editarBtn.style.display = "inline-block";

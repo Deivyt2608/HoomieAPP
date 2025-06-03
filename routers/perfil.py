@@ -25,7 +25,7 @@ async def actualizar_perfil(
     apellido_usuario: str = Form(...),
     phone_usuario: str = Form(...),
     email_usuario: str = Form(...),
-    biografia_usuario: str = File(...),
+    biografia_usuario: str = File(None),
     foto_usuario: UploadFile = File(None),
     db: Session = Depends(get_db)
 ):
