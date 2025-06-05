@@ -1,11 +1,12 @@
 from fastapi import APIRouter, Request, Depends
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from utils.session import get_usuario_logueado
 from sqlalchemy.orm import Session
 from database.connection import get_db
 from models.publicacion import Publicacion
 from models.preferencias import Preference
+from models.user import User
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")  # Ruta relativa desde main.py
@@ -83,6 +84,19 @@ async def mostrar_formulario_inmueble(request: Request, publicacion_id: int):
         "usuario_logueado": usuario if usuario else None,
         "publicacion_id": publicacion_id
     })
+
+@router.get("/editar/{publicacion_id}")
+def vista_editar(publicacion_id: int, request: Request, db: Session = Depends(get_db), usuario_logueado: User = Depends(get_usuario_logueado)):
+    publicacion = db.query(Publicacion).filter(Publicacion.id == publicacion_id).first()
+    if not publicacion or publicacion.usuario_id != usuario_logueado.id:
+        return RedirectResponse(url="/publicaciones", status_code=303)
+    
+    return templates.TemplateResponse("apto.html", {
+        "request": request,
+        "publicacion_id": publicacion.id,
+        "publicacion": publicacion
+    })
+
 
 @router.get("/nosotros", response_class=HTMLResponse)
 async def mostrar_formulario_inmueble(request: Request):

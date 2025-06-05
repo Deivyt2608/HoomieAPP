@@ -297,11 +297,14 @@ html, body {
     margin-top: 10px;
   }
   .navbar{
-    height: 110px;
+    height: 115px;
     max-height: 130px;
   }
-  .profile-button{
-    margin-left: 300px;
+  .logo{
+    width: 200px;
+  }
+  .buttons{
+    margin-left: 250px;
     margin-bottom: 50px;
   }
   body{

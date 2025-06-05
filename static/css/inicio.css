@@ -175,7 +175,7 @@
 
 .acciones {
     text-align: center;
-    background-color: #CFEBFD; 
+    background: linear-gradient(rgb(140, 140, 231),rgb(223, 221, 221)); 
     padding: 20px;
     width: 100%;
 }
@@ -206,6 +206,7 @@
     width: 100%;
     margin: auto;
     max-width: 300px;
+    height: 250px;
     margin-bottom: 10px;
 }
 

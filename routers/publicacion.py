@@ -7,6 +7,8 @@ from models.publicacion import Publicacion
 from models.inmueble import Inmueble
 from models.user import User
 import shutil, os
+import uuid
+from utils.session import get_usuario_logueado
 
 router = APIRouter()
 
@@ -129,3 +131,76 @@ async def publicar_apartamento(
         db.commit()
 
     return RedirectResponse("/inicio?mensaje=publicacion_exitosa", status_code=302)
+
+@router.post("/editar-publicacion/{publicacion_id}")
+def editar_publicacion(
+    publicacion_id: int,
+    nombre: str = Form(...),
+    descripcion: str = Form(...),
+    tipo_publicacion: str = Form(...),
+    tipo_inmueble: str = Form(...),
+    ciudad: str = Form(...),
+    barrio: str = Form(...),
+    direccion: str = Form(...),
+    latitud: float = Form(...),
+    longitud: float = Form(...),
+    valor_arriendo: int = Form(...),
+    valor_administracion: int = Form(None),
+    area_m2: int = Form(...),
+    num_banos: int = Form(...),
+    num_habitaciones: int = Form(...),
+    num_parqueaderos: int = Form(...),
+    estrato: int = Form(...),
+    genero_preferido: str = Form(...),
+    permite_mascotas: bool = Form(...),
+    permite_fumadores: bool = Form(...),
+    permite_fiestas: bool = Form(...),
+    fotos: list[UploadFile] = File(None),
+    db: Session = Depends(get_db),
+    usuario_logueado: User = Depends(get_usuario_logueado)
+):
+    publicacion = db.query(Publicacion).filter(Publicacion.id == publicacion_id).first()
+    if not publicacion:
+        raise HTTPException(status_code=404, detail="Publicación no encontrada")
+
+    if publicacion.usuario_id != usuario_logueado.id:
+        raise HTTPException(status_code=403, detail="No autorizado")
+
+    # Actualiza campos
+    publicacion.nombre = nombre
+    publicacion.descripcion = descripcion
+    publicacion.tipo_publicacion = tipo_publicacion
+
+    inmueble = publicacion.inmueble
+    inmueble.tipo_inmueble = tipo_inmueble
+    inmueble.ciudad = ciudad
+    inmueble.barrio = barrio
+    inmueble.direccion = direccion
+    inmueble.latitud = latitud
+    inmueble.longitud = longitud
+    inmueble.valor_arriendo = valor_arriendo
+    inmueble.valor_administracion = valor_administracion
+    inmueble.area_m2 = area_m2
+    inmueble.num_banos = num_banos
+    inmueble.num_habitaciones = num_habitaciones
+    inmueble.num_parqueaderos = num_parqueaderos
+    inmueble.estrato = estrato
+    inmueble.genero_preferido = genero_preferido
+    inmueble.permite_mascotas = permite_mascotas
+    inmueble.permite_fumadores = permite_fumadores
+    inmueble.permite_fiestas = permite_fiestas
+
+    # Fotos (si se suben nuevas)
+    if fotos:
+        nombres_fotos = []
+        for foto in fotos:
+            extension = os.path.splitext(foto.filename)[1]
+            nombre_archivo = f"{uuid.uuid4().hex}{extension}"
+            ruta = f"static/fotos/{nombre_archivo}"
+            with open(ruta, "wb") as buffer:
+                shutil.copyfileobj(foto.file, buffer)
+            nombres_fotos.append(ruta)
+        inmueble.fotos = ",".join(nombres_fotos)
+
+    db.commit()
+    return RedirectResponse(f"/detalle/{publicacion.id}?mensaje=editado", status_code=303)

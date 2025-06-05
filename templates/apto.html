@@ -41,8 +41,25 @@
 </div>
 
 
-<form id="formularioInmueble" method="post" enctype="multipart/form-data" action="/publicar-inmueble">
+<form id="formularioInmueble" method="post" enctype="multipart/form-data" action="{% if publicacion %}/editar-publicacion/{{ publicacion.id }}{% else %}/publicar-inmueble{% endif %}">
   <input type="hidden" name="publicacion_id" value="{{ publicacion_id }}">
+
+  {% if publicacion %}
+  <div class="paso">
+    <label>Nombre de la publicación</label>
+    <input type="text" name="nombre" value="{{ publicacion.nombre }}" required>
+
+    <label>Descripción</label>
+    <textarea name="descripcion" required>{{ publicacion.descripcion }}</textarea>
+
+    <label>Tipo de publicación</label>
+    <select name="tipo_publicacion" required>
+      <option value="arrendar" {% if publicacion.tipo_publicacion == 'arrendar' %}selected{% endif %}>Arrendar</option>
+      <option value="buscar roomie" {% if publicacion.tipo_publicacion == 'buscar roomie' %}selected{% endif %}>Buscar roomie</option>
+    </select>
+  </div>
+  {% endif %}
+
 
   <!-- Paso 1 -->
   <div class="paso">
