@@ -6,6 +6,8 @@ const inputFotos = document.getElementById("fotos");
 const previewFotos = document.getElementById("previewFotos");
 let pasoActual = 0;
 let mapa, marcador;
+let archivosCargados = [];
+
 
 const secciones = [
   { titulo: "Tipo de inmueble", descripcion: "Selecciona si es apartamento o casa" },
@@ -45,61 +47,66 @@ btnAnterior.addEventListener("click", () => {
 });
 
 btnSiguiente.addEventListener("click", () => {
-  const camposActuales = pasos[pasoActual].querySelectorAll("input, select");
-  for (let campo of camposActuales) {
-    if (!campo.checkValidity()) {
-      campo.reportValidity();
-      return;
+    const camposActuales = pasos[pasoActual].querySelectorAll("input, select");
+    for (let campo of camposActuales) {
+      if (!campo.checkValidity()) {
+        campo.reportValidity();
+        return;
+      }
     }
-  }
-
-  if (pasoActual === 1) {
-    const ciudad = document.getElementById("ciudad").value.trim();
-    const barrio = document.getElementById("barrio").value.trim();
-    const direccion = document.querySelector('input[name="direccion"]').value.trim();
-
-    if (!ciudad || !barrio || !direccion) {
-      alert("Por favor completa ciudad, barrio y dirección antes de continuar.");
-      return;
-    }
-
-    const lat = parseFloat(document.getElementById("latitud").value);
-    const lng = parseFloat(document.getElementById("longitud").value);
-    const ciudadDetectada = ubicacionEsValida(lat, lng);
-    if (!ciudadDetectada) {
+  
+    // Validación paso 2
+    if (pasoActual === 1) {
+      const ciudad = document.getElementById("ciudad").value.trim();
+      const barrio = document.getElementById("barrio").value.trim();
+      const direccion = document.querySelector('input[name="direccion"]').value.trim();
+  
+      if (!ciudad || !barrio || !direccion) {
+        alert("Por favor completa ciudad, barrio y dirección antes de continuar.");
+        return;
+      }
+  
+      const lat = parseFloat(document.getElementById("latitud").value);
+      const lng = parseFloat(document.getElementById("longitud").value);
+      const ciudadDetectada = ubicacionEsValida(lat, lng);
+      if (!ciudadDetectada) {
         document.getElementById("modalUbicacion").classList.remove("oculto");
         return;
       }
-      
-  }
-
-  if (pasoActual === pasos.length - 1) {
-    if (!inputFotos || inputFotos.files.length < 2) {
-      alert("Debes subir al menos 2 fotos.");
-      return;
     }
-    formulario.submit();
-  } else {
-    pasoActual++;
-    mostrarPaso(pasoActual);
-  }
-});
-
-inputFotos?.addEventListener("change", () => {
-  previewFotos.innerHTML = "";
-  const archivos = inputFotos.files;
-  for (let archivo of archivos) {
-    if (archivo.type.startsWith("image/")) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.createElement("img");
-        img.src = e.target.result;
-        previewFotos.appendChild(img);
-      };
-      reader.readAsDataURL(archivo);
+  
+    // Validación paso final
+    if (pasoActual === pasos.length - 1) {
+      if (!inputFotos || inputFotos.files.length < 2) {
+        alert("Debes subir al menos 2 fotos.");
+        return;
+      }
+  
+      // Desformatear valores monetarios
+      const arriendo = document.getElementById("valor_arriendo");
+      const administracion = document.getElementById("valor_administracion");
+  
+      arriendo.value = arriendo.value.replace(/[^0-9]/g, "");
+      administracion.value = administracion.disabled ? "0" : administracion.value.replace(/[^0-9]/g, "");
+  
+      formulario.submit();
+    } else {
+      pasoActual++;
+      mostrarPaso(pasoActual);
     }
-  }
-});
+  });
+  
+
+formulario.addEventListener("submit", () => {
+
+    const arriendo = document.getElementById("valor_arriendo");
+    const administracion = document.getElementById("valor_administracion");
+
+    arriendo.value = arriendo.value.replace(/[^0-9]/g, "");
+    administracion.value = administracion.disabled ? "0" : administracion.value.replace(/[^0-9]/g, "");
+
+  });
+  
 
 function inicializarMapa() {
   mapa = L.map('mapa').setView([4.65, -74.1], 11);
@@ -322,4 +329,192 @@ const barriosPorCiudad = {
     document.getElementById("modalUbicacion").classList.add("oculto");
   });
   
+  function formatearMonedaSinSimbolo(input) {
+    const valor = input.value.replace(/\D/g, ""); // solo números
+    if (!valor) {
+      input.value = "";
+      return;
+    }
   
+    const conPuntos = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    input.value = conPuntos;
+  }
+  
+  
+  // Detectar inputs de dinero
+  ["valor_arriendo", "valor_administracion"].forEach(id => {
+    const campo = document.getElementById(id);
+    campo?.addEventListener("input", () => formatearMonedaSinSimbolo(campo));
+  });
+  
+
+  function desformatearMoneda(valorFormateado) {
+    return valorFormateado.replace(/[^0-9]/g, "");
+  }
+  
+const adminSwitch = document.getElementById("admin_switch");
+const campoAdministracion = document.getElementById("valor_administracion");
+
+adminSwitch?.addEventListener("change", () => {
+  const activo = adminSwitch.checked;
+  const grupoAdmin = campoAdministracion.closest(".input-moneda");
+    if (activo) {
+    grupoAdmin.style.display = "block";
+    campoAdministracion.disabled = false;
+    campoAdministracion.value = "";
+    } else {
+    grupoAdmin.style.display = "none";
+    campoAdministracion.disabled = true;
+    campoAdministracion.value = "0";
+    }
+
+});
+
+document.querySelectorAll(".stepper").forEach(stepper => {
+    const input = stepper.querySelector("input");
+    const btnMenos = stepper.querySelector(".menos");
+    const btnMas = stepper.querySelector(".mas");
+  
+    function actualizarBotones() {
+      const valor = parseInt(input.value) || 0;
+      const min = parseInt(input.min || 0);
+      const max = parseInt(input.max || Infinity);
+  
+      btnMenos.disabled = valor <= min;
+      btnMas.disabled = valor >= max;
+    }
+  
+    btnMenos.addEventListener("click", () => {
+      let valor = parseInt(input.value) || 0;
+      const min = parseInt(input.min || 0);
+      if (valor > min) {
+        input.value = valor - 1;
+        actualizarBotones();
+      }
+    });
+  
+    btnMas.addEventListener("click", () => {
+      let valor = parseInt(input.value) || 0;
+      const max = parseInt(input.max || Infinity);
+      if (valor < max) {
+        input.value = valor + 1;
+        actualizarBotones();
+      }
+    });
+  
+    // Actualiza cuando cambia manualmente el valor
+    input.addEventListener("input", actualizarBotones);
+  
+    actualizarBotones(); // inicial
+  });
+  
+  const dropzone = document.getElementById("dropzone");
+  
+  // 🧹 Limpiar preview y setear input
+  function manejarArchivos(files) {
+    const dataTransfer = new DataTransfer();
+    previewFotos.innerHTML = "";
+  
+    files = [...files].filter(file => file.type.startsWith("image/"));
+    files.forEach(file => {
+      dataTransfer.items.add(file);
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        previewFotos.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+  
+    inputFotos.files = dataTransfer.files;
+  }
+  
+  // 👉 Click sobre dropzone abre input
+  dropzone.addEventListener("click", () => inputFotos.click());
+  
+  // 🪂 Drag & Drop sin duplicaciones
+  dropzone.addEventListener("dragover", e => {
+    e.preventDefault();
+    dropzone.classList.add("dragover");
+  });
+  
+  dropzone.addEventListener("dragleave", () => {
+    dropzone.classList.remove("dragover");
+  });
+  
+  dropzone.addEventListener("drop", e => {
+    e.preventDefault();
+    dropzone.classList.remove("dragover");
+    manejarArchivos(e.dataTransfer.files);
+  })
+  
+  // 📂 Selección manual desde input
+  inputFotos.addEventListener("change", () => {
+    const files = inputFotos.files;
+  
+    if (files.length > 10) {
+      alert("Solo puedes subir hasta 10 fotos.");
+      inputFotos.value = "";
+      return;
+    }
+  
+    if (files.length < 2) {
+      alert("Debes subir al menos 2 fotos.");
+      return;
+    }
+  
+    manejarArchivos(files);
+  });
+  
+  
+  function mostrarPrevisualizacion(files) {
+    previewFotos.innerHTML = "";
+  
+    const dataTransfer = new DataTransfer();
+  
+    Array.from(files).forEach((file, index) => {
+      if (!file.type.startsWith("image/")) return;
+  
+      const reader = new FileReader();
+  
+      reader.onload = (e) => {
+        const contenedor = document.createElement("div");
+        contenedor.classList.add("foto-preview");
+  
+        const img = document.createElement("img");
+        img.src = e.target.result;
+  
+        const btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "❌";
+        btnEliminar.classList.add("eliminar-foto");
+        btnEliminar.type = "button";
+  
+        btnEliminar.addEventListener("click", () => {
+          // ⚠️ Crear nuevo FileList SIN esta imagen
+          const nuevoDT = new DataTransfer();
+          Array.from(inputFotos.files).forEach((f) => {
+            if (f.name !== file.name || f.size !== file.size) {
+              nuevoDT.items.add(f);
+            }
+          });
+  
+          // ✅ Actualizar input
+          inputFotos.files = nuevoDT.files;
+  
+          // ✅ Volver a mostrar
+          mostrarPrevisualizacion(inputFotos.files);
+        });
+  
+        contenedor.appendChild(img);
+        contenedor.appendChild(btnEliminar);
+        previewFotos.appendChild(contenedor);
+      };
+  
+      reader.readAsDataURL(file);
+      dataTransfer.items.add(file);
+    });
+  
+    // ✅ Actualizar input al renderizar
+    inputFotos.files = dataTransfer.files;
+  }

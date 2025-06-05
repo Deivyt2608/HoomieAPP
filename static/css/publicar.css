@@ -294,3 +294,263 @@ form {
     cursor: pointer;
   }
   
+  .grupo-campo {
+    margin-bottom: 1.5rem;
+  }
+  
+  .input-moneda {
+    position: relative;
+    width: 100%;
+  }
+  
+  .simbolo-moneda {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555;
+    font-size: 1rem;
+    z-index: 1;
+  }
+  
+  .input-moneda input {
+    padding: 10px 12px 10px 32px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 0;
+  }
+  
+  .admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Switch visual */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 22px;
+    transition: 0.4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #2962ff;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(18px);
+  }
+
+  .ayuda-texto {
+    font-size: 13px;
+    color: #666;
+    margin-top: 4px;
+    display: block;
+  }
+  
+  /* Estilos 4 paso */
+
+  .caracteristicas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .grupo-campo label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+  }
+  
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  /* Stepper */
+  .stepper {
+    display: flex;
+    align-items: center;
+  }
+  
+  .stepper input {
+    width: 60px;
+    margin: 0 8px;
+  }
+  
+  .stepper button {
+    font-size: 18px;
+    padding: 6px 12px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .stepper button:hover {
+    background: #e0e0e0;
+  }
+  
+  .preferencias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .radio-opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 6px;
+  }
+  
+  .radio-opciones label {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 500;
+    gap: 8px;
+    cursor: pointer;
+  }
+  
+  .radio-opciones input[type="radio"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #aaa;
+    border-radius: 50%;
+    position: relative;
+    transition: border 0.2s ease;
+  }
+  
+  .radio-opciones input[type="radio"]:checked {
+    border-color: #2962ff;
+  }
+  
+  .radio-opciones input[type="radio"]::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 10px;
+    height: 10px;
+    background: #2962ff;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.2s ease;
+  }
+  
+  .radio-opciones input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
+  
+  /* Estios Fotos */
+
+  .dropzone {
+    border: 2px dashed #9ea5b1;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 12px;
+    color: #6c757d;
+    cursor: pointer;
+    background-color: #fafbfc;
+    transition: background-color 0.2s ease;
+  }
+  
+  .dropzone:hover {
+    background-color: #f1f3f5;
+  }
+  
+  .dropzone.dragover {
+    background-color: #e8f0ff;
+    border-color: #2962ff;
+  }
+  
+  .dropzone .clickable {
+    color: #2962ff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .preview-fotos {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    gap: 10px;
+  }
+  
+  .preview-fotos img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  .foto-preview {
+    position: relative;
+    display: inline-block;
+    margin: 5px;
+  }
+  
+  .foto-preview img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .eliminar-foto {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #ff5252;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    width: 22px;
+    height: 22px;
+  }
+  

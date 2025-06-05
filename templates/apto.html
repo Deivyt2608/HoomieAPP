@@ -82,37 +82,143 @@
 
   <!-- Paso 3 -->
   <div class="paso oculto">
-    <label>Valor arriendo</label><input type="number" name="valor_arriendo" required>
-    <label>Administración</label><input type="number" name="valor_administracion">
+    <!-- Valor arriendo -->
+    <div class="grupo-campo">
+      <label for="valor_arriendo">Valor arriendo</label>
+      <div class="input-moneda">
+        <span class="simbolo-moneda">$</span>
+        <input type="text" id="valor_arriendo" name="valor_arriendo" required>
+      </div>
+    </div>
+
+    <!-- Administración -->
+    <div class="grupo-campo">
+      <div class="admin-header">
+        <label for="admin_switch">¿Tiene costos de administración?</label>
+        <small class="ayuda-texto">Si no tiene valor de administración, desactiva el interruptor.</small>
+        <label class="switch">
+          <input type="checkbox" id="admin_switch" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="input-moneda">
+        <span class="simbolo-moneda">$</span>
+        <input type="text" id="valor_administracion" name="valor_administracion">
+      </div>
+    </div>
+
   </div>
 
   <!-- Paso 4 -->
   <div class="paso oculto">
-    <label>Área m²</label><input type="number" name="area_m2" required>
-    <label>Habitaciones</label><input type="number" name="num_habitaciones" required>
-    <label>Baños</label><input type="number" name="num_banos" required>
-    <label>Parqueaderos</label><input type="number" name="num_parqueaderos" required>
-    <label>Estrato</label><input type="number" name="estrato" required>
+    <div class="caracteristicas-grid">
+      <!-- Área -->
+      <div class="grupo-campo">
+        <label for="area_m2">Área del inmueble (m²)</label>
+        <input type="number" id="area_m2" name="area_m2" placeholder="Ej: 60" min="10" required>
+      </div>
+    
+      <!-- Número de baños -->
+      <div class="grupo-campo"> 
+        <label>Número de baños</label>
+        <div class="stepper">
+          <button type="button" class="menos" data-target="num_banos">−</button>
+          <input type="number" id="num_banos" name="num_banos" value="1" min="0" max="10" required>
+          <button type="button" class="mas" data-target="num_banos">+</button>
+        </div>
+      </div>
+    
+      <!-- Número de habitaciones -->
+      <div class="grupo-campo">
+        <label>Número de habitaciones</label>
+        <div class="stepper">
+          <button type="button" class="menos" data-target="num_habitaciones">−</button>
+          <input type="number" id="num_habitaciones" name="num_habitaciones" value="1" min="0" max="10" required>
+          <button type="button" class="mas" data-target="num_habitaciones">+</button>
+        </div>
+      </div>
+    
+      <!-- Parqueaderos -->
+      <div class="grupo-campo">
+        <label>Número de parqueaderos</label>
+        <div class="stepper">
+          <button type="button" class="menos" data-target="num_parqueaderos">−</button>
+          <input type="number" id="num_parqueaderos" name="num_parqueaderos" value="0" min="0" max="5" required>
+          <button type="button" class="mas" data-target="num_parqueaderos">+</button>
+        </div>
+      </div>
+    
+      <!-- Estrato -->
+      <div class="grupo-campo">
+        <label>Estrato</label>
+        <div class="stepper">
+          <button type="button" class="menos" data-target="estrato">−</button>
+          <input type="number" id="estrato" name="estrato" value="3" min="1" max="6" required>
+          <button type="button" class="mas" data-target="estrato">+</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Paso 5 -->
   <div class="paso oculto">
-    <label>Género preferido</label>
-    <select name="genero_preferido" required>
-      <option value="Indiferente">Indiferente</option>
-      <option value="Masculino">Masculino</option>
-      <option value="Femenino">Femenino</option>
-    </select>
-    <label>Mascotas</label><select name="permite_mascotas" required><option value="true">Sí</option><option value="false">No</option></select>
-    <label>Fumar</label><select name="permite_fumadores" required><option value="true">Sí</option><option value="false">No</option></select>
-    <label>Fiestas</label><select name="permite_fiestas" required><option value="true">Sí</option><option value="false">No</option></select>
+    <div class="grupo-campo">
+      <label>¿Con quién prefieres compartir?</label>
+      <div class="radio-opciones">
+        <label>
+          <input type="radio" name="genero_preferido" value="Indiferente" required>
+          Indiferente
+        </label>
+        <label>
+          <input type="radio" name="genero_preferido" value="Femenino">
+          Solo con mujeres
+        </label>
+        <label>
+          <input type="radio" name="genero_preferido" value="Masculino">
+          Solo con hombres
+        </label>
+      </div>
+    </div>
+    
+   <!-- Mascotas -->
+    <div class="grupo-campo">
+      <label class="etiqueta-pregunta">¿Acepta mascotas?</label>
+      <div class="radio-opciones">
+        <label><input type="radio" name="permite_mascotas" value="true" required> Sí</label>
+        <label><input type="radio" name="permite_mascotas" value="false"> No</label>
+      </div>
+    </div>
+
+    <!-- Fumar -->
+    <div class="grupo-campo">
+      <label class="etiqueta-pregunta">¿Se permite fumar?</label>
+      <div class="radio-opciones">
+        <label><input type="radio" name="permite_fumadores" value="true" required> Sí</label>
+        <label><input type="radio" name="permite_fumadores" value="false"> No</label>
+      </div>
+    </div>
+
+    <!-- Fiestas -->
+    <div class="grupo-campo">
+      <label class="etiqueta-pregunta">¿Se permiten fiestas?</label>
+      <div class="radio-opciones">
+        <label><input type="radio" name="permite_fiestas" value="true" required> Sí</label>
+        <label><input type="radio" name="permite_fiestas" value="false"> No</label>
+      </div>
+    </div>
   </div>
 
   <!-- Paso 6 -->
   <div class="paso oculto">
-    <label>Fotos (mínimo 2)</label>
-    <input type="file" id="fotos" name="fotos" accept="image/*" multiple required>
-    <div id="previewFotos" class="preview-fotos"></div>
+    <div class="grupo-campo">
+      <label for="fotos">Fotos del inmueble</label>
+      <div id="dropzone" class="dropzone">
+        <p>Arrastra y suelta las fotos aquí, o <span class="clickable">haz clic para seleccionarlas</span></p>
+        <input type="file" id="fotos" name="fotos" accept="image/*" multiple required hidden>
+      </div>
+      <div id="previewFotos" class="preview-fotos"></div>
+    </div>
+    
   </div>
 
   <!-- Navegación -->
