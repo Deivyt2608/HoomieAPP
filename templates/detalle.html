@@ -52,20 +52,23 @@
   </div>
 
   <div class="detalle-publicador">
-  <div class="datos-publicador">
-    <h3>Publicado por:</h3>
-    <p><strong>Nombre:</strong> {{ publicacion.usuario.nombre }} {{ publicacion.usuario.apellido }}</p>
-    <p><strong>Email:</strong> {{ publicacion.usuario.email }}</p>
-    <p><strong>Teléfono:</strong> {{ publicacion.usuario.phone }}</p>
-  </div>
+    <div class="datos-publicador">
+      <h3>Publicado por:</h3>
+      <p><strong>Nombre:</strong> {{ publicacion.usuario.nombre }} {{ publicacion.usuario.apellido }}</p>
+      <p><strong>Email:</strong> {{ publicacion.usuario.email }}</p>
+      <p><strong>Teléfono:</strong> {{ publicacion.usuario.phone }}</p>
+    </div>
 
-  <div class="botones-publicador">
-    <a href="mailto:{{ publicacion.usuario.email }}" class="botonAzu" id="contac">Contactar</a>
-    {% if publicacion.tipo_publicacion == "buscar roomie" %}
-      <button onclick="verCompatibilidad({{ publicacion.usuario.id }})" class="botonAma" id="match">Compatibilidad</button>
-      {% endif %}
+    <div class="botones-publicador">
+      <a href="mailto:{{ publicacion.usuario.email }}" class="botonAzu" id="contac">Contactar</a>
+      {% if publicacion.tipo_publicacion == "roomie" %}
+        <button onclick="verCompatibilidad({{ publicacion.usuario.id }})" class="botonAma" id="match">Compatibilidad</button>
+        {% endif %}
+    </div>
   </div>
-</div>
+  {% if es_propia %}
+  <a href="/editar-publicacion/{{ publicacion.id }}" class="botonAma">Editar publicación</a>
+  {% endif %}
 
 
   </div>

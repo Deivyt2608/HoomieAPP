@@ -23,7 +23,7 @@ ciudades_barrios = {
 
 tipos = ["apartamento", "casa"]
 generos = ["masculino", "femenino", "indiferente"]
-tipos_publicacion = ["arrendar", "buscar roomie"]
+tipos_publicacion = ["arrendar", "roomie"]
 
 nombres_publicacion = [
     "Arriendo habitación amoblada",

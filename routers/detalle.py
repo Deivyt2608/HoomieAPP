@@ -26,8 +26,11 @@ async def ver_detalle_publicacion(publicacion_id: int, request: Request, db: Ses
 
     usuario = get_usuario_logueado(request)
 
+    es_propia = usuario and usuario.id == publicacion.usuario_id
+
     return templates.TemplateResponse("detalle.html", {
         "request": request,
         "publicacion": publicacion,
-        "usuario_logueado": usuario
+        "usuario_logueado": usuario,
+        "es_propia": es_propia  # ✅ pasamos esto a la plantilla
     })
