@@ -45,7 +45,7 @@
           <button type="button" id="cancelarBtn" class="botonRojo" style="display:none;"><i class="fa-solid fa-eraser"></i> Cancelar</button>
           <button type="button" id="eliminarBtn" class="botonRojo"><i class="fa-solid fa-user-xmark"></i> Eliminar perfil</button>
         </div>
-      <a href="/editar-preferencias"><button type="button" class="match"><i class="fa-solid fa-star"></i> Editar preferencias</button></a>
+      <a href="/editar-preferencias"><button type="button" id="preferenciasBtn" class="match"><i class="fa-solid fa-star"></i> Editar preferencias</button></a>
 
     </form>
   </div>
@@ -61,7 +61,7 @@
             <div class="card-content">
               <h4>{{ pub.nombre }}</h4>
               <p>{{ pub.inmueble.ciudad }} - {{ pub.inmueble.barrio }}</p>
-              <a href="/detalle/{{ pub.id }}" class="botonAma">Ver</a>
+              <a href="/detalle/{{ pub.id }}" class="botonAma">  <i class="fa-solid fa-eye"></i>   ‍‍‍ ‍‍‍ ‍‍‍     ‍‍‍‍‍‍‍Ver</a>
             </div>
           </div>
         {% endfor %}
@@ -79,7 +79,7 @@
 <!-- 🧨 Modal de confirmación -->
   <div class="modal" id="modal-confirmacion">
     <div class="modal-contenido">
-        <h1><i class="fa-solid fa-user-xmark" style="color: #ab0303;"></i> Eliminar Cuenta</h1>
+        <h2><i class="fa-solid fa-user-xmark" style="color: #ab0303;"></i> Eliminar Cuenta</h2>
       <p>¿Estás segur@ de que quieres eliminar tu perfil? Esta acción no se puede deshacer.</p>
       <div class="modal-botones">
         <button id="cancelar-eliminar">Cancelar</button>
@@ -87,6 +87,25 @@
       </div>
     </div>
   </div>
+
+  <div id="modalCancelar" class="modal-overlay oculto">
+    <div class="modal-contenido">
+      <h2>¿Descartar cambios?</h2>
+      <p>Perderás todos los cambios no guardados. ¿Estás seguro?</p>
+      <div class="modal-botones">
+        <button id="confirmarCancelar" class="botonRojo">Sí, descartar</button>
+        <button id="cerrarModalCancelar" class="botonAzu">No, volver</button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="modalExito" class="modal-overlay oculto">
+    <div class="modal-contenido exito">
+      <h2>✅ ¡Listo!</h2>
+      <p>Tus cambios se guardaron con éxito.</p>
+    </div>
+  </div>
+  
 {% endblock %}
 
 {% block scripts %}
@@ -169,6 +188,44 @@ document.addEventListener("DOMContentLoaded", () => {
     alert('Perfil eliminado');
     });
   });
+
+  const cancelarBtn = document.getElementById("cancelarBtn");
+const modalCancelar = document.getElementById("modalCancelar");
+const cerrarModalCancelar = document.getElementById("cerrarModalCancelar");
+const confirmarCancelar = document.getElementById("confirmarCancelar");
+
+cancelarBtn?.addEventListener("click", () => {
+  modalCancelar.classList.remove("oculto");
+});
+
+cerrarModalCancelar?.addEventListener("click", () => {
+  modalCancelar.classList.add("oculto");
+});
+
+confirmarCancelar?.addEventListener("click", () => {
+  modalCancelar.classList.add("oculto");
+  // Lógica para cancelar cambios:
+  // 👉 volver a deshabilitar campos, mostrar btn editar, ocultar guardar/cancelar
+  document.getElementById("guardarBtn").style.display = "none";
+  document.getElementById("cancelarBtn").style.display = "none";
+  document.getElementById("editarBtn").style.display = "inline-block";
+  
+  document.querySelectorAll(".perfil-input input, .perfil-input select").forEach(input => {
+    input.disabled = true;
+    input.classList.remove("editable");
+  });
+});
+
+function mostrarModalExito() {
+  const modalExito = document.getElementById("modalExito");
+  modalExito.classList.remove("oculto");
+
+  setTimeout(() => {
+    modalExito.classList.add("oculto");
+  }, 2000); // Se cierra solo después de 2 seg
+}
+mostrarModalExito();
+
 
 </script>
 
