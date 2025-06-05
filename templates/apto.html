@@ -1,90 +1,142 @@
+<!-- archivo: apto.html -->
 {% extends "base.html" %}
 
-{% block title %}Detalles inmueble - Hoomie{% endblock %}
+{% block title %}Publicar Inmueble - Hoomie{% endblock %}
 
 {% block head %}
-        <link rel="stylesheet" href="/static/css/publica.css">
+<link rel="stylesheet" href="/static/css/publicar.css">
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  crossorigin=""
+>
+
+
 {% endblock %}
+
 {% block content %}
-  <div class="formulario-container">
-    <h2>Publicar inmueble</h2>
-    <form action="/publicar-inmueble" method="post" enctype="multipart/form-data">
 
-      <input type="hidden" name="publicacion_id" value="{{ publicacion_id }}">
+<div class="encabezado-pasos">
+  <div class="encabezado-izquierda">
+    <a href="javascript:history.back()" class="volver"><i class="fa-solid fa-arrow-left"></i> Publicar inmueble</a>
 
-      <label for="tipo_inmueble">Tipo de alojamiento</label>
-      <select id="tipo_inmueble" name="tipo_inmueble" required>
-        <option value="Apartamento">Apartamento</option>
-        <option value="Casa">Casa</option>
-      </select>
-
-      <h3>Ubicación</h3>
-      <label for="direccion">Dirección</label>
-      <input type="text" id="direccion" name="direccion" required>
-
-      <label for="barrio">Barrio</label>
-      <input type="text" id="barrio" name="barrio" required>
-
-      <label for="ciudad">Ciudad</label>
-      <input type="text" id="ciudad" name="ciudad" required>
-
-      <label for="valor_arriendo">Precio arriendo mensual</label>
-      <input type="number" id="precio" name="valor_arriendo" placeholder="$COP" required>
-
-      <label for="valor_administracion">Precio administracion mensual</label>
-      <input type="number" id="precio" name="valor_administracion" placeholder="$COP" required>
-
-      <label for="area">Área (en m²)</label>
-      <input type="number" id="area" name="area_m2" required>
-
-      <label for="num_habitaciones">Numero de habitaciones</label>
-      <input type="number" id="num_habitaciones" name="num_habitaciones" required>
-
-
-      <label for="num_banos">Numero de baños</label>
-      <input type="number" id="num_banos" name="num_banos" required>
-
-      <label for="num_parqueaderos">numero de parqueaderos</label>
-      <input type="number" id="num_parqueaderos" name="num_parqueaderos" required>
-
-      <label for="">Estrato</label>
-      <input type="number" id="estrato" name="estrato" required>
-
-      <label for="genero_preferido">Preferencia de genero</label>
-      <select id="genero_preferido" name="genero_preferido" required>
-        <option value="Indiferente">Indiferente</option>
-        <option value="Masculino">Masculino</option>
-        <option value="Femenino">Femenino</option>
-      </select>
-
-      <label for="permite_mascotas">Permite mascotas</label>
-      <select id="permite_mascotas" name="permite_mascotas" required>
-        <option value=true>Si</option>
-        <option value=false>No</option>
-      </select>
-
-      <label for="permite_fumadores">Permite fumar</label>
-      <select id="permite_fumadores" name="permite_fumadores" required>
-        <option value=true>Si</option>
-        <option value=false>No</option>
-      </select>
-
-      <label for="permite_fiestas">Permite fiestas</label>
-      <select id="permite_fiestas" name="permite_fiestas" required>
-        <option value=true>Si</option>
-        <option value=false>No</option>
-      </select>
-
-      <label for="fotos">Fotografías</label>
-      <input type="file" id="fotos" name="fotos" accept="image/*" multiple required>
-
-
-      <button type="submit">Publicar</button>
-    </form>
+    <div class="paso-indicador">
+      <div class="progreso-circulo-svg">
+        <svg width="40" height="40">
+          <circle cx="20" cy="20" r="18" stroke="#e0e0e0" stroke-width="4" fill="none"/>
+          <circle id="circuloProgreso" cx="20" cy="20" r="18" stroke="#2962ff" stroke-width="4" fill="none"
+            stroke-dasharray="113.1" stroke-dashoffset="113.1" />
+        </svg>
+      <div class="progreso-numero" id="circuloNumero">1/6</div>
+      </div>
+      
+      <div class="info-paso">
+        <h3 id="tituloPaso">Tipo de inmueble</h3>
+        <p id="descripcionPaso">Selecciona si es apartamento o casa</p>
+      </div>
+    </div>
   </div>
-   {% endblock %}
+
+  <button class="cerrar" onclick="window.history.back()"><i class="fa-solid fa-xmark"></i></button>
+</div>
+
+
+<form id="formularioInmueble" method="post" enctype="multipart/form-data" action="/publicar-inmueble">
+  <input type="hidden" name="publicacion_id" value="{{ publicacion_id }}">
+
+  <!-- Paso 1 -->
+  <div class="paso">
+    <label>Tipo de alojamiento</label>
+    <select name="tipo_inmueble" required>
+      <option value="Apartamento">Apartamento</option>
+      <option value="Casa">Casa</option>
+    </select>
+  </div>
+
+ <!-- Paso 2 -->
+  <div class="paso oculto">
+    <label>Ciudad</label>
+    <select id="ciudad" name="ciudad" required>
+      <option value="">Selecciona una ciudad</option>
+      <option value="Bogotá">Bogotá</option>
+      <option value="Medellín">Medellín</option>
+      <option value="Cartagena">Cartagena</option>
+    </select>
+
+    <label>Barrio</label>
+    <select id="barrio" name="barrio" required>
+      <option value="">Primero selecciona una ciudad</option>
+    </select>
+
+    <label>Dirección</label>
+    <input type="text" name="direccion" required>
+
+    <label>Ubicación en el mapa</label>
+    <div id="mapa" style="height: 300px; border-radius: 8px;"></div>
+    <button type="button" id="usarUbicacion" class="botonSiguiente" style="margin-top: 10px;">📍 Usar mi ubicación actual</button>
+    <input type="hidden" id="latitud" name="latitud">
+    <input type="hidden" id="longitud" name="longitud">
+
+  </div>
+
+
+  <!-- Paso 3 -->
+  <div class="paso oculto">
+    <label>Valor arriendo</label><input type="number" name="valor_arriendo" required>
+    <label>Administración</label><input type="number" name="valor_administracion">
+  </div>
+
+  <!-- Paso 4 -->
+  <div class="paso oculto">
+    <label>Área m²</label><input type="number" name="area_m2" required>
+    <label>Habitaciones</label><input type="number" name="num_habitaciones" required>
+    <label>Baños</label><input type="number" name="num_banos" required>
+    <label>Parqueaderos</label><input type="number" name="num_parqueaderos" required>
+    <label>Estrato</label><input type="number" name="estrato" required>
+  </div>
+
+  <!-- Paso 5 -->
+  <div class="paso oculto">
+    <label>Género preferido</label>
+    <select name="genero_preferido" required>
+      <option value="Indiferente">Indiferente</option>
+      <option value="Masculino">Masculino</option>
+      <option value="Femenino">Femenino</option>
+    </select>
+    <label>Mascotas</label><select name="permite_mascotas" required><option value="true">Sí</option><option value="false">No</option></select>
+    <label>Fumar</label><select name="permite_fumadores" required><option value="true">Sí</option><option value="false">No</option></select>
+    <label>Fiestas</label><select name="permite_fiestas" required><option value="true">Sí</option><option value="false">No</option></select>
+  </div>
+
+  <!-- Paso 6 -->
+  <div class="paso oculto">
+    <label>Fotos (mínimo 2)</label>
+    <input type="file" id="fotos" name="fotos" accept="image/*" multiple required>
+    <div id="previewFotos" class="preview-fotos"></div>
+  </div>
+
+  <!-- Navegación -->
+  <div class="navegacion">
+    <button type="button" id="btnAnterior" class="botonAtras oculto">Atrás</button>
+    <button type="button" id="btnSiguiente" class="botonSiguiente">Siguiente</button>
+  </div>
+</form>
+
+<div id="modalUbicacion" class="modal-ubicacion oculto">
+  <div class="modal-contenido">
+    <h2>Ubicación inválida</h2>
+    <p>La dirección seleccionada está fuera de Bogotá, Medellín o Cartagena. Por favor, ubica un punto dentro de las ciudades disponibles.</p>
+    <button id="cerrarModalUbicacion">Entendido</button>
+  </div>
+</div>
+
+{% endblock %}
 
 {% block scripts %}
-<script src="/static/js/java.js"></script>
-{% endblock %}
+<script src="/static/js/publicar.js"></script>
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  crossorigin=""
+></script>
 
+{% endblock %}
