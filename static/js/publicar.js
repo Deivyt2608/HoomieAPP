@@ -10,12 +10,12 @@ let archivosCargados = [];
 
 
 const secciones = [
-  { titulo: "Tipo de inmueble", descripcion: "Selecciona si es apartamento o casa" },
-  { titulo: "Ubicación", descripcion: "Indica ciudad, barrio y dirección" },
-  { titulo: "Costos", descripcion: "Arriendo mensual y administración" },
-  { titulo: "Características físicas", descripcion: "Área, habitaciones, baños, parqueaderos y estrato" },
-  { titulo: "Preferencias y normas", descripcion: "Mascotas, fumar, fiestas y género" },
-  { titulo: "Fotos", descripcion: "Sube al menos 2 imágenes del lugar" }
+  { titulo: "🏡Tipo de inmueble", descripcion: "Selecciona si es apartamento o casa" },
+  { titulo: "📍Ubicación", descripcion: "Indica ciudad, barrio y dirección" },
+  { titulo: "💰Costos", descripcion: "Arriendo mensual y administración" },
+  { titulo: "🏙️Características físicas", descripcion: "Área, habitaciones, baños, parqueaderos y estrato" },
+  { titulo: "🚭Preferencias y normas", descripcion: "Mascotas, fumar, fiestas y género" },
+  { titulo: "📸Fotos", descripcion: "Sube al menos 2 imágenes del lugar" }
 ];
 
 function mostrarPaso(index) {
