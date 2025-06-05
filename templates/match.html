@@ -42,8 +42,9 @@
 </div>
 
 <div id="toast" class="toast"></div>
+<script>
+  const preferenciasGuardadas = {{ preferencias_guardadas | tojson | safe }};
+</script>
 <script src="/static/js/match.js"></script>
-
-
 </body>
 </html>
