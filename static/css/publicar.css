@@ -68,12 +68,14 @@ form {
     }
 
 .botonAtras {
-    background-color: #ccc;
+    background-color:#FFC875;
+    font-weight: bold;
 }
 
 .botonSiguiente {
-    background-color: #2962ff;
-    color: white;
+    background-color: #CFEBFD;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
 }
 
 .preview-fotos {
@@ -128,7 +130,7 @@ form {
   .circulo-paso {
     width: 40px;
     height: 40px;
-    border: 3px solid #2962ff;
+    border: 3px solid #e0a848;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -229,28 +231,6 @@ form {
     border: 2px solid #ccc;
   }
   
-  #sugerencias {
-    list-style: none;
-    padding: 0;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    max-height: 150px;
-    overflow-y: auto;
-    background-color: white;
-    z-index: 1000;
-    position: relative;
-  }
-  
-  #sugerencias li {
-    padding: 8px;
-    cursor: pointer;
-  }
-  
-  #sugerencias li:hover {
-    background-color: #f0f0f0;
-  }
-
   
   /* Estilos Modal */
   .modal-ubicacion {
@@ -288,7 +268,7 @@ form {
     margin-top: 1rem;
     padding: 0.5rem 1.5rem;
     border: none;
-    background: #2962ff;
+    background:#64b5f6;
     color: white;
     font-weight: bold;
     border-radius: 8px;
@@ -369,7 +349,7 @@ form {
   }
   
   input:checked + .slider {
-    background-color: #2962ff;
+    background-color: #e0a848;
   }
   
   input:checked + .slider:before {
@@ -465,7 +445,7 @@ form {
   }
   
   .radio-opciones input[type="radio"]:checked {
-    border-color: #2962ff;
+    border-color: #e0a848;
   }
   
   .radio-opciones input[type="radio"]::before {
@@ -475,7 +455,7 @@ form {
     left: 3px;
     width: 10px;
     height: 10px;
-    background: #2962ff;
+    background:#e0a848;
     border-radius: 50%;
     transform: scale(0);
     transition: transform 0.2s ease;
@@ -504,11 +484,11 @@ form {
   
   .dropzone.dragover {
     background-color: #e8f0ff;
-    border-color: #2962ff;
+    border-color: #e0a848;
   }
   
   .dropzone .clickable {
-    color: #2962ff;
+    color:#e0a848;
     font-weight: 600;
     cursor: pointer;
   }
