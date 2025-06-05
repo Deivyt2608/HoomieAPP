@@ -1,6 +1,7 @@
 form {
     max-width: 800px;
-    margin: 0 auto;
+    min-height: 65vh;
+    margin:auto;
     padding: 20px;
 }
 
