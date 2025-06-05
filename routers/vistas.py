@@ -5,6 +5,7 @@ from utils.session import get_usuario_logueado
 from sqlalchemy.orm import Session
 from database.connection import get_db
 from models.publicacion import Publicacion
+from models.preferencias import Preference
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")  # Ruta relativa desde main.py
@@ -61,11 +62,17 @@ async def inicio(request: Request):
     })
 
 @router.get("/match", response_class=HTMLResponse)
-async def inicio(request: Request):
+async def inicio(request: Request, db: Session = Depends(get_db)):
     usuario = get_usuario_logueado(request)
+    preferencias = None
+
+    if usuario:
+        preferencias = db.query(Preference).filter(Preference.usuario.has == usuario.id).first()
+
     return templates.TemplateResponse("match.html", {
         "request": request,
-        "usuario_logueado": usuario if usuario else None
+        "usuario_logueado": usuario,
+        "preferencias_guardadas": preferencias
     })
 
 @router.get("/apto", response_class=HTMLResponse)

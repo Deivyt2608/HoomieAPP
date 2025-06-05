@@ -32,6 +32,23 @@ const textoPregunta = document.getElementById("textoPregunta");
 const descripcionPregunta = document.getElementById("descripcionPregunta");
 const imagenPregunta = document.getElementById("imagenPregunta");
 const respuestaPregunta = document.getElementById("respuestaPregunta");
+if (typeof preferenciasGuardadas === "object" && preferenciasGuardadas !== null) {
+  respuestas = {
+    "El aseo del hogar": preferenciasGuardadas.aseo_hogar?.toString(),
+    "El ruido del hogar": preferenciasGuardadas.ruido_hogar?.toString(),
+    "Las visitas": preferenciasGuardadas.visitas?.toString(),
+    "El aseo personal": preferenciasGuardadas.aseo_personal?.toString(),
+    "División de tareas del hogar": preferenciasGuardadas.division_tareas?.toString(),
+    "Salidas de fiesta": preferenciasGuardadas.salidas_fiesta?.toString(),
+    "¿Fumas?": preferenciasGuardadas.fuma,
+    "¿Consumes alcohol regularmente?": preferenciasGuardadas.alcohol,
+    "¿Trabajas?": preferenciasGuardadas.trabaja,
+    "¿Estudias?": preferenciasGuardadas.estudia,
+    "¿Trabajas en casa?": preferenciasGuardadas.trabaja_casa,
+    "¿Tienes mascotas?": preferenciasGuardadas.mascotas
+  };
+}
+
 const barraProgreso = document.getElementById("barraProgreso");
 
 // Mostrar modal al cargar
@@ -127,18 +144,29 @@ function actualizarPaso() {
         if (paso.tipo === "escala") {
             for (let i = 1; i <= 5; i++) {
                 const option = document.createElement("option");
-                option.value = i;
+                option.value = i.toString(); // for consistency
                 option.textContent = `${i} ${i === 1 ? "(Nada importante)" : i === 5 ? "(Muy importante)" : ""}`;
+
+                if (respuestas[paso.texto] === option.value) {
+                    option.selected = true;
+                }
+
                 respuestaPregunta.appendChild(option);
-            }
-        } else if (paso.tipo === "binario") {
+            }} 
+        else if (paso.tipo === "binario") {
             ["Sí", "No"].forEach((texto) => {
                 const option = document.createElement("option");
                 option.value = texto.toLowerCase();
                 option.textContent = texto;
+
+                if (respuestas[paso.texto]?.toLowerCase() === option.value) {
+                    option.selected = true;
+                }
+
                 respuestaPregunta.appendChild(option);
             });
-        }
+            }
+
     }
 
     // Cambiar texto del botón en el último paso

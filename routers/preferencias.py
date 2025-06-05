@@ -1,12 +1,15 @@
 # routers/preferencias.py
 from fastapi import APIRouter, Form, Request, Depends
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, HTMLResponse
+from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from database.connection import SessionLocal
 from models.user import User
 from models.preferencias import Preference
+from utils.session import get_usuario_logueado
 
 router = APIRouter()
+templates = Jinja2Templates(directory="templates")
 
 def get_db():
     db = SessionLocal()
@@ -61,3 +64,27 @@ async def guardar_preferencias(
 
     db.commit()
     return RedirectResponse(url="/inicio?mensaje=preferencias_guardadas", status_code=302)
+
+
+@router.get("/editar-preferencias", response_class=HTMLResponse)
+def editar_preferencias(request: Request, db: Session = Depends(get_db), usuario=Depends(get_usuario_logueado)):
+    preferencias = db.query(Preference).filter(Preference.usuario == usuario).first()
+    preferencias_dict = {
+    "aseo_hogar": preferencias.aseo_hogar,
+    "ruido_hogar": preferencias.ruido_hogar,
+    "visitas": preferencias.visitas,
+    "aseo_personal": preferencias.aseo_personal,
+    "division_tareas": preferencias.division_tareas,
+    "salidas_fiesta": preferencias.salidas_fiesta,
+    "fuma": preferencias.fuma,
+    "alcohol": preferencias.alcohol,
+    "trabaja_casa": preferencias.trabaja_casa,
+    "mascotas": preferencias.mascotas,
+    "estudia": preferencias.estudia,
+    "trabaja": preferencias.trabaja
+    } if preferencias else None
+
+    return templates.TemplateResponse("match.html", {
+    "request": request,
+    "preferencias_guardadas": preferencias_dict
+})
