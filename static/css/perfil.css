@@ -105,7 +105,7 @@ body {
 }
 
 .subir-foto {
-  background-color: #007bff;
+  background-color: #98cef1;
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
@@ -115,7 +115,7 @@ body {
 }
 
 .subir-foto:hover {
-  background-color: #0056b3;
+  background-color: #6eb0dd;
 }
 
   
@@ -173,36 +173,37 @@ body {
   margin-top: 10px;
   padding: 12px 0;
   border-radius: 10px;
+  background-color: #FFC875;
 }
   
-  #editar-btn,
-  #guardar-btn,
-  #eliminar-btn {
-    padding: 10px 16px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-  }
-  
-  #editar-btn {
-    background-color: #4682A9;
-    color: white;
-  }
-  
-  #guardar-btn {
-    background-color: #5D9C59;
-    color: white;
-  }
-  
-  .eliminar {
-    background-color: #da3e3e;
-    color: white;
-  }
-  
-  #preferencias-btn {
-    margin-top: 25px;
-    background: linear-gradient(to right, #4682A9, #5D9C59);
+    #editar-btn,
+    #guardar-btn,
+    #eliminar-btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
+    
+    #editarBtn {
+      background-color: #4682A9;
+      color: white;
+    }
+    
+    #guardarBtn {
+      background-color: #5D9C59;
+      color: white;
+    }
+    
+    #cancelarBtn, #eliminarBtn , .botonRojo {
+      background-color: #da3e3e;
+      color: white;
+    }
+    
+  #preferenciasBtn {
+    margin-top: 10px;
+    background-color: #febc4b;
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -216,6 +217,7 @@ body {
   
   #preferencias-btn:hover {
     transform: scale(1.03);
+    background-color: #FFC875;
   }
   
 
@@ -233,11 +235,15 @@ body {
   
   .modal-contenido {
     background-color: white;
+    margin-top: 20px;
     padding: 25px;
     border-radius: 12px;
     text-align: center;
     max-width: 400px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    p{
+      margin-top: 15px;
+    }
   }
   
   .modal-botones {
@@ -289,7 +295,7 @@ body {
     background: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     max-width: 500px;
-    max-height: 100px;
+    max-height: 120px;
 }
 .card img {
     width: 30%;
@@ -312,4 +318,57 @@ body {
 .card-content a {
     align-self: start;
     margin-top: 10px;
+    text-decoration: none;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-contenido {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  animation: aparecer 0.3s ease;
+}
+
+.modal-contenido h2 {
+  margin-bottom: 10px;
+}
+
+.modal-botones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.oculto {
+  display: none !important;
+}
+
+@keyframes aparecer {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-contenido.exito {
+  border-left: 8px solid #4caf50;
+}
+
+.modal-contenido.exito h2 {
+  color: #4caf50;
+  font-weight: 700;
 }
